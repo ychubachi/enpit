@@ -3,3 +3,9 @@
 *.html
 *.log
 *.tex
+*.nav
+*.out
+*.pyg
+*.snm
+*.toc
+*.vrb

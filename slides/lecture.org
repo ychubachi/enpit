@@ -7,6 +7,8 @@
 #+AUTHOR: 中鉢 欣秀 \\ yc@aiit.ac.jp
 #+DATE: 
 #+LATEX_HEADER: \institute[AIIT]{産業技術大学院大学(AIIT)}
+#+LATEX_HEADER: \hypersetup{colorlinks,linkcolor=,urlcolor=gray}
+
 
 * [講義] ガイダンス
 ** はじめに
@@ -157,16 +159,18 @@
 *** クラウド技術
 **** Travis CIとは？
 **** Herokuとは？
-** 道具の準備
-*** GitHubのアカウント作成
-**** GitHubのアカウント作成
-     - GitHubにアカウントを作成する
-*** Herokuのアカウント作成
-**** Heroku
-     - Herokuにアカウントを作成する
-*** 課題：アカウントの提出
+* WIP
+** クラウドのアカウント準備
+*** クラウドのアカウント作成と提出
+**** クラウドのアカウント作成
+***** GitHub
+     - GitHubにアカウントを作成する [[[https://github.com/join][Join GitHub · GitHub]]]
+***** Heroku
+      - Herokuにアカウントを作成する [[[https://id.heroku.com/signup][Heroku | Sign up]]]
+***** Travis CI
+      - GitHubアカウントでSign inする [[[https://travis-ci.org/][Travis CI]]]
 **** 課題：アカウントの提出
-     - フォームに提出する
+     - GitHubとHerokuアカウントを作成し，提出してください [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 * <演習> 開発環境の構築
 ** 開発環境のインストール
 *** ソフトウエアのインストール
