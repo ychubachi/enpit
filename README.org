@@ -7,3 +7,10 @@
 * Gist
 - [[https://gist.github.com/ychubachi/621182f2620bf6785f4f][generate_rails.sh]]
 - [[https://gist.github.com/ychubachi/6491682][github-connect.sh]]
+
+* 参考
+- [[http://dotinstall.com/lessons][プログラミングのレッスン一覧 - プログラミングならドットインストール]]
+  - gitやrubyの他，htmlやcssなど，スクリーンキャストを用いた教材の宝庫
+- [[http://www.backlog.jp/git-guide/][サルでもわかるGit入門 〜バージョン管理を使いこなそう〜 | どこでもプロジェクト管理バックログ]]
+  - GitHubではなくBacklogでの説明になっているが，gitの機能を勉強する教材として
+    よくまとまっている．
