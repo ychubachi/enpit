@@ -4,3 +4,6 @@
 * enpit boxに入っているもの
 - hub
 
+* Gist
+- [[https://gist.github.com/ychubachi/621182f2620bf6785f4f][generate_rails.sh]]
+- [[https://gist.github.com/ychubachi/6491682][github-connect.sh]]
