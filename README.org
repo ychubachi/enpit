@@ -15,3 +15,4 @@
 - [[http://www.backlog.jp/git-guide/][サルでもわかるGit入門 〜バージョン管理を使いこなそう〜 | どこでもプロジェクト管理バックログ]]
   - GitHubではなくBacklogでの説明になっているが，gitの機能を勉強する教材として
     よくまとまっている．
+- [[http://sourceforge.jp/magazine/09/03/16/0831212][Gitを使いこなすための20のコマンド | SourceForge.JP Magazine]]
