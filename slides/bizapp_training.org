@@ -183,9 +183,17 @@ vagrant up
 *** TODO commitの作成とpush
     - 3回以上，変更作業を行いcommitしてください．
       ??? 提出先 ???
-* <演習> 開発環境の構築
-** 開発環境のインストール
+* WIP
+** gitの基本コマンド
+*** ステージングエリアを省略する場合
+    - git commit -am "Update"
+*** ステージングエリアを利用するとき
+    - git add -p
+    - git commit -m "Update"
+*** commitログの書き方
+    - [[https://github.com/erlang/otp/wiki/Writing-good-commit-messages][Writing good commit messages · erlang/otp Wiki]]
 ** 動作確認の方法
+* <演習> 開発環境の構築
 * [講義] 道具の概要説明
 ** バージョン管理の概念
 *** シナリオ
