@@ -23,7 +23,7 @@
 #+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
-* 第1回 [講義] ガイダンス
+* 第1章 [講義] ガイダンス
 ** 自己紹介
 *** 自己紹介
 **** 名前
@@ -152,7 +152,7 @@
      - LinuxのソースコードのVCSとして用いられているGitを学ぶ
      - GitはGitHubと連携することでOSS型のチーム開発ができる
 
-* 第2回 <演習> 道具の準備
+* 第2章 [講義] 道具の準備
 ** 準備作業
 *** クラウドのアカウント作成方法
 **** GitHub
@@ -260,7 +260,7 @@ git create
 #+begin_src bash
 git remote -vv
 #+end_src
-** GitとGitHubを用いたバージョン管理
+** GitとGitHubの基本操作
 *** Gitの操作
 **** マニュアル等
    - [[http://git-scm.com/doc][Git - Documentation]]
@@ -308,22 +308,29 @@ git log
 git push
 #+end_src
 
-** リモートのブランチを活用した共同作業
-*** TODO branch
-    - 新しい作業を行うには必ずbranchを切る
-*** TODO merge
-*** TODO conflict
-*** TODO pull
-
-* 演習
-** 課題
+** TODO 演習課題
 *** クラウドアカウントの作成と提出
      - GitHubとHerokuアカウントを作成し，提出してください
        [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 
 *** TODO commitの作成とpush
     - 3回以上，変更作業を行いcommitしてください．
+    - 作業が完了したらpushしてください
+*** 提出方法
+    - 提出物
+      - 
       ??? 提出先 ???
+
+* 第3章 演習課題
+** 演習課題
+*** リモートのブランチを活用した共同作業
+*** TODO branch
+    - 新しい作業を行うには必ずbranchを切る
+*** TODO merge
+*** TODO conflict
+*** TODO pull
+
+
 * WIP
 ** WIP
 * <演習> 開発環境の構築
