@@ -23,7 +23,7 @@
 #+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
-* 第1章 [講義] ガイダンス
+* 第1章 ガイダンス
 ** 自己紹介
 *** 自己紹介
 **** 名前
@@ -207,7 +207,7 @@ git config --list
 **** GitHubの設定確認
      - ブラウザでGitHubのSSH Keyページを開く
 
-* 第2章 [講義] リポジトリの操作
+* 第2章 ローカルリポジトリの操作
 ** ローカルリポジトリ
 *** Gitのローカルリポジトリの作成
 **** ローカルリポジトリ
@@ -243,6 +243,7 @@ find .git
 
 #+begin_src bash
 git version
+alias git
 #+end_src
 
 *** Hubコマンドによるリモートリポジトリの作成
@@ -315,6 +316,18 @@ git log
 git push --set-upstream origin master
 #+end_src
 
+*** コミットのログを詳細に書く方法
+**** エディタを使ったログの記述
+    - コミットのログや，Pull requestの記述を，より詳しく書くことができる
+    - =commit= や =pull_request= から  =-m= オプションを外すと，エディタが立ち上がる
+      - エディタはemacsを起動するようになっている
+      - =C-x C-s= で保存， =C-x C-c= で終了
+**** コマンド
+#+begin_src bash
+git commit
+git pull_request
+#+end_src
+
 ** ★演習課題★
 *** Init/Status/Addの練習
      1. 解説した手順に従い，my_enpitリポジトリを作成
@@ -329,7 +342,8 @@ git push --set-upstream origin master
      3. 作業が完了したら，pushしなさい（ =--set-upstream= が必要）
      4. コミットがpushされていることをWebブラウザで確認しなさい
      5. 作成したファイルを削除してcommitしてpushしなさい
-     6. その他，いろいろとcommitの作業を試しなさい
+     6. エディタを使って，詳細なログを書きなさい
+     7. その他，自由にcommitの作業を試しなさい
 *** ここまでの課題の提出
 **** 提出物
      - 下記のものを提出してください
@@ -338,7 +352,7 @@ git push --set-upstream origin master
 **** 提出先
      - [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 
-* 第3章 ブランチの使い方リモートリポジトリでの協同作業
+* 第3章 リモートリポジトリでの作業
 ** ブランチの使い方
 *** branchによる開発
 **** ブランチとは？
@@ -380,7 +394,7 @@ git merge new_branch
 **** 解消方法
      - エディタ等で編集を行い，解消する
 
-** リモートのブランチとPull request
+** リモートのブランチ
 *** BranchのPush
 **** リモートへのPush
     - BranchをGitHubにPushすることができる
@@ -392,6 +406,7 @@ git merge new_branch
 git push --set-upstream origin new_branch
 #+end_src
 
+** Pull request
 *** Pull requestの作成
 **** Pull Roquestとは？
      - pushしたbranchでの作業の統合（merge）を依頼する
@@ -422,21 +437,9 @@ git checkout master
 git pull
 #+end_src
 
-*** コミットのログ/Pull requestを丁寧に書く
-**** エディタを使ったログの記述
-    - コミットのログや，Pull requestの記述を，より詳しく書くことができる
-    - =commit= や =pull_request=から  =-m= オプションを外すと，エディタが立ち上がる
-      - エディタはemacsを起動するよういになっている
-      - =C-x C-s= で保存， =C-x C-c= で終了
-**** コマンド
-#+begin_src bash
-git commit
-git pull_request
-#+end_src
-
 ** ★演習課題★
 *** branchの操作（ローカル）
-    1. =my_enpit= リポジトリでブランチを作成しなさい（=new_branch=）
+    1. =my_enpit= リポジトリでブランチを作成しなさい（ =new_branch= ）
     2. =checkout= で =new_branch= に移動する
     3. ファイルを編集しcommitする
     4. =master= ブランチに移動してファイルの内容が
@@ -452,28 +455,87 @@ git pull_request
     2. Pull requestを送る
     3. ブラウザで，Pull requestをマージする
     4. =master= ブランチに移動して， =pull= することで，更新する
-* WIP
-** WIP
-* <演習> 開発環境の構築
-* [講義] 道具の概要説明
-** バージョン管理の概念
-*** シナリオ
-**** HTMLによるWebページ
-**** index.htmlを作りブラウザで開く
-*** バージョン管理の基礎知識
-**** diff
-**** patch
-**** sha1
-** Git
-*** Gitコマンドの使い方
-*** git status
-*** git stageとcommit
-** GitHub
-*** GitHubのWeb管理画面
-*** git pushとclone
-*** ForkとPull Request
-*** GitHubのその他の機能
-* ???もう一回講義増やす???
+* 第4章 GitHubを使った協同作業
+** 他の人の開発状況を見る
+*** リモートのリポジトリをClone
+**** Cloneとは
+    - GitHubで公開されているリポジトリはだれでも複製（clone）できる
+    - ソースコードはローカルにコピーされ，閲覧やコンパイルなどができるようになる
+    - アクセス権限がない場合は，pushできない
+**** コマンド
+#+begin_src bash
+git clone octocat/Spoon-Knife
+#+end_src
+
+*** Pull requestをチェックアウト
+**** Pull requestのチェックアウト
+     - 誰かが作成したPull requestの内容を，ブランチとしてローカルにコピーする
+     - 試しに動作させたり，コードをチェックするときなどに利用
+**** コマンド
+#+begin_src bash
+git checkout https://github.com/octocat/Spoon-Knife/pull/3166
+#+end_src
+
+** 開発に参加する
+*** オリジナルのリポジトリをForkする
+**** Forkとは
+     - Cloneしたリポジトリを，
+       自分のアカウントが所持するリポジトリとして
+       GitHub上で複製する
+     - =remote= の値は，オリジナルのリポジトリが =origin= ，
+       自分のリポジトリは自分のGitHubユーザ名になる
+**** コマンド
+#+begin_src bash
+git fork
+git remote -vv
+#+end_src
+
+*** ブランチを作成し自分のリポジトリにpush
+**** オリジナルの改変等
+     - 新しい機能追加等を行う場合，ブランチを作成する
+     - ブランチは，自分のリポジトリにpushする
+**** コマンド
+#+begin_src bash
+git branch my_branch
+git checkout my_branch
+＜編集＞
+git commit -a -m 'Update'
+git push -u ychubachi my_branch
+#+end_src
+
+*** Forkした元にPull Requestを送る
+**** コードのレビューやマージを依頼する
+     - 新しい機能ができたら，オリジナルにPull requestを送り，
+       レビューやマージをしてもらう
+**** コマンド
+#+begin_src bash
+git pull_request -m 'Pull request'
+#+end_src
+
+
+** TODO GitHubのその他の機能
+*** Issue
+*** Wiki
+** TODO ＜演習課題＞
+*** our_enpitにファイルを追加する
+    1. =ychubich/our_enpit= をcloneしてforkする
+    2. 新しいブランチを作成し，新規にファイルを追加する
+       - 内容は任意（自己紹介など）
+       - Markdownで書いてください（拡張子は.md）
+    3. コミットを作成し，pull requestを送信する
+    4. 教員がマージ作業を行います
+*** 既存のファイルを変更する
+    1. README.mdを改変して，pull requestを送信する
+    2. GitHubのPull request一覧を確認する
+    3. おそらくコンフリクトが発生するので，
+       GitHubの指示に従い競合を解消する
+*** 隣の人との協同作業
+    1. 新しくリポジトリを作成する（名称は任意）
+    2. 互いに，隣の席の人にリポジトリ名を教え，forkしてもらい
+       Pull requestを送ってもらう
+    3. マージしてあげる
+    4. 2〜3を繰り返し，協同作業を行ってみよう
+* 第5章 クラウドを使った開発
 ** Heroku
 *** herokuのWeb管理画面
 *** herokuコマンドによるdeploy
@@ -523,6 +585,16 @@ git pull_request
 * [講義] ミニプロジェクト
 * <演習> ミニプロジェクト演習(1)
 * <演習> ミニプロジェクト演習(2)
+* memo
+** バージョン管理の概念
+*** シナリオ
+**** HTMLによるWebページ
+**** index.htmlを作りブラウザで開く
+*** バージョン管理の基礎知識
+**** diff
+**** patch
+**** sha1
+
 * Tasks
 ** DONE chocolateyのインストールをkazamでキャプチャする
    CLOSED: [2014-08-18 月 17:27]
