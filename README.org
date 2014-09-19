@@ -2,6 +2,7 @@
 ビジネスアプリケーション演習に関連した情報をまとめたリポジトリです．
 * Bookmark
 - enPiT用box作成 :: [[https://github.com/ychubachi/vagrant_enpit][ychubachi/vagrant_enpit]]
+- enPiT用Vagrant Croud :: [[https://vagrantcloud.com/ychubachi/boxes/enpit][ychubachi/enpit]]
 * enpit boxに入っているもの
 - hub
 
