@@ -1,7 +1,7 @@
 #+STARTUP: latexpreview
 
 #+LATEX_CLASS: beamer_lecture
-#+LaTeX_CLASS_OPTIONS: [12pt, t, aspectratio=169]
+#+LaTeX_CLASS_OPTIONS: [t, aspectratio=169]
 
 #+OPTIONS: H:3		# Frameのレベル
 #+OPTIONS: toc:nil
@@ -152,9 +152,8 @@
      - LinuxのソースコードのVCSとして用いられているGitを学ぶ
      - GitはGitHubと連携することでOSS型のチーム開発ができる
 
-* 第2章 [講義] 道具の準備
-** 準備作業
-*** クラウドのアカウント作成方法
+** ★演習課題（準備作業）★
+*** クラウドのアカウント作成
 **** GitHub
      - [[[https://github.com/join][Join GitHub · GitHub]]]
 **** Heroku
@@ -164,7 +163,7 @@
        - Travis CIは，GitHubのアカウントでログインできる
 *** enPiT仮想化環境のアップデート
 **** 作業内容
-     - enPiT仮想化環境（vagrantのbox）を新しくしたので更新する
+     - enPiT仮想化環境（vagrantのbox）を更新しておく
 **** コマンド
 
 #+begin_src bash
@@ -207,15 +206,18 @@ git config --list
 #+end_src
 **** GitHubの設定確認
      - ブラウザでGitHubのSSH Keyページを開く
+
+* 第2章 [講義] リポジトリの操作
 ** ローカルリポジトリ
 *** Gitのローカルリポジトリの作成
 **** ローカルリポジトリ
      - ソースコードや各種のファイルを保存し，開発に利用する
+     - 「 =my_enpit= 」というディレクトリを作成し，初期化する
 **** コマンド
 
 #+begin_src bash
-mkdir ~/enpit_2014
-cd ~/enpit_2014
+mkdir ~/my_enpit
+cd ~/my_enpit
 git init
 #+end_src
 
@@ -236,7 +238,7 @@ find .git
     - [[https://github.com/github/hub][github/hub]]
 **** GitへのGitHub操作機能追加
     - 通常のGitの機能に加えて，GitHub用のコマンドが利用できる
-    - エイリアス設定済み
+    - エイリアス設定しており，コマンド名は「git」のまま
 **** 確認方法
 
 #+begin_src bash
@@ -246,6 +248,8 @@ git version
 *** Hubコマンドによるリモートリポジトリの作成
 **** 作業内容
      - コマンドライン操作で，GitHubにリポジトリを作成する
+     - Hubコマンドの機能である =git create= を利用
+     - 初回既動時にはパスワードか聞かれる
 **** コマンド
 
 #+begin_src bash
@@ -254,16 +258,16 @@ git create
 
 *** リポジトリの確認方法
 **** 確認方法
-    - WebブラウザでGitHubを開き，「 =enpit_2014= 」ができていることを確認
+    - WebブラウザでGitHubを開き，「 =my_enpit= 」ができていることを確認
 **** コマンドラインで確認
 
 #+begin_src bash
 git remote -vv
 #+end_src
 ** GitとGitHubの基本操作
-*** Gitの操作
+*** Gitの操作方法
 **** マニュアル等
-   - [[http://git-scm.com/doc][Git - Documentation]]
+     - [[http://git-scm.com/doc][Git - Documentation]]
 **** commitログの書き方
      - [[https://github.com/erlang/otp/wiki/Writing-good-commit-messages][Writing good commit messages · erlang/otp Wiki]]
 *** ステータスの確認
@@ -286,12 +290,12 @@ emacs README.md
 git status
 #+end_src
 
-*** Commitの方法
+*** Add/Commitの方法
 **** ステージングエリアを利用する場合
-     - git add -p
-     - git commit -m "Update"
+     - git add README.mb
+     - git commit -m 'First commit'
 **** ステージングエリアを省略する場合
-     - git commit -am "Update"
+     - git commit -a -m 'First commit'
 *** Logの閲覧
 **** コミットログ
      - ソースコードに加えた変更の履歴を，commitを単位として閲覧できる
@@ -303,34 +307,123 @@ git log
 *** Pushの方法
 **** pushとは？
      - ローカルで作成したcommitを，リモートのリポジトリにアップロードすること
+     - originとは，リモートのリポジトリの内部的な名前
+     - upstreamとは，ブランチ（後述）が紐づいているリポジトリのこと
+     - 最初にそのブランチをpushするときは， =--setupstream= オプションを指定
 **** コマンド
 #+begin_src bash
-git push
+git push --set-upstream origin master
 #+end_src
 
-** TODO 演習課題
-*** クラウドアカウントの作成と提出
-     - GitHubとHerokuアカウントを作成し，提出してください
-       [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
+** ★演習課題★
+*** Init/Status/Addの練習
+**** my_enpitリポジトリの作成
+     1. 解説した手順に従い，my_enpitリポジトリを作成
+     2. git statusコマンドを実行
+     3. README.mdファイルを作成しなさい
+     4. git statusコマンドを実行し，変化を見なさい
+     5. commitしなさい．ログを必ず書くこと
+     6. git statusコマンドを実行し，変化を見なさい
+*** Commit/Log/Pushの練習
+**** my_enpitリポジトリで下記の作業を行う
+     1. README.mdを修正してcommitしなさい
+     2. 新しいファイルを作成してcommitしなさい
+     3. 作業が完了したら，pushしなさい（ =--set-upstream= が必要）
+     4. コミットがpushされていることをWebブラウザで確認しなさい
+     5. 作成したファイルを削除してcommitしてpushしなさい
+     6. その他，いろいろとcommitの作業を試しなさい
+*** ここまでの課題の提出
+**** 提出物
+     - 下記のものを提出してください
+       - GitHubとHerokuアカウント
+       - 作成したmy_enpitリポジトリのURL
+**** 提出先
+     - [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 
-*** TODO commitの作成とpush
-    - 3回以上，変更作業を行いcommitしてください．
-    - 作業が完了したらpushしてください
-*** 提出方法
-    - 提出物
-      - 
-      ??? 提出先 ???
+* 第3章 ブランチの使い方リモートリポジトリでの協同作業
+** ブランチの使い方
+*** branchによる開発
+**** ブランチとは？
+     - リポジトリにはmasterブランチがある
+     - 新しい作業を行う場合，必ずbranchを切る
+**** コマンド
 
-* 第3章 演習課題
-** 演習課題
-*** リモートのブランチを活用した共同作業
-*** TODO branch
-    - 新しい作業を行うには必ずbranchを切る
-*** TODO merge
-*** TODO conflict
-*** TODO pull
+#+begin_src bash
+git branch new_branch
+git branch -vv
+#+end_src
 
+*** branchのcheckout
+**** branchを切り替える
+     - checkoutしてブランチを切り替える
+     - ブランチをcommitすることができる
+     - 切り替える前に，ブランチでの作業はcommitしておく（stashも可）
+**** コマンド
+#+begin_src bash
+git checkout new_branch
+<編集作業>
+git commit -a -m 'Create a new branch'
+#+end_src
 
+*** 他のbranchをmergeする
+**** mergeとは
+     - ブランチで作業した内容（commit）を，他のブランチに統合すること
+     - new_branchでの作業をmasterに統合する場合，最初にmasterをcheckoutする
+**** コマンド操作
+#+begin_src bash
+git checkout master
+git merge new_branch
+#+end_src
+
+*** Conflict（競合）とその解消
+**** Conflictとは
+     - branchで行う作業がかち合った場合，発生する
+     - mergeする際，conflictが生じた場合，エラーになる
+**** 解消方法
+     - エディタ等で編集を行い，解消する
+
+** リモートのブランチとPull request
+*** BranchのPush
+**** リモートへのPush
+    - BranchをGitHubにPushすることができる
+    - masterブランチをPushした際と同様，upstreamを指定する
+    - PushできたかどうかをWebブラウザで確認する
+
+**** コマンド
+#+begin_src bash
+git push --set-upstream origin new_branch
+#+end_src
+
+*** Pull requestの作成
+**** Pull Roquestとは？
+     - pushしたbranchでの作業の統合（merge）を依頼する
+     - hubコマンドの =pull-request= で発行できる
+
+**** コマンド
+#+begin_src bash
+git pull-request -m 'Update a new branch'
+#+end_src
+
+*** Pull requestのmerge
+**** Pull requestをレビューする
+     - WebブラウザでPull requestを確認する
+**** ブラウザでmerge
+     - 問題なければmergeボタンを押す
+**** コマンドラインでmergeする場合
+
+*** BranchのPull
+**** BranchをPullするとは
+     - リモートで行われた変更を適用すること
+     - 内部的にはfetchでダウンロードしてからmergeする
+**** コマンド
+#+begin_src bash
+git checkout master
+git pull
+#+end_src
+
+** ★演習課題★
+*** branchの操作
+*** コミットのログ/Pull requestを丁寧に書く
 * WIP
 ** WIP
 * <演習> 開発環境の構築
