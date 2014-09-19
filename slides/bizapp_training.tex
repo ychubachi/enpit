@@ -1,4 +1,4 @@
-% Created 2014-09-19 金 20:15
+% Created 2014-09-19 金 20:36
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -511,7 +511,7 @@ git status
 \end{block}
 \begin{block}{ステージングエリアを省略する場合}
 \begin{itemize}
-\item git commit -am 'First commit'
+\item git commit -a -m 'First commit'
 \end{itemize}
 \end{block}
 \end{frame}
@@ -547,7 +547,6 @@ git push --set-upstream origin master
 \section{★演習課題★}
 \label{sec-2-4}
 \begin{frame}[label=sec-2-4-1]{Init/Status/Addの練習}
-\begin{block}{my\_enpitリポジトリの作成}
 \begin{enumerate}
 \item 解説した手順に従い，my\_enpitリポジトリを作成
 \item git statusコマンドを実行
@@ -556,11 +555,9 @@ git push --set-upstream origin master
 \item commitしなさい．ログを必ず書くこと
 \item git statusコマンドを実行し，変化を見なさい
 \end{enumerate}
-\end{block}
 \end{frame}
 \begin{frame}[fragile,label=sec-2-4-2]{Commit/Log/Pushの練習}
- \begin{block}{my\_enpitリポジトリで下記の作業を行う}
-\begin{enumerate}
+ \begin{enumerate}
 \item README.mdを修正してcommitしなさい
 \item 新しいファイルを作成してcommitしなさい
 \item 作業が完了したら，pushしなさい（ \texttt{-{}-set-upstream} が必要）
@@ -568,7 +565,6 @@ git push --set-upstream origin master
 \item 作成したファイルを削除してcommitしてpushしなさい
 \item その他，いろいろとcommitの作業を試しなさい
 \end{enumerate}
-\end{block}
 \end{frame}
 \begin{frame}[label=sec-2-4-3]{ここまでの課題の提出}
 \begin{block}{提出物}
@@ -618,7 +614,7 @@ git branch -vv
 \begin{minted}[]{bash}
 git checkout new_branch
 <編集作業>
-git commit -am 'Create a new branch'
+git commit -a -m 'Create a new branch'
 \end{minted}
 \end{block}
 \end{frame}
@@ -685,8 +681,8 @@ git pull-request -m 'Update a new branch'
 \end{block}
 \end{frame}
 
-\begin{frame}[label=sec-3-2-3]{Pull requestのmerge}
-\begin{block}{Pull requestをレビューする}
+\begin{frame}[fragile,label=sec-3-2-3]{Pull requestのmerge}
+ \begin{block}{Pull requestをレビューする}
 \begin{itemize}
 \item WebブラウザでPull requestを確認する
 \end{itemize}
@@ -697,6 +693,9 @@ git pull-request -m 'Update a new branch'
 \end{itemize}
 \end{block}
 \begin{block}{コマンドラインでmergeする場合}
+\begin{minted}[]{bash}
+git merge pull_request_URL
+\end{minted}
 \end{block}
 \end{frame}
 
@@ -715,11 +714,52 @@ git pull
 \end{block}
 \end{frame}
 
+\begin{frame}[fragile,label=sec-3-2-5]{コミットのログ/Pull requestを丁寧に書く}
+ \begin{block}{エディタを使ったログの記述}
+\begin{itemize}
+\item コミットのログや，Pull requestの記述を，より詳しく書くことができる
+\item \texttt{commit} や \texttt{pull\_request=から  =-m} オプションを外すと，エディタが立ち上がる
+\begin{itemize}
+\item エディタはemacsを起動するよういになっている
+\item \texttt{C-x C-s} で保存， \texttt{C-x C-c} で終了
+\end{itemize}
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git commit
+git pull_request
+\end{minted}
+\end{block}
+\end{frame}
+
 \section{★演習課題★}
 \label{sec-3-3}
-\begin{frame}[label=sec-3-3-1]{branchの操作}
+\begin{frame}[fragile,label=sec-3-3-1]{branchの操作（ローカル）}
+ \begin{enumerate}
+\item \texttt{my\_enpit} リポジトリでブランチを作成しなさい（=new\_branch=）
+\item \texttt{checkout} で \texttt{new\_branch} に移動する
+\item ファイルを編集しcommitする
+\item \texttt{master} ブランチに移動してファイルの内容が
+「編集されていないこと」を確認しなさい
+\item \texttt{merge} して，変更を適用しなさい
+\end{enumerate}
 \end{frame}
-\begin{frame}[label=sec-3-3-2]{コミットのログ/Pull requestを丁寧に書く}
+\begin{frame}[fragile,label=sec-3-3-2]{競合の発生と解消}
+ \begin{enumerate}
+\item \texttt{new\_branch} でファイルを編集して，commitする
+\item \texttt{master} に移動し，ファイルの同じ箇所を編集して，commitする
+\item \texttt{master} に \texttt{new\_branch} をmergeして，コンフリクトを発生させる
+\item エディタで競合箇所を修正してcommitする
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile,label=sec-3-3-3]{リモートのbranchの操作}
+ \begin{enumerate}
+\item 新しいブランチを作成して，remoteにpushする
+\item Pull requestを送る
+\item ブラウザで，Pull requestをマージする
+\item \texttt{master} ブランチに移動して， \texttt{pull} することで，更新する
+\end{enumerate}
 \end{frame}
 \part{{\bfseries\sffamily WIP} }
 \label{sec-4}

@@ -317,7 +317,6 @@ git push --set-upstream origin master
 
 ** ★演習課題★
 *** Init/Status/Addの練習
-**** my_enpitリポジトリの作成
      1. 解説した手順に従い，my_enpitリポジトリを作成
      2. git statusコマンドを実行
      3. README.mdファイルを作成しなさい
@@ -325,7 +324,6 @@ git push --set-upstream origin master
      5. commitしなさい．ログを必ず書くこと
      6. git statusコマンドを実行し，変化を見なさい
 *** Commit/Log/Pushの練習
-**** my_enpitリポジトリで下記の作業を行う
      1. README.mdを修正してcommitしなさい
      2. 新しいファイルを作成してcommitしなさい
      3. 作業が完了したら，pushしなさい（ =--set-upstream= が必要）
@@ -410,6 +408,9 @@ git pull-request -m 'Update a new branch'
 **** ブラウザでmerge
      - 問題なければmergeボタンを押す
 **** コマンドラインでmergeする場合
+#+begin_src bash
+git merge pull_request_URL
+#+end_src
 
 *** BranchのPull
 **** BranchをPullするとは
@@ -421,9 +422,36 @@ git checkout master
 git pull
 #+end_src
 
-** ★演習課題★
-*** branchの操作
 *** コミットのログ/Pull requestを丁寧に書く
+**** エディタを使ったログの記述
+    - コミットのログや，Pull requestの記述を，より詳しく書くことができる
+    - =commit= や =pull_request=から  =-m= オプションを外すと，エディタが立ち上がる
+      - エディタはemacsを起動するよういになっている
+      - =C-x C-s= で保存， =C-x C-c= で終了
+**** コマンド
+#+begin_src bash
+git commit
+git pull_request
+#+end_src
+
+** ★演習課題★
+*** branchの操作（ローカル）
+    1. =my_enpit= リポジトリでブランチを作成しなさい（=new_branch=）
+    2. =checkout= で =new_branch= に移動する
+    3. ファイルを編集しcommitする
+    4. =master= ブランチに移動してファイルの内容が
+       「編集されていないこと」を確認しなさい
+    5. =merge= して，変更を適用しなさい
+*** 競合の発生と解消
+    1. =new_branch= でファイルを編集して，commitする
+    2. =master= に移動し，ファイルの同じ箇所を編集して，commitする
+    3. =master= に =new_branch= をmergeして，コンフリクトを発生させる
+    4. エディタで競合箇所を修正してcommitする
+*** リモートのbranchの操作
+    1. 新しいブランチを作成して，remoteにpushする
+    2. Pull requestを送る
+    3. ブラウザで，Pull requestをマージする
+    4. =master= ブランチに移動して， =pull= することで，更新する
 * WIP
 ** WIP
 * <演習> 開発環境の構築
