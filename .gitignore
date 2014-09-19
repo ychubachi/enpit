@@ -2,7 +2,6 @@
 *.fdb_latexmk
 *.html
 *.log
-*.tex
 *.nav
 *.out
 *.pyg
