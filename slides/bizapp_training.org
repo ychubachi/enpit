@@ -152,7 +152,7 @@
      - LinuxのソースコードのVCSとして用いられているGitを学ぶ
      - GitはGitHubと連携することでOSS型のチーム開発ができる
 
-** ★演習課題（準備作業）★
+** ＜演習課題（準備作業）＞
 *** クラウドのアカウント作成
 **** GitHub
      - [[[https://github.com/join][Join GitHub · GitHub]]]
@@ -170,7 +170,20 @@
 cd ~/enpit
 vagrant destroy
 vagrant box update
-vagrant up
+#+end_src
+*** Port Forwardの設定
+**** 説明
+     - Guest OSで実行するサーバに，Host OSからWebブラウザでアクセスできるようにしておく
+     - 任意のエディタでVagrantfileを変更
+**** 変更前
+#+begin_src ruby
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+#+end_src
+
+**** 変更後
+#+begin_src ruby
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 4567, host: 4567
 #+end_src
 
 *** enPiT仮想化環境にログイン
@@ -178,6 +191,7 @@ vagrant up
      - 前の操作に引き続き，仮想化環境にSSH接続する
 **** コマンド
 #+begin_src bash
+vagrant up
 vagrant ssh
 #+end_src
 
@@ -297,6 +311,7 @@ git status
      - git commit -m 'First commit'
 **** ステージングエリアを省略する場合
      - git commit -a -m 'First commit'
+       - トラックされていないファイルはcommitしないので注意
 *** Logの閲覧
 **** コミットログ
      - ソースコードに加えた変更の履歴を，commitを単位として閲覧できる
@@ -354,7 +369,7 @@ git pull_request
 **** 提出先
      - [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 
-* 第3章 リモートリポジトリでの作業
+* 第3章 ブランチとリモートリポジトリ
 ** GitHub Flow
 *** GitHub Flow (1)
    1. 思い立ったらブランチ作成
@@ -575,53 +590,176 @@ git pull_request -m 'Pull Request'
        Pull Requestを送ってもらう
     3. マージしてあげる
     4. 2〜3を繰り返し，協同作業を行ってみよう
-* 第5章 クラウドを使った開発
-** Heroku
-*** herokuのWeb管理画面
-*** herokuコマンドによるdeploy
-** Travis CI
-*** Travis CIのWeb管理画面
-* <演習> 静的サイトの開発演習(1)
-** 1人でやる演習
-*** 演習課題
+*** Issue/Wikiの利用
 **** 演習課題
-     - あなたがよく知っている「歴史上の有名人」を一人取り上げる
-     - その人を紹介するWebページを作成する
-     - HTMLを作成する（リンクや画像の埋め込みにもチャレンジ）
-     - gitでバージョン管理
-     - GitHubにpushする
-*** 
-*** GitHubでリポジトリを作成
-*** Webページを作成してGitHubにpushする
-*** 作成した
-** 2人でやる演習
-*** 隣の人通しでPull Requestを送ってみる
-** 「GitHubによるソースコード共有」演習
-*** 
-** 「HTMLでのサイト構築」演習
-*** 演習の流れ
-*** 
-*** 2人でやる作業
-*** グループでやる作業
-* <演習> 動的サイトの開発演習(2)
-** 「Ruby（Sinatra）によるサイト構築」演習
-*** 演習の流れ
-** Herokuでのテスト
-* [講義] Ruby on Railsを用いた開発
+     - GitHubのIssueの機能を使ってみなさい
+     - commitのログでIssueをクローズさせてみなさい
+     - Wikiを作ってください
+* 第5章 Sinatraアプリの開発
+** Sinatraアプリケーションの作成
+*** Sinatraを使った簡単なWebアプリケーション
+**** Sinatraとは？
+     - Webアプリケーションを作成するDSL
+     - Railsに比べ軽量で，学習曲線が緩やか
+**** 参考文献
+     - [[http://www.sinatrarb.com/][Sinatra]]
+       
+*** Sinatraアプリ用リポジトリを作成する
+**** 内容
+     - Sinatraアプリを作成するため，新しいリポジトリを作る
+**** コマンド
+#+begin_src bash
+mkdir ~/sinatra_enpit
+cd ~/shinatra_enpit
+git init
+git create
+#+end_src
+
+*** Sinatraアプリを作成する
+**** コマンド
+#+begin_src bash
+emacs hello.rb
+git add hello.rb
+git commit -m 'Create hello.rb'
+#+end_src
+
+**** コード: =hello.rb=
+#+begin_src ruby
+require 'sinatra'
+
+get '/' do
+  "Hello World!"
+end
+#+end_src
+
+*** Sinatraアプリを起動する
+**** 起動の方法
+     - hello.rbをrubyで動かせば，サーバが立ち上がる
+     - vagrantのport forwardを利用するためのオプションを追加する
+       - [[http://stackoverflow.com/questions/21250885/unable-to-access-sinatra-app-on-host-machine-with-vagrant-forwarded-ports][ruby - Unable to access Sinatra app on host machine with Vagrant forwarded ports - Stack Overflow]]
+
+**** コマンド
+#+begin_src bash
+ruby hello.rb -o 0.0.0.0
+#+end_src
+
+*** Sinatraアプリの動作確認
+**** 動作確認の方法
+     - Host OSのWebブラウザで，http://localhost:4567 にアクセスする．
+
+** Herokuでアプリケーションを動かす
+*** コマンドラインでHerokuにログインする
+**** 内容
+     - enPiT環境には =heroku= コマンドをインストールしてある
+     - =heroku= コマンドを用いて，Herokuにログインできる
+     - 以後の作業はHerokuコマンドを利用する
+**** コマンド
+#+begin_src bash
+heroku login
+#+end_src
+
+*** herokuにSSHの公開鍵を設定する
+**** 内容
+     - Herokuもgitのリモートリポジトリである
+     - ここに公開鍵でアクセスできるようにする
+**** コマンド
+#+begin_src bash
+heroku keys:add
+#+end_src
+**** 確認
+#+begin_src bash
+heroku keys
+#+end_src
+
+*** Herokuで動作できるSinatraアプリ
+**** 内容
+     - Herokuで動作できるSinatraアプリと設定ファイルの例
+       [[https://devcenter.heroku.com/articles/rack#sinatra][Deploying Rack-based Apps | Heroku Dev Center]]
+     - 例を見ながら，エディタを用いて，次の3つのファイルを作成する
+       - =hello.rb= :: RubyによるWebアプリ本体（作成済み）
+       - =config.ru= :: Webアプリサーバ（Rack）の設定
+       - =Gemfile= :: アプリで利用するライブラリ（Gem）
+**** コマンド
+#+begin_src bash
+emacs config.ru
+emacs Gemfile
+#+end_src
+
+*** アプリをGitHubにpushする
+**** 内容
+     - Herokuで動かす前に，commitが必要
+     - ついでに，GitHubにコードをpushしておく
+       - この場合のpush先は =origin master=
+**** コマンド
+#+begin_src bash
+git add .
+git commit -m 'Add configuration files for Heroku'
+git push origin master
+#+end_src
+
+*** Herokuにアプリを作る
+**** アプリを作る
+     - Herokuが自動生成したURLが表示されるので，メモする
+     - =git remote -v= でherokuという名前のremoteが追加されたことが分かる
+     - WebブラウザでHerokuの管理画面を開くと，アプリができていることが確認できる
+
+**** コマンド
+#+begin_src bash
+heroku create
+git remote -v
+#+end_src
+
+*** Herokuにアプリを配備する
+**** 配備する方法
+     - Herokuのリモートリポジトリにpushする
+     - WebブラウザでアプリのURLを開き，動作を確認する
+**** コマンド
+#+begin_src bash
+git push heroku master
+#+end_src
+
+** ＜演習課題＞
+*** Sinatraアプリの作成
+**** 演習課題
+     - Sinatraアプリを作成して，Herokuで動作させなさい
+     - SinatraのDSLについて調べ，機能を追加しなさい
+     - コミットのログは詳細に記述し，どんな作業を行ったかが
+       他の人にも分かるようにしなさい
+     - 完成したコードはGitHubにもpushしなさい
+*** Sinatraアプリの共同開発
+**** 演習課題
+     - 隣の席の人と協同でSinatraアプリを開発しなさい
+     - 一方がGitHubのリポジトリを作成し，もう一人がForkする
+     - 最初に，どんな機能をもたせるかを相談しなさい
+       - メンバーのスキルに合わせて，できるだけ簡単なもの
+       - データベースは使わない
+     - ブランチを作成し，Pull Requestを送る
+
+* 第6章 Web APIを活用したサービス構築
+** ご利用ガイド
+   - [[https://webservice.rakuten.co.jp/guide/][楽天ウェブサービス: ご利用ガイド]]
+
+** 楽天API SDK
+   - [[https://github.com/rakuten-ws/rws-ruby-sdk][rakuten-ws/rws-ruby-sdk]]
+
+** Sinatraとの組み合わせ
+
+* WIP [講義] Ruby on Railsの開発
+** Memo
+   - Gemfileのtherubyracerをアンコメントする
 ** Ruby on Railsの全体像
 ** Scaffoldの作成と動作
 *** Herokuへのdeploy
 *** ScaffoldによるModelの拡張
 ** RSpecによるテスト
 *** RSpecの実行
+** Travis CI
+*** Travis CIのWeb管理画面
 *** GitHubとTravis CI連携
 *** Travis経由でのHerokuへのdeploy
 * <演習> Ruby on Railsを用いた開発演習(1)
 * <演習> Ruby on Railsを用いた開発演習(2)
-* [講義] Web API活用したサービス構築
-** 楽天API
-* <演習> Web API活用したサービス構築演習(1)
-* <演習> Web API活用したサービス構築演習(2)
+
 * [講義] ミニプロジェクト
 * <演習> ミニプロジェクト演習(1)
 * <演習> ミニプロジェクト演習(2)
@@ -635,6 +773,19 @@ git pull_request -m 'Pull Request'
 **** patch
 **** sha1
 
+*** 演習課題
+**** 演習課題
+     - あなたがよく知っている「歴史上の有名人」を一人取り上げる
+     - その人を紹介するWebページを作成する
+     - HTMLを作成する（リンクや画像の埋め込みにもチャレンジ）
+     - gitでバージョン管理
+     - GitHubにpushする
+*** GitHubにpush
+**** コマンド
+#+begin_src bash
+git commit -a -m 'First commit'
+git push -u origin msater
+#+end_src
 * Tasks
 ** DONE chocolateyのインストールをkazamでキャプチャする
    CLOSED: [2014-08-18 月 17:27]

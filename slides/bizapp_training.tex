@@ -1,4 +1,4 @@
-% Created 2014-09-20 土 11:15
+% Created 2014-09-20 土 16:30
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -279,7 +279,7 @@
 \end{block}
 \end{frame}
 
-\section{★演習課題（準備作業）★}
+\section{＜演習課題（準備作業）＞}
 \label{sec-1-5}
 \begin{frame}[label=sec-1-5-1]{クラウドのアカウント作成}
 \begin{block}{GitHub}
@@ -312,12 +312,31 @@
 cd ~/enpit
 vagrant destroy
 vagrant box update
-vagrant up
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-1-5-3]{Port Forwardの設定}
+ \begin{block}{説明}
+\begin{itemize}
+\item Guest OSで実行するサーバに，Host OSからWebブラウザでアクセスできるようにしておく
+\item 任意のエディタでVagrantfileを変更
+\end{itemize}
+\end{block}
+\begin{block}{変更前}
+\begin{minted}[]{ruby}
+# config.vm.network "forwarded_port", guest: 80, host: 8080
+\end{minted}
+\end{block}
+
+\begin{block}{変更後}
+\begin{minted}[]{ruby}
+config.vm.network "forwarded_port", guest: 3000, host: 3000
+config.vm.network "forwarded_port", guest: 4567, host: 4567
 \end{minted}
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-5-3]{enPiT仮想化環境にログイン}
+\begin{frame}[fragile,label=sec-1-5-4]{enPiT仮想化環境にログイン}
  \begin{block}{作業内容}
 \begin{itemize}
 \item 前の操作に引き続き，仮想化環境にSSH接続する
@@ -325,12 +344,13 @@ vagrant up
 \end{block}
 \begin{block}{コマンド}
 \begin{minted}[]{bash}
+vagrant up
 vagrant ssh
 \end{minted}
 \end{block}
 \end{frame}
 
-\begin{frame}[label=sec-1-5-4]{github-connectスクリプト}
+\begin{frame}[label=sec-1-5-5]{github-connectスクリプト}
 \begin{block}{URL}
 \begin{itemize}
 \item\relax [\href{https://gist.github.com/ychubachi/6491682}{github-connect.sh}]
@@ -347,7 +367,7 @@ vagrant ssh
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-1-5-5]{github-connect.shの実行}
+\begin{frame}[fragile,label=sec-1-5-6]{github-connect.shの実行}
  \begin{block}{作業内容}
 \begin{itemize}
 \item スクリプトを起動し，設定を行う
@@ -362,7 +382,7 @@ github-connect.sh
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-5-6]{GitとGitHubの設定確認}
+\begin{frame}[fragile,label=sec-1-5-7]{GitとGitHubの設定確認}
  \begin{block}{Gitの設定確認}
 \begin{minted}[]{bash}
 git config --list
@@ -513,6 +533,9 @@ git status
 \begin{block}{ステージングエリアを省略する場合}
 \begin{itemize}
 \item git commit -a -m 'First commit'
+\begin{itemize}
+\item トラックされていないファイルはcommitしないので注意
+\end{itemize}
 \end{itemize}
 \end{block}
 \end{frame}
@@ -608,7 +631,7 @@ git pull_request
 \end{block}
 \end{frame}
 
-\part{第3章 リモートリポジトリでの作業}
+\part{第3章 ブランチとリモートリポジトリ}
 \label{sec-3}
 \section{GitHub Flow}
 \label{sec-3-1}
@@ -978,23 +1001,305 @@ Pull Requestを送ってもらう
 \end{enumerate}
 \end{block}
 \end{frame}
-\part{第5章 クラウドを使った開発}
-\label{sec-5}
-\section{Heroku}
-\label{sec-5-1}
-\begin{frame}[label=sec-5-1-1]{herokuのWeb管理画面}
+\begin{frame}[label=sec-4-4-4]{Issue/Wikiの利用}
+\begin{block}{演習課題}
+\begin{itemize}
+\item GitHubのIssueの機能を使ってみなさい
+\item commitのログでIssueをクローズさせてみなさい
+\item Wikiを作ってください
+\end{itemize}
+\end{block}
 \end{frame}
-\begin{frame}[label=sec-5-1-2]{herokuコマンドによるdeploy}
+\part{第5章 Sinatraアプリの開発}
+\label{sec-5}
+\section{Sinatraアプリケーションの作成}
+\label{sec-5-1}
+\begin{frame}[label=sec-5-1-1]{Sinatraを使った簡単なWebアプリケーション}
+\begin{block}{Sinatraとは？}
+\begin{itemize}
+\item Webアプリケーションを作成するDSL
+\item Railsに比べ軽量で，学習曲線が緩やか
+\end{itemize}
+\end{block}
+\begin{block}{参考文献}
+\begin{itemize}
+\item \href{http://www.sinatrarb.com/}{Sinatra}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-1-2]{Sinatraアプリ用リポジトリを作成する}
+ \begin{block}{内容}
+\begin{itemize}
+\item Sinatraアプリを作成するため，新しいリポジトリを作る
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+mkdir ~/sinatra_enpit
+cd ~/shinatra_enpit
+git init
+git create
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-1-3]{Sinatraアプリを作成する}
+ \begin{block}{コマンド}
+\begin{minted}[]{bash}
+emacs hello.rb
+git add hello.rb
+git commit -m 'Create hello.rb'
+\end{minted}
+\end{block}
+
+\begin{block}{コード: \texttt{hello.rb}}
+\begin{minted}[]{ruby}
+require 'sinatra'
+
+get '/' do
+  "Hello World!"
+end
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-1-4]{Sinatraアプリを起動する}
+ \begin{block}{起動の方法}
+\begin{itemize}
+\item hello.rbをrubyで動かせば，サーバが立ち上がる
+\item vagrantのport forwardを利用するためのオプションを追加する
+\begin{itemize}
+\item \href{http://stackoverflow.com/questions/21250885/unable-to-access-sinatra-app-on-host-machine-with-vagrant-forwarded-ports}{ruby - Unable to access Sinatra app on host machine with Vagrant forwarded ports - Stack Overflow}
+\end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+ruby hello.rb -o 0.0.0.0
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[label=sec-5-1-5]{Sinatraアプリの動作確認}
+\begin{block}{動作確認の方法}
+\begin{itemize}
+\item Host OSのWebブラウザで，\url{http://localhost:4567} にアクセスする．
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Herokuでアプリケーションを動かす}
+\label{sec-5-2}
+\begin{frame}[fragile,label=sec-5-2-1]{コマンドラインでHerokuにログインする}
+ \begin{block}{内容}
+\begin{itemize}
+\item enPiT環境には \texttt{heroku} コマンドをインストールしてある
+\item \texttt{heroku} コマンドを用いて，Herokuにログインできる
+\item 以後の作業はHerokuコマンドを利用する
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+heroku login
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-2]{herokuにSSHの公開鍵を設定する}
+ \begin{block}{内容}
+\begin{itemize}
+\item Herokuもgitのリモートリポジトリである
+\item ここに公開鍵でアクセスできるようにする
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+heroku keys:add
+\end{minted}
+\end{block}
+\begin{block}{確認}
+\begin{minted}[]{bash}
+heroku keys
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-3]{Herokuで動作できるSinatraアプリ}
+ \begin{block}{内容}
+\begin{itemize}
+\item Herokuで動作できるSinatraアプリと設定ファイルの例
+\href{https://devcenter.heroku.com/articles/rack#sinatra}{Deploying Rack-based Apps | Heroku Dev Center}
+\item 例を見ながら，エディタを用いて，次の3つのファイルを作成する
+\begin{description}
+\item[{\texttt{hello.rb}}] RubyによるWebアプリ本体（作成済み）
+\item[{\texttt{config.ru}}] Webアプリサーバ（Rack）の設定
+\item[{\texttt{Gemfile}}] アプリで利用するライブラリ（Gem）
+\end{description}
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+emacs config.ru
+emacs Gemfile
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-4]{アプリをGitHubにpushする}
+ \begin{block}{内容}
+\begin{itemize}
+\item Herokuで動かす前に，commitが必要
+\item ついでに，GitHubにコードをpushしておく
+\begin{itemize}
+\item この場合のpush先は \texttt{origin master}
+\end{itemize}
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git add .
+git commit -m 'Add configuration files for Heroku'
+git push origin master
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-5]{Herokuにアプリを作る}
+ \begin{block}{アプリを作る}
+\begin{itemize}
+\item Herokuが自動生成したURLが表示されるので，メモする
+\item \texttt{git remote -v} でherokuという名前のremoteが追加されたことが分かる
+\item WebブラウザでHerokuの管理画面を開くと，アプリができていることが確認できる
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+heroku create
+git remote -v
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-6]{Herokuにアプリを配備する}
+ \begin{block}{配備する方法}
+\begin{itemize}
+\item Herokuのリモートリポジトリにpushする
+\item WebブラウザでアプリのURLを開き，動作を確認する
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git push heroku master
+\end{minted}
+\end{block}
+\end{frame}
+
+\section{＜演習課題＞}
+\label{sec-5-3}
+\begin{frame}[label=sec-5-3-1]{Sinatraアプリの作成}
+\begin{block}{演習課題}
+\begin{itemize}
+\item Sinatraアプリを作成して，Herokuで動作させなさい
+\item SinatraのDSLについて調べ，機能を追加しなさい
+\item コミットのログは詳細に記述し，どんな作業を行ったかが
+他の人にも分かるようにしなさい
+\item 完成したコードはGitHubにもpushしなさい
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[label=sec-5-3-2]{Sinatraアプリの共同開発}
+\begin{block}{演習課題}
+\begin{itemize}
+\item 隣の席の人と協同でSinatraアプリを開発しなさい
+\item 一方がGitHubのリポジトリを作成し，もう一人がForkする
+\item 最初に，どんな機能をもたせるかを相談しなさい
+\begin{itemize}
+\item メンバーのスキルに合わせて，できるだけ簡単なもの
+\item データベースは使わない
+\end{itemize}
+\item ブランチを作成し，Pull Requestを送る
+\end{itemize}
+\end{block}
+\end{frame}
+
+\part{第6章 Web APIを活用したサービス構築}
+\label{sec-6}
+\section{ご利用ガイド}
+\label{sec-6-1}
+\begin{itemize}
+\item \href{https://webservice.rakuten.co.jp/guide/}{楽天ウェブサービス: ご利用ガイド}
+\end{itemize}
+
+\section{楽天API SDK}
+\label{sec-6-2}
+\begin{itemize}
+\item \href{https://github.com/rakuten-ws/rws-ruby-sdk}{rakuten-ws/rws-ruby-sdk}
+\end{itemize}
+
+\section{Sinatraとの組み合わせ}
+\label{sec-6-3}
+
+\part{{\bfseries\sffamily WIP} [講義] Ruby on Railsの開発}
+\label{sec-7}
+\section{Memo}
+\label{sec-7-1}
+\begin{itemize}
+\item Gemfileのtherubyracerをアンコメントする
+\end{itemize}
+\section{Ruby on Railsの全体像}
+\label{sec-7-2}
+\section{Scaffoldの作成と動作}
+\label{sec-7-3}
+\begin{frame}[label=sec-7-3-1]{Herokuへのdeploy}
+\end{frame}
+\begin{frame}[label=sec-7-3-2]{ScaffoldによるModelの拡張}
+\end{frame}
+\section{RSpecによるテスト}
+\label{sec-7-4}
+\begin{frame}[label=sec-7-4-1]{RSpecの実行}
 \end{frame}
 \section{Travis CI}
-\label{sec-5-2}
-\begin{frame}[label=sec-5-2-1]{Travis CIのWeb管理画面}
+\label{sec-7-5}
+\begin{frame}[label=sec-7-5-1]{Travis CIのWeb管理画面}
 \end{frame}
-\part{<演習> 静的サイトの開発演習(1)}
-\label{sec-6}
-\section{1人でやる演習}
-\label{sec-6-1}
-\begin{frame}[label=sec-6-1-1]{演習課題}
+\begin{frame}[label=sec-7-5-2]{GitHubとTravis CI連携}
+\end{frame}
+\begin{frame}[label=sec-7-5-3]{Travis経由でのHerokuへのdeploy}
+\end{frame}
+\part{<演習> Ruby on Railsを用いた開発演習(1)}
+\label{sec-8}
+\part{<演習> Ruby on Railsを用いた開発演習(2)}
+\label{sec-9}
+
+\part{[講義] ミニプロジェクト}
+\label{sec-10}
+\part{<演習> ミニプロジェクト演習(1)}
+\label{sec-11}
+\part{<演習> ミニプロジェクト演習(2)}
+\label{sec-12}
+\part{memo}
+\label{sec-13}
+\section{バージョン管理の概念}
+\label{sec-13-1}
+\begin{frame}[label=sec-13-1-1]{シナリオ}
+\begin{block}{HTMLによるWebページ}
+\end{block}
+\begin{block}{index.htmlを作りブラウザで開く}
+\end{block}
+\end{frame}
+\begin{frame}[label=sec-13-1-2]{バージョン管理の基礎知識}
+\begin{block}{diff}
+\end{block}
+\begin{block}{patch}
+\end{block}
+\begin{block}{sha1}
+\end{block}
+\end{frame}
+
+\begin{frame}[label=sec-13-1-3]{演習課題}
 \begin{block}{演習課題}
 \begin{itemize}
 \item あなたがよく知っている「歴史上の有名人」を一人取り上げる
@@ -1005,107 +1310,26 @@ Pull Requestを送ってもらう
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[label=sec-6-1-2]{}
-\end{frame}
-\begin{frame}[label=sec-6-1-3]{GitHubでリポジトリを作成}
-\end{frame}
-\begin{frame}[label=sec-6-1-4]{Webページを作成してGitHubにpushする}
-\end{frame}
-\begin{frame}[label=sec-6-1-5]{作成した}
-\end{frame}
-\section{2人でやる演習}
-\label{sec-6-2}
-\begin{frame}[label=sec-6-2-1]{隣の人通しでPull Requestを送ってみる}
-\end{frame}
-\section{「GitHubによるソースコード共有」演習}
-\label{sec-6-3}
-\begin{frame}[label=sec-6-3-1]{}
-\end{frame}
-\section{「HTMLでのサイト構築」演習}
-\label{sec-6-4}
-\begin{frame}[label=sec-6-4-1]{演習の流れ}
-\end{frame}
-\begin{frame}[label=sec-6-4-2]{}
-\end{frame}
-\begin{frame}[label=sec-6-4-3]{2人でやる作業}
-\end{frame}
-\begin{frame}[label=sec-6-4-4]{グループでやる作業}
-\end{frame}
-\part{<演習> 動的サイトの開発演習(2)}
-\label{sec-7}
-\section{「Ruby（Sinatra）によるサイト構築」演習}
-\label{sec-7-1}
-\begin{frame}[label=sec-7-1-1]{演習の流れ}
-\end{frame}
-\section{Herokuでのテスト}
-\label{sec-7-2}
-\part{[講義] Ruby on Railsを用いた開発}
-\label{sec-8}
-\section{Ruby on Railsの全体像}
-\label{sec-8-1}
-\section{Scaffoldの作成と動作}
-\label{sec-8-2}
-\begin{frame}[label=sec-8-2-1]{Herokuへのdeploy}
-\end{frame}
-\begin{frame}[label=sec-8-2-2]{ScaffoldによるModelの拡張}
-\end{frame}
-\section{RSpecによるテスト}
-\label{sec-8-3}
-\begin{frame}[label=sec-8-3-1]{RSpecの実行}
-\end{frame}
-\begin{frame}[label=sec-8-3-2]{GitHubとTravis CI連携}
-\end{frame}
-\begin{frame}[label=sec-8-3-3]{Travis経由でのHerokuへのdeploy}
-\end{frame}
-\part{<演習> Ruby on Railsを用いた開発演習(1)}
-\label{sec-9}
-\part{<演習> Ruby on Railsを用いた開発演習(2)}
-\label{sec-10}
-\part{[講義] Web API活用したサービス構築}
-\label{sec-11}
-\section{楽天API}
-\label{sec-11-1}
-\part{<演習> Web API活用したサービス構築演習(1)}
-\label{sec-12}
-\part{<演習> Web API活用したサービス構築演習(2)}
-\label{sec-13}
-\part{[講義] ミニプロジェクト}
-\label{sec-14}
-\part{<演習> ミニプロジェクト演習(1)}
-\label{sec-15}
-\part{<演習> ミニプロジェクト演習(2)}
-\label{sec-16}
-\part{memo}
-\label{sec-17}
-\section{バージョン管理の概念}
-\label{sec-17-1}
-\begin{frame}[label=sec-17-1-1]{シナリオ}
-\begin{block}{HTMLによるWebページ}
-\end{block}
-\begin{block}{index.htmlを作りブラウザで開く}
+\begin{frame}[fragile,label=sec-13-1-4]{GitHubにpush}
+ \begin{block}{コマンド}
+\begin{minted}[]{bash}
+git commit -a -m 'First commit'
+git push -u origin msater
+\end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[label=sec-17-1-2]{バージョン管理の基礎知識}
-\begin{block}{diff}
-\end{block}
-\begin{block}{patch}
-\end{block}
-\begin{block}{sha1}
-\end{block}
-\end{frame}
-
 \part{Tasks}
-\label{sec-18}
+\label{sec-14}
 \section{{\bfseries\sffamily DONE} chocolateyのインストールをkazamでキャプチャする}
-\label{sec-18-1}
+\label{sec-14-1}
 \section{{\bfseries\sffamily TODO} 英語の原典を読めるようになること}
-\label{sec-18-2}
+\label{sec-14-2}
 \section{{\bfseries\sffamily TODO} よくある間違い cdしないでgit initするとか．}
-\label{sec-18-3}
+\label{sec-14-3}
 \section{{\bfseries\sffamily TODO} OSをインストールし，手順書を参照しながら長々とコマンドを打つ，ということが不要になった．}
-\label{sec-18-4}
+\label{sec-14-4}
 \section{{\bfseries\sffamily TODO} アンケートを作成する}
-\label{sec-18-5}
+\label{sec-14-5}
 \begin{itemize}
 \item 調査の目的
 \begin{itemize}
@@ -1135,6 +1359,6 @@ Pull Requestを送ってもらう
 \item 道具
 \end{enumerate}
 \section{{\bfseries\sffamily TODO} .bash\_profileから.bashrcを読み込む（カラー化）}
-\label{sec-18-6}
+\label{sec-14-6}
 % Emacs 24.3.1 (Org mode 8.2.6)
 \end{document}
