@@ -318,7 +318,7 @@ git push --set-upstream origin master
 
 *** コミットのログを詳細に書く方法
 **** エディタを使ったログの記述
-    - コミットのログや，Pull requestの記述を，より詳しく書くことができる
+    - コミットのログや，Pull Requestの記述を，より詳しく書くことができる
     - =commit= や =pull_request= から  =-m= オプションを外すと，エディタが立ち上がる
       - エディタはemacsを起動するようになっている
       - =C-x C-s= で保存， =C-x C-c= で終了
@@ -328,8 +328,9 @@ git commit
 git pull_request
 #+end_src
 
-** ★演習課題★
+** ＜演習課題＞
 *** Init/Status/Addの練習
+**** 演習課題
      1. 解説した手順に従い，my_enpitリポジトリを作成
      2. git statusコマンドを実行
      3. README.mdファイルを作成しなさい
@@ -337,6 +338,7 @@ git pull_request
      5. commitしなさい．ログを必ず書くこと
      6. git statusコマンドを実行し，変化を見なさい
 *** Commit/Log/Pushの練習
+**** 演習課題
      1. README.mdを修正してcommitしなさい
      2. 新しいファイルを作成してcommitしなさい
      3. 作業が完了したら，pushしなさい（ =--set-upstream= が必要）
@@ -353,8 +355,27 @@ git pull_request
      - [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
 
 * 第3章 リモートリポジトリでの作業
-** ブランチの使い方
-*** branchによる開発
+** GitHub Flow
+*** GitHub Flow (1)
+   1. 思い立ったらブランチ作成
+      - 新しい機能追加や，アイディアを試す
+   2. ブランチにコミットを追加
+      - 変更点をコミットとして作成
+      - コミットのログは，他人が読んでわかるように書く
+   3. Pull Requestを開く
+      - コミットについて，意見交換ができる
+      - 作業途中でPull Requestを出しても構わない
+*** GitHub Flow (2)
+   1. 議論とレビュー
+      - レビューをしたり，質疑応答をしたりする
+   2. マージしてディプロイ
+      - =master= ブランチにマージする（自動でディプロイ）
+      - マージの前にテストしたいときは，ローカルで試す
+参考文献
+   - [[https://guides.github.com/introduction/flow/index.html][Understanding the GitHub Flow · GitHub Guides]]
+
+** ブランチの操作
+*** branchの作成
 **** ブランチとは？
      - リポジトリにはmasterブランチがある
      - 新しい作業を行う場合，必ずbranchを切る
@@ -393,7 +414,8 @@ git merge new_branch
      - mergeする際，conflictが生じた場合，エラーになる
 **** 解消方法
      - エディタ等で編集を行い，解消する
-
+**** 参考文献
+     - [[https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line][Resolving a merge conflict from the command line · GitHub Help]]
 ** リモートのブランチ
 *** BranchのPush
 **** リモートへのPush
@@ -406,8 +428,8 @@ git merge new_branch
 git push --set-upstream origin new_branch
 #+end_src
 
-** Pull request
-*** Pull requestの作成
+** Pull Request
+*** Pull Requestの作成
 **** Pull Roquestとは？
      - pushしたbranchでの作業の統合（merge）を依頼する
      - hubコマンドの =pull-request= で発行できる
@@ -417,9 +439,9 @@ git push --set-upstream origin new_branch
 git pull-request -m 'Update a new branch'
 #+end_src
 
-*** Pull requestのmerge
-**** Pull requestをレビューする
-     - WebブラウザでPull requestを確認する
+*** Pull Requestのmerge
+**** Pull Requestをレビューする
+     - WebブラウザでPull Requestを確認する
 **** ブラウザでmerge
      - 問題なければmergeボタンを押す
 **** コマンドラインでmergeする場合
@@ -437,8 +459,9 @@ git checkout master
 git pull
 #+end_src
 
-** ★演習課題★
+** ＜演習課題＞
 *** branchの操作（ローカル）
+**** 演習課題
     1. =my_enpit= リポジトリでブランチを作成しなさい（ =new_branch= ）
     2. =checkout= で =new_branch= に移動する
     3. ファイルを編集しcommitする
@@ -446,14 +469,16 @@ git pull
        「編集されていないこと」を確認しなさい
     5. =merge= して，変更を適用しなさい
 *** 競合の発生と解消
+**** 演習課題
     1. =new_branch= でファイルを編集して，commitする
     2. =master= に移動し，ファイルの同じ箇所を編集して，commitする
     3. =master= に =new_branch= をmergeして，コンフリクトを発生させる
     4. エディタで競合箇所を修正してcommitする
 *** リモートのbranchの操作
+**** 演習課題
     1. 新しいブランチを作成して，remoteにpushする
-    2. Pull requestを送る
-    3. ブラウザで，Pull requestをマージする
+    2. Pull Requestを送る
+    3. ブラウザで，Pull Requestをマージする
     4. =master= ブランチに移動して， =pull= することで，更新する
 * 第4章 GitHubを使った協同作業
 ** 他の人の開発状況を見る
@@ -467,9 +492,9 @@ git pull
 git clone octocat/Spoon-Knife
 #+end_src
 
-*** Pull requestをチェックアウト
-**** Pull requestのチェックアウト
-     - 誰かが作成したPull requestの内容を，ブランチとしてローカルにコピーする
+*** Pull Requestをチェックアウト
+**** Pull Requestのチェックアウト
+     - 誰かが作成したPull Requestの内容を，ブランチとしてローカルにコピーする
      - 試しに動作させたり，コードをチェックするときなどに利用
 **** コマンド
 #+begin_src bash
@@ -505,19 +530,32 @@ git push -u ychubachi my_branch
 
 *** Forkした元にPull Requestを送る
 **** コードのレビューやマージを依頼する
-     - 新しい機能ができたら，オリジナルにPull requestを送り，
+     - 新しい機能ができたら，オリジナルにPull Requestを送り，
        レビューやマージをしてもらう
 **** コマンド
 #+begin_src bash
-git pull_request -m 'Pull request'
+git pull_request -m 'Pull Request'
 #+end_src
 
-
-** TODO GitHubのその他の機能
-*** Issue
-*** Wiki
-** TODO ＜演習課題＞
+** GitHubの他の機能
+*** Issue/Wiki
+**** Issue
+    - 課題管理（ITS: Issue Tracking System）
+    - コミットのメッセージでcloseできる
+      - [[https://help.github.com/articles/closing-issues-via-commit-messages][Closing issues via commit messages · GitHub Help]]
+**** Wiki
+     - GitHubのリポジトリにWikiを作る
+       - [[https://help.github.com/articles/about-github-wikis][About GitHub Wikis · GitHub Help]]
+*** GitHub
+**** GitHub Pages
+     - 特殊なブランチを作成すると，Webページが構築できる
+       - [[https://pages.github.com/][GitHub Pages]]
+**** Git brame
+     - だれがどの作業をしたかわかる（誰がバグを仕込んだのかも）
+       - [[https://help.github.com/articles/using-git-blame-to-trace-changes-in-a-file][Using git blame to trace changes in a file · GitHub Help]]
+** ＜演習課題＞
 *** our_enpitにファイルを追加する
+**** 演習課題
     1. =ychubich/our_enpit= をcloneしてforkする
     2. 新しいブランチを作成し，新規にファイルを追加する
        - 内容は任意（自己紹介など）
@@ -525,14 +563,16 @@ git pull_request -m 'Pull request'
     3. コミットを作成し，pull requestを送信する
     4. 教員がマージ作業を行います
 *** 既存のファイルを変更する
+**** 演習課題
     1. README.mdを改変して，pull requestを送信する
-    2. GitHubのPull request一覧を確認する
+    2. GitHubのPull Request一覧を確認する
     3. おそらくコンフリクトが発生するので，
        GitHubの指示に従い競合を解消する
 *** 隣の人との協同作業
+**** 演習課題
     1. 新しくリポジトリを作成する（名称は任意）
     2. 互いに，隣の席の人にリポジトリ名を教え，forkしてもらい
-       Pull requestを送ってもらう
+       Pull Requestを送ってもらう
     3. マージしてあげる
     4. 2〜3を繰り返し，協同作業を行ってみよう
 * 第5章 クラウドを使った開発
