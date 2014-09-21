@@ -1,4 +1,4 @@
-% Created 2014-09-21 日 22:45
+% Created 2014-09-21 日 23:10
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1618,7 +1618,6 @@ rake test
 \end{minted}
 \end{block}
 \end{frame}
-
 \section{Travis CIとの連携}
 \label{sec-7-3}
 \begin{frame}[label=sec-7-3-1]{Travis CI}
@@ -1658,7 +1657,7 @@ travis setup heroku
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-7-3-4]{Travis設定ファイルの変更(1)}
+\begin{frame}[fragile,label=sec-7-3-4]{Travisで動かすRubyのバージョン設定}
  \begin{block}{設定ファイルの変更}
 \begin{itemize}
 \item Rubyのバージョン
@@ -1666,14 +1665,13 @@ travis setup heroku
 \end{block}
 
 \begin{block}{.travis.yml（抜粋）}
-\begin{minted}[]{yml}
+\begin{minted}[]{yaml}
 language: ruby
 rvm:
 - 2.1.2
 \end{minted}
 \end{block}
 \end{frame}
-
 \begin{frame}[fragile,label=sec-7-3-5]{Travis用DB設定ファイル}
  \begin{block}{TravisでのテストDB}
 − テストDB用の設定ファイルを追加する
@@ -1725,7 +1723,21 @@ git push
 \end{block}
 \end{frame}
 \begin{frame}[label=sec-7-3-8]{Travis経由でのHerokuへのdeploy}
+\begin{block}{Travisのログを閲覧}
+\begin{itemize}
+\item WebブラウザでTravis CIの画面を開く
+\item ログを読む
+\end{itemize}
+\end{block}
+
+\begin{block}{HerokuへのDeploy}
+\begin{itemize}
+\item テストが通れば，自動でHerokuに配備される
+\item 配備できたらWebブラウザでアプリのページを開いて確認する
+\end{itemize}
+\end{block}
 \end{frame}
+
 \section{＜演習課題＞}
 \label{sec-7-4}
 \begin{frame}[label=sec-7-4-1]{Herokuへのdeploy}
@@ -1758,7 +1770,16 @@ booksコントローラのviewへのリンクを追加しなさい
 \begin{frame}[label=sec-7-4-4]{Travis経由でのHerokuへのdeploy}
 \begin{block}{演習課題}
 \begin{itemize}
-\item Travis経由でHerokuへdeployできるように
+\item Travis経由でHerokuへdeployできるようにする
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label=sec-7-4-5]{Status Image}
+\begin{block}{演習課題}
+\begin{itemize}
+\item README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
+\item \href{http://docs.travis-ci.com/user/status-images/}{Travis CI: Status Images}
 \end{itemize}
 \end{block}
 \end{frame}

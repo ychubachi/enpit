@@ -978,7 +978,6 @@ git branch -D books
 rake test
 #+end_src
 
-
 ** Travis CIとの連携
 *** Travis CI
     − [[http://docs.travis-ci.com/user/languages/ruby/][Travis CI: Building a Ruby Project]]
@@ -1005,16 +1004,15 @@ travis init            # 質問には全てEnterを押す
 travis setup heroku
 #+end_src
 
-*** Travis設定ファイルの変更(1)
+*** Travisで動かすRubyのバージョン設定
 **** 設定ファイルの変更
      - Rubyのバージョン
 **** .travis.yml（抜粋）
-#+begin_src yml
+#+begin_src yaml
 language: ruby
 rvm:
 - 2.1.2
 #+end_src
-
 
 *** Travis用DB設定ファイル
 **** TravisでのテストDB
@@ -1056,7 +1054,12 @@ git push
 #+end_src
 
 *** Travis経由でのHerokuへのdeploy
-
+**** Travisのログを閲覧
+     - WebブラウザでTravis CIの画面を開く
+     - ログを読む
+**** HerokuへのDeploy
+     - テストが通れば，自動でHerokuに配備される
+     - 配備できたらWebブラウザでアプリのページを開いて確認する
 ** ＜演習課題＞
 *** Herokuへのdeploy
 **** 演習課題
@@ -1072,4 +1075,8 @@ git push
      - うまく動作したらHerokuに配備しなさい
 *** Travis経由でのHerokuへのdeploy
 **** 演習課題
-     - Travis経由でHerokuへdeployできるように
+     - Travis経由でHerokuへdeployできるようにする
+*** Status Image
+**** 演習課題
+     - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
+     - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
