@@ -24,63 +24,6 @@
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
 * 第1章 ガイダンス
-** 自己紹介
-*** 自己紹介
-**** 名前
-     - 中鉢 欣秀（ちゅうばち よしひで）
-**** 出身地
-     - 宮城県仙台市
-**** 肩書
-     - 産業技術大学院大学 産業技術研究科 \\ 情報アーキテクチャ専攻 准教授
-*** 連絡先
-    - E-Mail :: yc@aiit...
-    - Facebook :: ychubachi
-    - Twitter :: ychubachi （あんまり使ってない）
-    - Skype :: ychubachi （あんまり使ってない）
-*** 学歴
-| 1991年 | 4月    | 慶應義塾大学環境情報学部 入学   |
-| 1995年 | *10月* | 同大大学院 政策・メディア研究科 |
-|        |        | 修士課程 入学                   |
-| 1997年 | 10月   | 同大大学院 政策・メディア研究科 |
-|        |        | 後期博士課程 入学               |
-| 2004年 | 10月   | 同大大学院 政策・メディア研究科 |
-|        |        | 後期博士課程 卒業               |
-|        |        | 学位：博士（政策・メディア）    |
-
-*** 職歴
-| 1997年 | 10月 | 合資会社ニューメリック設立        |
-|        |      | *社長就任*                        |
-| 2005年 | 4月  | 独立行政法人科学技術振興機構      |
-|        |      | PD級研究員                        |
-|        |      | （長岡技術科学大学）              |
-| 2006年 | 4月  | 産業技術大学院大学 産業技術研究科 |
-|        |      | 情報アーキテクチャ専攻 准教授     |
-*** 起業経験
-**** 社名
-     - 合資会社ニューメリック
-**** 設立
-     - 1997年
-**** 資本金
-     - *18万円*
-*** 起業の背景
-**** 設立当時の状況
-     - Windows 95が普及（初期状態でインターネットは使えなかった）
-     - 後輩のやっていたベンチャーの仕事を手伝って面白かった
-**** 会社設立の理由
-     - 「やってみたかった」から
-     - 少しプログラムがかければ仕事はいくらでもあった
-     - 後輩にそそのかされた・笑
-*** 起業から学んだこと
-      - 実プロジェクトの経験
-      - 使える技術
-      - お金は簡単には儲からない
-*** 教育における関心事
-**** 情報技術産業の変化
-    - 情報技術のマーケットが変化
-    - ユーザ・ベンダ型モデルの終焉
-**** モダンなソフトウエア開発者
-  - 新しいサービスの企画から，ソフトウエアの実装まで何でもこなせる開発者
-  - このような人材の育成方法
 ** 授業の全体像
 *** 学習目標と目的
 **** 目標
@@ -152,6 +95,16 @@
      - LinuxのソースコードのVCSとして用いられているGitを学ぶ
      - GitはGitHubと連携することでOSS型のチーム開発ができる
 
+*** enPiT仮想化環境
+**** インストール済みの言語と道具
+     - エディタ（Emacs/Vim）
+     - Rubyの実行環境
+     - GitHub，Heroku，Travis CIと連携するための各種コマンド（github-connect.sh，hub，heroku，travis）
+     - PostgreSQLのクライアント・サーバーとDB
+     - 各種設定ファイル（.bash_profile，.gemrc，.gitconfig）
+     - その他
+**** 仮想化環境の構築用リポジトリ（参考）
+     - [[https://github.com/ychubachi/vagrant_enpit][ychubachi/vagrant_enpit]]
 ** ＜演習課題（準備作業）＞
 *** クラウドのアカウント作成
 **** GitHub
@@ -735,7 +688,120 @@ git push heroku master
        - データベースは使わない
      - ブランチを作成し，Pull Requestを送る
 
-* 第6章 Web APIを活用したサービス構築
+* WIP 第6章 Ruby on Railsアプリの開発
+** Ruby on Railsアプリの生成と実行
+*** RoRを使ったWebアプリケーション
+**** Ruby on Rails（RoR）とは？
+     - Webアプリケーションを作成するためのフレームワーク
+**** 参考文献
+     - [[http://rubyonrails.org/][Ruby on Rails]]
+       
+*** =rails_enpit= リポジトリを作成する
+**** 内容
+     - =rails= は予め，仮想化環境にインストールしてある
+     - =rails new= コマンドを用いて，RoRアプリの雛形を作成する
+**** コマンド
+
+#+begin_src bash
+rails new ~/rails_enpit
+cd ~/rails_enpit
+git init
+git create
+git add .
+git commit -m 'Generate a new rails app'
+git push -u origin master
+#+end_src
+
+*** Gemfileの変更
+**** 変更する内容
+     - GemfileにRails内部で動作するJavaScriptの実行環境を設定する
+     - 当該箇所のコメントを外す
+     - 変更をcommitしておく
+**** 変更前
+#+begin_src ruby
+# gem 'therubyracer',  platforms: :ruby
+#+end_src
+
+**** 変更後
+#+begin_src ruby
+gem 'therubyracer',  platforms: :ruby
+#+end_src
+
+*** Bundle installの実行
+**** =bundle install=
+     - Gemfileを読み込み，必要なgemをインストールする
+     - therubyracerと，それが依存しているgemでまだインストールしていないものをインストール
+     - =rails new= をした際にも， =bundle install= は実行されている
+     - インストールする先は =~/.rbenv= 以下の特定のディレクトリ
+**** コマンド
+#+begin_src bash
+bundle install
+git commit -a -m 'Run bundle install'
+#+end_src
+
+*** Rails serverの起動
+**** Rails serverを起動
+     - この段階で，アプリケーションを起動できるようになっている
+     - Host OSのWebブラウザで， =http://localhost:3000= にアクセスして確認
+**** コマンド
+#+begin_src bash
+rails server
+#+end_src
+
+** Scaffoldの作成と実行
+*** Scaffold
+**** Scaffoldとは
+     - [[https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925][scaffold - Google 検索]]
+**** コマンド
+#+begin_src bash
+rails generate scaffold book title:string author:string
+#+end_src
+
+*** DBのmigrate
+**** migrateとは
+    - Databaseのスキーマ定義の更新
+    - Scaffoldを追加したり，属性を追加したりした際に行う
+**** コマンド
+#+begin_src bash
+rake db:migrate
+#+end_src
+
+*** 動作確認
+**** 動作確認の方法
+     - Webブラウザで http://localhost:3000/books を開く
+     - CRUD処理が完成していることを確かめる
+** RoRアプリのテストについて
+*** テストについて
+**** ガイド
+    - [[http://guides.rubyonrails.org/testing.html][A Guide to Testing Rails Applications — Ruby on Rails Guides]]
+**** コマンド
+#+begin_src bash
+rake test
+#+end_src
+
+** Herokuで動作するアプリ
+*** Herokuで動かす場合の注意
+**** DBについて
+    - DatabeseはPostgreSQLを使用する
+      - sqliteは使えない
+      - mysqlを利用することも可能
+**** Getting Started
+    - [[https://devcenter.heroku.com/articles/getting-started-with-rails4][Getting Started with Rails 4.x on Heroku | Heroku Dev Center]]
+*** TODO Scaffoldの作成
+**** Herokuで動作する
+
+*** TODO DBの作成
+#+begin_src bash
+createdb heroku_enpit_development
+createdb heroku_enpit_test
+#+end_src
+
+** Travis CIとの連携
+*** Travis CIのWeb管理画面
+*** GitHubとTravis CI連携
+*** Travis経由でのHerokuへのdeploy
+
+* 第7章 Web APIを活用したサービス構築
 ** ご利用ガイド
    - [[https://webservice.rakuten.co.jp/guide/][楽天ウェブサービス: ご利用ガイド]]
 
@@ -744,19 +810,6 @@ git push heroku master
 
 ** Sinatraとの組み合わせ
 
-* WIP [講義] Ruby on Railsの開発
-** Memo
-   - Gemfileのtherubyracerをアンコメントする
-** Ruby on Railsの全体像
-** Scaffoldの作成と動作
-*** Herokuへのdeploy
-*** ScaffoldによるModelの拡張
-** RSpecによるテスト
-*** RSpecの実行
-** Travis CI
-*** Travis CIのWeb管理画面
-*** GitHubとTravis CI連携
-*** Travis経由でのHerokuへのdeploy
 * <演習> Ruby on Railsを用いた開発演習(1)
 * <演習> Ruby on Railsを用いた開発演習(2)
 
