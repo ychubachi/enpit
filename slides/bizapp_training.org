@@ -862,7 +862,7 @@ git push heroku master
 **** 演習課題
      - ここまでの説明に従い，Herokuで動作するRoRアプリを完成させなさい
 
-* 第7章 RoRアプリでDBを使う
+* 第7章 DBを使うアプリの開発と継続的統合
 ** DBとScaffoldの作成
 *** PostgreSQLにDBを作成
 **** 開発で利用するDB
