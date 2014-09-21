@@ -875,14 +875,18 @@ createdb rails_enpit_development
 createdb rails_enpit_test
 #+end_src
 
-
 *** Scaffold
 **** Scaffoldとは
      - [[https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925][scaffold - Google 検索]]
      - RoRでは，MVCの雛形を作る
-     - CRUD処理が全て実装される
+       - CRUD処理が全て実装される
+     - 多くのコードが自動生成されるので，branchを切っておくと良い
+       - 動作が確認できたらbranchをマージ
+       - うまく行かなかったらbranchごと削除すれば良い
 **** コマンド
 #+begin_src bash
+git branch books
+git checkout books
 rails generate scaffold book title:string author:string
 #+end_src
 
@@ -895,30 +899,113 @@ rails generate scaffold book title:string author:string
 rake db:migrate
 #+end_src
 
+*** routeの確認
+**** route
+     - ルーティングの設定を確認しよう
+**** コマンド
+#+begin_src bash
+rake routes
+#+end_src
+
 *** 動作確認
 **** 動作確認の方法
      - Webブラウザで http://localhost:3000/books を開く
      - CRUD処理が完成していることを確かめる
+**** コマンド
+#+begin_src bash
+rails server
+#+end_src
 
-** RoRアプリのテストについて
+*** 完成したコードをマージ
+**** ブランチをマージ
+     - 動作確認できたので， =books= branchをマージする
+**** コマンド
+#+begin_src bash
+git add .
+git commit -m 'Generate books scaffold'
+git checkout master
+git merge books
+#+end_src
+
+*** Herokuにディプロイ
+**** ディプロイ
+     - ここまでのアプリをディプロイする
+     - herokuにあるdbもmigrateする
+     - Webブラウザで動作確認する
+**** コマンド
+#+begin_src bash
+git push heroku master
+heroku run db:migrate
+#+end_src
+
+*** Scaffoldの作成を取り消す場合（参考）
+**** 取り消す操作
+    - migrationを取り消す
+    - branchに一旦コミットして，masterブランチに移動
+    - branchを削除
+**** コマンド
+#+begin_src bash
+rake db:rollback
+git add .
+git commit -m 'Rollback'
+git checkout master
+git branch -D books
+#+end_src
+
+*** PostgereSQLクライアントのコマンド（参考）
+    - psqlでDBにログイン
+
+| Backslashコマンド | 説明               |
+|-------------------+--------------------|
+| l                 | DBの一覧           |
+| c                 | DBに接続           |
+| d                 | リレーションの一覧 |
+| q                 | 終了               |
+** RoRアプリのテスト
 *** テストについて
 **** ガイド
     - [[http://guides.rubyonrails.org/testing.html][A Guide to Testing Rails Applications — Ruby on Rails Guides]]
+
+*** テストの実行
+**** テストコード
+     - Scaffoldはテストコードも作成してくれる
+     - テスト用のDB（ =rails_enpit_test= ）が更新される
 **** コマンド
 #+begin_src bash
 rake test
 #+end_src
 
-** Herokuで動作するアプリ
-*** TODO Scaffoldの作成
 
 
 ** Travis CIとの連携
+*** Travis CI
+    − [[http://docs.travis-ci.com/user/languages/ruby/][Travis CI: Building a Ruby Project]]
+
+*** ???
+**** コマンド
+#+begin_src bash
+travis init
+#+end_src
+
+
 *** Travis CIのWeb管理画面
 *** GitHubとTravis CI連携
 *** Travis経由でのHerokuへのdeploy
 
-* 第7章 Web APIを活用したサービス構築
+** ＜演習課題＞
+*** Herokuへのdeploy
+**** 演習課題
+    - books コントローラを備えたアプリをHerokuに配備しなさい
+*** リンクの追加
+**** 演習課題
+     - welcomeコントローラのviewから，
+       booksコントローラのviewへのリンクを追加しなさい
+*** Scaffoldの追加
+**** 演習課題
+     - Scaffoldを追加しなさい
+     - DBのmigrationを行い，動作確認しなさい
+     - うまく動作したらHerokuに配備しなさい
+* TODO 第7章 Web APIを活用したサービス構築
 ** ご利用ガイド
    - [[https://webservice.rakuten.co.jp/guide/][楽天ウェブサービス: ご利用ガイド]]
 
@@ -927,27 +1014,16 @@ rake test
 
 ** Sinatraとの組み合わせ
 
-* <演習> Ruby on Railsを用いた開発演習(1)
-* <演習> Ruby on Railsを用いた開発演習(2)
 
-* [講義] ミニプロジェクト
-* <演習> ミニプロジェクト演習(1)
-* <演習> ミニプロジェクト演習(2)
-* memo
-** 演習で作成したリポジトリ
+* TODO ミニプロジェクト
+* 補足資料
+** 補足資料
+*** 演習で作成したリポジトリ
 - my_enpit
 - our_enpit -> 事前に教員が用意
 - 二人で行う演習のもの
 - sinatra_enpit
 - rails_enpit
-** バージョン管理の概念
-*** シナリオ
-**** HTMLによるWebページ
-**** index.htmlを作りブラウザで開く
-*** バージョン管理の基礎知識
-**** diff
-**** patch
-**** sha1
 
 *** 演習課題
 **** 演習課題
@@ -956,15 +1032,7 @@ rake test
      - HTMLを作成する（リンクや画像の埋め込みにもチャレンジ）
      - gitでバージョン管理
      - GitHubにpushする
-*** GitHubにpush
-**** コマンド
-#+begin_src bash
-git commit -a -m 'First commit'
-git push -u origin msater
-#+end_src
 * Tasks
-** DONE chocolateyのインストールをkazamでキャプチャする
-   CLOSED: [2014-08-18 月 17:27]
 ** TODO 英語の原典を読めるようになること
 ** TODO よくある間違い cdしないでgit initするとか．
 ** TODO OSをインストールし，手順書を参照しながら長々とコマンドを打つ，ということが不要になった．

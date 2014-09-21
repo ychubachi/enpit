@@ -1,4 +1,4 @@
-% Created 2014-09-21 日 16:13
+% Created 2014-09-21 日 16:46
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1441,7 +1441,7 @@ git push heroku master
 \end{itemize}
 \end{block}
 \end{frame}
-\part{第7章 RoRアプリでDBを使う}
+\part{{\bfseries\sffamily WIP} 第7章 RoRアプリでDBを使う}
 \label{sec-7}
 \section{DBとScaffoldの作成}
 \label{sec-7-1}
@@ -1461,18 +1461,26 @@ createdb rails_enpit_test
 \end{minted}
 \end{block}
 \end{frame}
-
 \begin{frame}[fragile,label=sec-7-1-2]{Scaffold}
  \begin{block}{Scaffoldとは}
 \begin{itemize}
 \item \href{https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925}{scaffold - Google 検索}
 \item RoRでは，MVCの雛形を作る
+\begin{itemize}
 \item CRUD処理が全て実装される
+\end{itemize}
+\item 多くのコードが自動生成されるので，branchを切っておくと良い
+\begin{itemize}
+\item 動作が確認できたらbranchをマージ
+\item うまく行かなかったらbranchごと削除すれば良い
+\end{itemize}
 \end{itemize}
 \end{block}
 
 \begin{block}{コマンド}
 \begin{minted}[]{bash}
+git branch books
+git checkout books
 rails generate scaffold book title:string author:string
 \end{minted}
 \end{block}
@@ -1491,20 +1499,104 @@ rake db:migrate
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[label=sec-7-1-4]{動作確認}
-\begin{block}{動作確認の方法}
+\begin{frame}[fragile,label=sec-7-1-4]{routeの確認}
+ \begin{block}{route}
+\begin{itemize}
+\item ルーティングの設定を確認しよう
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+rake routes
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-7-1-5]{動作確認}
+ \begin{block}{動作確認の方法}
 \begin{itemize}
 \item Webブラウザで \url{http://localhost:3000/books} を開く
 \item CRUD処理が完成していることを確かめる
 \end{itemize}
 \end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+rails server
+\end{minted}
+\end{block}
 \end{frame}
-\section{RoRアプリのテストについて}
+\begin{frame}[fragile,label=sec-7-1-6]{完成したコードをマージ}
+ \begin{block}{ブランチをマージ}
+\begin{itemize}
+\item 動作確認できたので， \texttt{books} branchをマージする
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git add .
+git commit -m 'Generate books scaffold'
+git checkout master
+git merge books
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[label=sec-7-1-7]{Herokuにディプロイ}
+\begin{block}{ディプロイ}
+ここまでのアプリをディプロイする
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-7-1-8]{Scaffoldの作成を取り消す場合（参考）}
+ \begin{block}{取り消す操作}
+\begin{itemize}
+\item migrationを取り消す
+\item branchに一旦コミットして，masterブランチに移動
+\item branchを削除
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+rake db:rollback
+git add .
+git commit -m 'Rollback'
+git checkout master
+git branch -D books
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[label=sec-7-1-9]{PostgereSQLクライアントのコマンド（参考）}
+\begin{itemize}
+\item psqlでDBにログイン
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{ll}
+Backslashコマンド & 説明\\
+\hline
+l & DBの一覧\\
+c & DBに接続\\
+d & リレーションの一覧\\
+q & 終了\\
+\end{tabular}
+\end{center}
+\end{frame}
+
+\section{RoRアプリのテスト}
 \label{sec-7-2}
-\begin{frame}[fragile,label=sec-7-2-1]{テストについて}
- \begin{block}{ガイド}
+\begin{frame}[label=sec-7-2-1]{テストについて}
+\begin{block}{ガイド}
 \begin{itemize}
 \item \href{http://guides.rubyonrails.org/testing.html}{A Guide to Testing Rails Applications — Ruby on Rails Guides}
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-7-2-2]{テストの実行}
+ \begin{block}{テストコード}
+\begin{itemize}
+\item Scaffoldはテストコードも作成してくれる
+\item テスト用のDB（ \texttt{rails\_enpit\_test} ）が更新される
 \end{itemize}
 \end{block}
 
@@ -1514,19 +1606,46 @@ rake test
 \end{minted}
 \end{block}
 \end{frame}
-\section{Herokuで動作するアプリ}
-\label{sec-7-3}
-\begin{frame}[label=sec-7-3-1]{Scaffoldの作成}
-\end{frame}
+
 
 \section{Travis CIとの連携}
+\label{sec-7-3}
+
+\begin{frame}[label=sec-7-3-1]{Travis CIのWeb管理画面}
+\end{frame}
+\begin{frame}[label=sec-7-3-2]{GitHubとTravis CI連携}
+\end{frame}
+\begin{frame}[label=sec-7-3-3]{Travis経由でのHerokuへのdeploy}
+\end{frame}
+\section{＜演習課題＞}
 \label{sec-7-4}
-\begin{frame}[label=sec-7-4-1]{Travis CIのWeb管理画面}
+\begin{frame}[label=sec-7-4-1]{Herokuへのdeploy}
+\begin{block}{演習課題}
+\begin{itemize}
+\item books コントローラを備えたアプリをHerokuに配備しなさい
+\end{itemize}
+\end{block}
 \end{frame}
-\begin{frame}[label=sec-7-4-2]{GitHubとTravis CI連携}
+
+\begin{frame}[label=sec-7-4-2]{リンクの追加}
+\begin{block}{演習課題}
+\begin{itemize}
+\item welcomeコントローラのviewから，
+booksコントローラのviewへのリンクを追加しなさい
+\end{itemize}
+\end{block}
 \end{frame}
-\begin{frame}[label=sec-7-4-3]{Travis経由でのHerokuへのdeploy}
+
+\begin{frame}[label=sec-7-4-3]{Scaffoldの追加}
+\begin{block}{演習課題}
+\begin{itemize}
+\item Scaffoldを追加しなさい
+\item DBのmigrationを行い，動作確認しなさい
+\item うまく動作したらHerokuに配備しなさい
+\end{itemize}
+\end{block}
 \end{frame}
+
 \part{第7章 Web APIを活用したサービス構築}
 \label{sec-8}
 \section{ご利用ガイド}
