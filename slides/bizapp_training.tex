@@ -1,4 +1,4 @@
-% Created 2014-09-21 日 17:54
+% Created 2014-09-21 日 22:45
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -34,7 +34,7 @@
 
 \maketitle
 
-\part{第1章 ガイダンス}
+\part{第1章 モダンなソフトウエア開発の道具達}
 \label{sec-1}
 \section{連絡事項}
 \label{sec-1-1}
@@ -161,7 +161,7 @@
 \end{block}
 \end{frame}
 
-\section{モダンなソフトウエア開発}
+\section{モダンなソフトウエア開発とは}
 \label{sec-1-4}
 \begin{frame}[label=sec-1-4-1]{ソフトウエア開発のための方法・言語・道具}
 \begin{figure}[htb]
@@ -352,7 +352,7 @@ git config --list
 \end{itemize}
 \end{block}
 \end{frame}
-\part{第2章 ローカルリポジトリの操作}
+\part{第2章 Git/GitHubの基本操作}
 \label{sec-2}
 \section{ローカルリポジトリ}
 \label{sec-2-1}
@@ -502,21 +502,7 @@ git status
 \end{itemize}
 \end{block}
 \end{frame}
-
-\begin{frame}[fragile,label=sec-2-3-5]{Logの閲覧}
- \begin{block}{コミットログ}
-\begin{itemize}
-\item ソースコードに加えた変更の履歴を，commitを単位として閲覧できる
-\end{itemize}
-\end{block}
-
-\begin{block}{コマンド}
-\begin{minted}[]{bash}
-git log
-\end{minted}
-\end{block}
-\end{frame}
-\begin{frame}[fragile,label=sec-2-3-6]{Pushの方法}
+\begin{frame}[fragile,label=sec-2-3-5]{リモートリポジトリへの公開}
  \begin{block}{pushとは？}
 \begin{itemize}
 \item ローカルで作成したcommitを，リモートのリポジトリにアップロードすること
@@ -529,6 +515,19 @@ git log
 \begin{block}{コマンド}
 \begin{minted}[]{bash}
 git push --set-upstream origin master
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-2-3-6]{Logの閲覧}
+ \begin{block}{コミットログ}
+\begin{itemize}
+\item ソースコードに加えた変更の履歴を，commitを単位として閲覧できる
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git log
 \end{minted}
 \end{block}
 \end{frame}
@@ -597,7 +596,7 @@ git pull_request
 \end{itemize}
 \end{block}
 \end{frame}
-\part{第3章 ブランチとリモートリポジトリ}
+\part{第3章 GitHubを用いた開発の流れ}
 \label{sec-3}
 \section{GitHub Flow}
 \label{sec-3-1}
@@ -809,7 +808,7 @@ git pull
 \end{block}
 \end{frame}
 
-\part{第4章 GitHubを使った協同作業}
+\part{第4章 GitHubによる協同作業}
 \label{sec-4}
 \section{他の人の開発状況を見る}
 \label{sec-4-1}
@@ -1387,8 +1386,8 @@ git commit -m 'Create welcome controller and view'
 \label{sec-6-3}
 \begin{frame}[fragile,label=sec-6-3-1]{Gemfileの設定}
  \begin{block}{Heroku用Gem}
-− \texttt{Gemfile} に \texttt{rails\_12factor} を追加する
 \begin{itemize}
+\item \texttt{Gemfile} に \texttt{rails\_12factor} を追加する
 \item Rubyのバージョンも指定しておく
 \item \texttt{Gemfile} を変更したら必ず \texttt{bundle install} すること
 \end{itemize}
@@ -1396,7 +1395,7 @@ git commit -m 'Create welcome controller and view'
 \begin{block}{\texttt{Gemfile} に追加する内容}
 \begin{minted}[]{ruby}
 gem 'rails_12factor', group: :production
-ruby '2.1.3'
+ruby '2.1.2'
 \end{minted}
 \end{block}
 \end{frame}
@@ -1441,7 +1440,7 @@ git push heroku master
 \end{itemize}
 \end{block}
 \end{frame}
-\part{{\bfseries\sffamily WIP} 第7章 RoRアプリでDBを使う}
+\part{第7章 RoRアプリでDBを使う}
 \label{sec-7}
 \section{DBとScaffoldの作成}
 \label{sec-7-1}
@@ -1620,7 +1619,6 @@ rake test
 \end{block}
 \end{frame}
 
-
 \section{Travis CIとの連携}
 \label{sec-7-3}
 \begin{frame}[label=sec-7-3-1]{Travis CI}
@@ -1671,7 +1669,7 @@ travis setup heroku
 \begin{minted}[]{yml}
 language: ruby
 rvm:
-- 2.1.3
+- 2.1.2
 \end{minted}
 \end{block}
 \end{frame}
@@ -1726,7 +1724,6 @@ git push
 \end{minted}
 \end{block}
 \end{frame}
-
 \begin{frame}[label=sec-7-3-8]{Travis経由でのHerokuへのdeploy}
 \end{frame}
 \section{＜演習課題＞}
@@ -1758,88 +1755,12 @@ booksコントローラのviewへのリンクを追加しなさい
 \end{block}
 \end{frame}
 
-\part{{\bfseries\sffamily TODO} 第7章 Web APIを活用したサービス構築}
-\label{sec-8}
-\section{ご利用ガイド}
-\label{sec-8-1}
-\begin{itemize}
-\item \href{https://webservice.rakuten.co.jp/guide/}{楽天ウェブサービス: ご利用ガイド}
-\end{itemize}
-\section{楽天API SDK}
-\label{sec-8-2}
-\begin{itemize}
-\item \href{https://github.com/rakuten-ws/rws-ruby-sdk}{rakuten-ws/rws-ruby-sdk}
-\end{itemize}
-\section{Sinatraとの組み合わせ}
-\label{sec-8-3}
-
-\part{{\bfseries\sffamily TODO} ミニプロジェクト}
-\label{sec-9}
-\part{補足資料}
-\label{sec-10}
-\section{補足資料}
-\label{sec-10-1}
-\begin{frame}[label=sec-10-1-1]{演習で作成したリポジトリ}
-\begin{itemize}
-\item my\_enpit
-\item our\_enpit -> 事前に教員が用意
-\item 二人で行う演習のもの
-\item sinatra\_enpit
-\item rails\_enpit
-\end{itemize}
-\end{frame}
-\begin{frame}[label=sec-10-1-2]{演習課題}
+\begin{frame}[label=sec-7-4-4]{Travis経由でのHerokuへのdeploy}
 \begin{block}{演習課題}
 \begin{itemize}
-\item あなたがよく知っている「歴史上の有名人」を一人取り上げる
-\item その人を紹介するWebページを作成する
-\item HTMLを作成する（リンクや画像の埋め込みにもチャレンジ）
-\item gitでバージョン管理
-\item GitHubにpushする
+\item Travis経由でHerokuへdeployできるように
 \end{itemize}
 \end{block}
 \end{frame}
-
-\part{Tasks}
-\label{sec-11}
-\section{{\bfseries\sffamily TODO} 英語の原典を読めるようになること}
-\label{sec-11-1}
-\section{{\bfseries\sffamily TODO} よくある間違い cdしないでgit initするとか．}
-\label{sec-11-2}
-\section{{\bfseries\sffamily TODO} OSをインストールし，手順書を参照しながら長々とコマンドを打つ，ということが不要になった．}
-\label{sec-11-3}
-\section{{\bfseries\sffamily TODO} アンケートを作成する}
-\label{sec-11-4}
-\begin{itemize}
-\item 調査の目的
-\begin{itemize}
-\item モダンなソフトウエア開発の理解度（これは2回やる）
-\begin{itemize}
-\item gitについて
-90\%（業務でのソフトウエア開発に利用できる）
-  , 70\%, 50\%, 30\%,
-10\% （ほとんど知らない・使ったことはない）
-\end{itemize}
-\item PBLのために，事前学習が役に立ったか（これはPBL後）
-事前学習をした人とそうでない人とで，PBLの満足感，達成感が違うか
-円滑にPBLをすすめることができたか
-\end{itemize}
-
-\item 方法論
-\end{itemize}
-あなたはBizApp演習の内容を学習しましか？
-\begin{enumerate}
-\item 授業を履修した
-\begin{enumerate}
-\item ビデオを視聴した
-\begin{enumerate}
-\item 学習していない
-\end{enumerate}
-\end{enumerate}
-\item 道具
-\end{enumerate}
-
-\section{{\bfseries\sffamily TODO} .bash\_profileから.bashrcを読み込む（カラー化）}
-\label{sec-11-5}
 % Emacs 24.3.2 (Org mode 8.2.5h)
 \end{document}
