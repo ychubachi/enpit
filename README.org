@@ -1,24 +1,6 @@
 * はじめに
 ビジネスアプリケーション演習に関連した情報をまとめたリポジトリです．
+
 * スライド資料
-- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.org][enpit/bizapp_training.org at master · ychubachi/enpit]]
-* Bookmark
-- enPiT用box作成 :: [[https://github.com/ychubachi/vagrant_enpit][ychubachi/vagrant_enpit]]
-- enPiT用Vagrant Croud :: [[https://vagrantcloud.com/ychubachi/boxes/enpit][ychubachi/enpit]]
-* enpit boxに入っているもの
-- hub
-
-* Gist
-- [[https://gist.github.com/ychubachi/621182f2620bf6785f4f][generate_rails.sh]]
-- [[https://gist.github.com/ychubachi/6491682][github-connect.sh]]
-
-* 参考になるWebサイト
-- [[http://dotinstall.com/lessons][プログラミングのレッスン一覧 - プログラミングならドットインストール]]
-  - gitやrubyの他，htmlやcssなど，スクリーンキャストを用いた教材の宝庫
-- [[http://www.backlog.jp/git-guide/][サルでもわかるGit入門 〜バージョン管理を使いこなそう〜 | どこでもプロジェクト管理バックログ]]
-  - GitHubではなくBacklogでの説明になっているが，gitの機能を勉強する教材として
-    よくまとまっている．
-- [[http://sourceforge.jp/magazine/09/03/16/0831212][Gitを使いこなすための20のコマンド | SourceForge.JP Magazine]]
-
-* 過去の資料
-- [[https://github.com/ychubachi/enpit_bizapp_practice][ychubachi/enpit_bizapp_practice]]
+- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]]
+- [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.pdf?raw=true][事前準備編]]
