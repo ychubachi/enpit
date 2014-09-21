@@ -1,4 +1,4 @@
-% Created 2014-09-21 日 14:45
+% Created 2014-09-21 日 16:13
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1196,7 +1196,7 @@ git push heroku master
 \end{itemize}
 \end{block}
 \end{frame}
-\part{{\bfseries\sffamily WIP} 第6章 Ruby on Railsアプリの開発}
+\part{第6章 Ruby on Railsアプリの開発}
 \label{sec-6}
 \section{Ruby on Railsアプリの生成と実行}
 \label{sec-6-1}
@@ -1213,7 +1213,23 @@ git push heroku master
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-1-2]{\texttt{rails\_enpit} リポジトリを作成する}
+\begin{frame}[label=sec-6-1-2]{Herokuで動かす方法}
+\begin{block}{Getting Started}
+\begin{itemize}
+\item \href{https://devcenter.heroku.com/articles/getting-started-with-rails4}{Getting Started with Rails 4.x on Heroku | Heroku Dev Center}
+\end{itemize}
+\end{block}
+\begin{block}{DBについて}
+\begin{itemize}
+\item DatabeseはPostgreSQLを使用する
+\begin{itemize}
+\item RoR標準のsqliteは使わない
+\end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-1-3]{\texttt{rails\_enpit} リポジトリを作成する}
  \begin{block}{内容}
 \begin{itemize}
 \item \texttt{rails} は予め，仮想化環境にインストールしてある
@@ -1223,7 +1239,7 @@ git push heroku master
 
 \begin{block}{コマンド}
 \begin{minted}[]{bash}
-rails new ~/rails_enpit
+rails new ~/rails_enpit --database=postgresql
 cd ~/rails_enpit
 git init
 git create
@@ -1233,7 +1249,7 @@ git push -u origin master
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-1-3]{Gemfileの変更}
+\begin{frame}[fragile,label=sec-6-1-4]{Gemfileの変更}
  \begin{block}{変更する内容}
 \begin{itemize}
 \item GemfileにRails内部で動作するJavaScriptの実行環境を設定する
@@ -1253,12 +1269,12 @@ gem 'therubyracer',  platforms: :ruby
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-1-4]{Bundle installの実行}
+\begin{frame}[fragile,label=sec-6-1-5]{Bundle installの実行}
  \begin{block}{\texttt{bundle install}}
 \begin{itemize}
 \item Gemfileを読み込み，必要なgemをインストールする
-\item therubyracerと，それが依存しているgemでまだインストールしていないものをインストール
 \item \texttt{rails new} をした際にも， \texttt{bundle install} は実行されている
+\item 今回はtherubyracerと，それが依存しているgemでまだインストールしていないものをインストール
 \item インストールする先は \texttt{\textasciitilde{}/.rbenv} 以下の特定のディレクトリ
 \end{itemize}
 \end{block}
@@ -1270,11 +1286,13 @@ git commit -a -m 'Run bundle install'
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-1-5]{Rails serverの起動}
+\begin{frame}[fragile,label=sec-6-1-6]{Rails serverの起動}
  \begin{block}{Rails serverを起動}
 \begin{itemize}
 \item この段階で，アプリケーションを起動できるようになっている
 \item Host OSのWebブラウザで， \texttt{http://localhost:3000} にアクセスして確認
+\item 端末にもログが表示される
+\item 確認したら，端末でCtrl-Cを押してサーバを停止する
 \end{itemize}
 \end{block}
 
@@ -1284,12 +1302,172 @@ rails server
 \end{minted}
 \end{block}
 \end{frame}
-\section{Scaffoldの作成と実行}
+\section{Controller/Viewの作成}
 \label{sec-6-2}
-\begin{frame}[fragile,label=sec-6-2-1]{Scaffold}
+\begin{frame}[fragile,label=sec-6-2-1]{Hello Worldを表示するController}
+ \begin{block}{Controllerとは？}
+\begin{itemize}
+\item MVC構造でいうController
+\item HTTPのリクエストを処理し，Viewに引き渡す
+\item \texttt{rails generate controller} コマンドで作成する
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+rails generate controller welcome
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-6-2-2]{Viewの作成}
+ \begin{block}{Viewとは？}
+\begin{itemize}
+\item HTML等で結果をレンダリングして表示する
+\item \texttt{app/views/welcome/inde.html.erb} を作成する
+\item erbで作成するのが一般的で，内部でRubyコードを動作させることができる
+\end{itemize}
+\end{block}
+
+\begin{block}{\texttt{index.html.erb}}
+\begin{minted}[]{html}
+<h2>Hello World</h2>
+<p>
+  The time is now: <%= Time.now %>
+</p>
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-2-3]{rootとなるrouteの設定}
+ \begin{block}{Routeとは？}
+\begin{itemize}
+\item HTTPのリクエスト（URL）とコントローラを紐付ける設定
+\item ここでは \texttt{root} へのリクエスト（ \texttt{GET /} ）を \texttt{welcome} コントローラの \texttt{index} メソッドに紐付ける
+\item \texttt{rake routes} で確認する
+\end{itemize}
+\end{block}
+
+\begin{block}{\texttt{config/routes.rb} の当該箇所をアンコメント}
+\begin{minted}[]{ruby}
+root 'welcome#index'
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-2-4]{ControllerとViewの動作確認}
+ \begin{block}{動作確認の方法}
+\begin{itemize}
+\item 再度， \texttt{rails server} でアプリを起動する
+\item Webブラウザで \texttt{http://localhost:3000/} を開いて確認する
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+rails server
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-2-5]{ここまでをコミットしておく}
+ \begin{block}{ここまでの内容}
+\begin{itemize}
+\item ここまでの作業で，controllerとviewを1つ備えるRoRアプリができた
+\item 作業が一区切りしたので，commitする
+（commitはひとかたまりの作業に対して行う）
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git add .
+git commit -m 'Create welcome controller and view'
+\end{minted}
+\end{block}
+\end{frame}
+\section{Herokuにディプロイする}
+\label{sec-6-3}
+\begin{frame}[fragile,label=sec-6-3-1]{Gemfileの設定}
+ \begin{block}{Heroku用Gem}
+− \texttt{Gemfile} に \texttt{rails\_12factor} を追加する
+\begin{itemize}
+\item Rubyのバージョンも指定しておく
+\item \texttt{Gemfile} を変更したら必ず \texttt{bundle install} すること
+\end{itemize}
+\end{block}
+\begin{block}{\texttt{Gemfile} に追加する内容}
+\begin{minted}[]{ruby}
+gem 'rails_12factor', group: :production
+ruby '2.1.3'
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-3-2]{Gitにコミット}
+ \begin{block}{コミットする必要性}
+\begin{itemize}
+\item Herokuにコードを送るには，gitを用いる
+\item ローカルで最新版をcommitしておく必要がある
+\item ついでにGitHubにもpushしておく
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git commit -a -m 'Set up for Heroku'
+git push # origin master -> GitHub が省略されている
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-3-3]{Herokuアプリの作成とディプロイ}
+ \begin{block}{作成とディプロイ}
+\begin{itemize}
+\item \texttt{heroku} コマンドを利用してアプリを作成する
+\item \texttt{heroku create} で表示されたURLを開く
+\item \texttt{git push} でディプロイすると，Herokuからのログが流れてくる
+\end{itemize}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+heroku create
+git push heroku master
+\end{minted}
+\end{block}
+\end{frame}
+\section{＜演習課題＞}
+\label{sec-6-4}
+\begin{frame}[label=sec-6-4-1]{RoRアプリの作成}
+\begin{block}{演習課題}
+\begin{itemize}
+\item ここまでの説明に従い，Herokuで動作するRoRアプリを完成させなさい
+\end{itemize}
+\end{block}
+\end{frame}
+\part{第7章 RoRアプリでDBを使う}
+\label{sec-7}
+\section{DBとScaffoldの作成}
+\label{sec-7-1}
+\begin{frame}[fragile,label=sec-7-1-1]{PostgreSQLにDBを作成}
+ \begin{block}{開発で利用するDB}
+\begin{description}
+\item[{rails\_enpit\_development}] 開発作業中に利用
+\item[{rails\_enpit\_test}] テスト用に利用
+\item[{rails\_enpit\_production}] 本番環境で利用（ローカルには作成しない）
+\end{description}
+\end{block}
+
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+createdb rails_enpit_development
+createdb rails_enpit_test
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-7-1-2]{Scaffold}
  \begin{block}{Scaffoldとは}
 \begin{itemize}
 \item \href{https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925}{scaffold - Google 検索}
+\item RoRでは，MVCの雛形を作る
+\item CRUD処理が全て実装される
 \end{itemize}
 \end{block}
 
@@ -1299,7 +1477,7 @@ rails generate scaffold book title:string author:string
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-2-2]{DBのmigrate}
+\begin{frame}[fragile,label=sec-7-1-3]{DBのmigrate}
  \begin{block}{migrateとは}
 \begin{itemize}
 \item Databaseのスキーマ定義の更新
@@ -1313,7 +1491,7 @@ rake db:migrate
 \end{minted}
 \end{block}
 \end{frame}
-\begin{frame}[label=sec-6-2-3]{動作確認}
+\begin{frame}[label=sec-7-1-4]{動作確認}
 \begin{block}{動作確認の方法}
 \begin{itemize}
 \item Webブラウザで \url{http://localhost:3000/books} を開く
@@ -1321,10 +1499,9 @@ rake db:migrate
 \end{itemize}
 \end{block}
 \end{frame}
-
 \section{RoRアプリのテストについて}
-\label{sec-6-3}
-\begin{frame}[fragile,label=sec-6-3-1]{テストについて}
+\label{sec-7-2}
+\begin{frame}[fragile,label=sec-7-2-1]{テストについて}
  \begin{block}{ガイド}
 \begin{itemize}
 \item \href{http://guides.rubyonrails.org/testing.html}{A Guide to Testing Rails Applications — Ruby on Rails Guides}
@@ -1338,80 +1515,65 @@ rake test
 \end{block}
 \end{frame}
 \section{Herokuで動作するアプリ}
-\label{sec-6-4}
-\begin{frame}[label=sec-6-4-1]{Herokuで動かす場合の注意}
-\begin{block}{DBについて}
-\begin{itemize}
-\item DatabeseはPostgreSQLを使用する
-\begin{itemize}
-\item sqliteは使えない
-\item mysqlを利用することも可能
-\end{itemize}
-\end{itemize}
-\end{block}
-
-\begin{block}{Getting Started}
-\begin{itemize}
-\item \href{https://devcenter.heroku.com/articles/getting-started-with-rails4}{Getting Started with Rails 4.x on Heroku | Heroku Dev Center}
-\end{itemize}
-\end{block}
+\label{sec-7-3}
+\begin{frame}[label=sec-7-3-1]{Scaffoldの作成}
 \end{frame}
 
-\begin{frame}[label=sec-6-4-2]{Scaffoldの作成}
-\begin{block}{Herokuで動作する}
-\end{block}
-\end{frame}
-\begin{frame}[fragile,label=sec-6-4-3]{DBの作成}
- \begin{minted}[]{bash}
-createdb heroku_enpit_development
-createdb heroku_enpit_test
-\end{minted}
-\end{frame}
 \section{Travis CIとの連携}
-\label{sec-6-5}
-\begin{frame}[label=sec-6-5-1]{Travis CIのWeb管理画面}
+\label{sec-7-4}
+\begin{frame}[label=sec-7-4-1]{Travis CIのWeb管理画面}
 \end{frame}
-\begin{frame}[label=sec-6-5-2]{GitHubとTravis CI連携}
+\begin{frame}[label=sec-7-4-2]{GitHubとTravis CI連携}
 \end{frame}
-\begin{frame}[label=sec-6-5-3]{Travis経由でのHerokuへのdeploy}
+\begin{frame}[label=sec-7-4-3]{Travis経由でのHerokuへのdeploy}
 \end{frame}
 \part{第7章 Web APIを活用したサービス構築}
-\label{sec-7}
+\label{sec-8}
 \section{ご利用ガイド}
-\label{sec-7-1}
+\label{sec-8-1}
 \begin{itemize}
 \item \href{https://webservice.rakuten.co.jp/guide/}{楽天ウェブサービス: ご利用ガイド}
 \end{itemize}
 \section{楽天API SDK}
-\label{sec-7-2}
+\label{sec-8-2}
 \begin{itemize}
 \item \href{https://github.com/rakuten-ws/rws-ruby-sdk}{rakuten-ws/rws-ruby-sdk}
 \end{itemize}
 \section{Sinatraとの組み合わせ}
-\label{sec-7-3}
+\label{sec-8-3}
 \part{<演習> Ruby on Railsを用いた開発演習(1)}
-\label{sec-8}
-\part{<演習> Ruby on Railsを用いた開発演習(2)}
 \label{sec-9}
+\part{<演習> Ruby on Railsを用いた開発演習(2)}
+\label{sec-10}
 
 \part{[講義] ミニプロジェクト}
-\label{sec-10}
-\part{<演習> ミニプロジェクト演習(1)}
 \label{sec-11}
-\part{<演習> ミニプロジェクト演習(2)}
+\part{<演習> ミニプロジェクト演習(1)}
 \label{sec-12}
-\part{memo}
+\part{<演習> ミニプロジェクト演習(2)}
 \label{sec-13}
+\part{memo}
+\label{sec-14}
+\section{演習で作成したリポジトリ}
+\label{sec-14-1}
+\begin{itemize}
+\item my\_enpit
+\item our\_enpit -> 事前に教員が用意
+\item 二人で行う演習のもの
+\item sinatra\_enpit
+\item rails\_enpit
+\end{itemize}
+
 \section{バージョン管理の概念}
-\label{sec-13-1}
-\begin{frame}[label=sec-13-1-1]{シナリオ}
+\label{sec-14-2}
+\begin{frame}[label=sec-14-2-1]{シナリオ}
 \begin{block}{HTMLによるWebページ}
 \end{block}
 \begin{block}{index.htmlを作りブラウザで開く}
 \end{block}
 \end{frame}
 
-\begin{frame}[label=sec-13-1-2]{バージョン管理の基礎知識}
+\begin{frame}[label=sec-14-2-2]{バージョン管理の基礎知識}
 \begin{block}{diff}
 \end{block}
 \begin{block}{patch}
@@ -1419,7 +1581,7 @@ createdb heroku_enpit_test
 \begin{block}{sha1}
 \end{block}
 \end{frame}
-\begin{frame}[label=sec-13-1-3]{演習課題}
+\begin{frame}[label=sec-14-2-3]{演習課題}
 \begin{block}{演習課題}
 \begin{itemize}
 \item あなたがよく知っている「歴史上の有名人」を一人取り上げる
@@ -1431,7 +1593,7 @@ createdb heroku_enpit_test
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-13-1-4]{GitHubにpush}
+\begin{frame}[fragile,label=sec-14-2-4]{GitHubにpush}
  \begin{block}{コマンド}
 \begin{minted}[]{bash}
 git commit -a -m 'First commit'
@@ -1441,18 +1603,18 @@ git push -u origin msater
 \end{frame}
 
 \part{Tasks}
-\label{sec-14}
+\label{sec-15}
 \section{{\bfseries\sffamily DONE} chocolateyのインストールをkazamでキャプチャする}
-\label{sec-14-1}
+\label{sec-15-1}
 
 \section{{\bfseries\sffamily TODO} 英語の原典を読めるようになること}
-\label{sec-14-2}
+\label{sec-15-2}
 \section{{\bfseries\sffamily TODO} よくある間違い cdしないでgit initするとか．}
-\label{sec-14-3}
+\label{sec-15-3}
 \section{{\bfseries\sffamily TODO} OSをインストールし，手順書を参照しながら長々とコマンドを打つ，ということが不要になった．}
-\label{sec-14-4}
+\label{sec-15-4}
 \section{{\bfseries\sffamily TODO} アンケートを作成する}
-\label{sec-14-5}
+\label{sec-15-5}
 \begin{itemize}
 \item 調査の目的
 \begin{itemize}
@@ -1483,6 +1645,6 @@ git push -u origin msater
 \end{enumerate}
 
 \section{{\bfseries\sffamily TODO} .bash\_profileから.bashrcを読み込む（カラー化）}
-\label{sec-14-6}
+\label{sec-15-6}
 % Emacs 24.3.2 (Org mode 8.2.5h)
 \end{document}
