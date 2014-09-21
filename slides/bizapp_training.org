@@ -919,12 +919,14 @@ rails server
 *** 完成したコードをマージ
 **** ブランチをマージ
      - 動作確認できたので， =books= branchをマージする
+     - 不要になったブランチは， =git branch -d= で削除する
 **** コマンド
 #+begin_src bash
 git add .
 git commit -m 'Generate books scaffold'
 git checkout master
 git merge books
+git branch -d books
 #+end_src
 
 *** Herokuにディプロイ
@@ -981,15 +983,78 @@ rake test
 *** Travis CI
     − [[http://docs.travis-ci.com/user/languages/ruby/][Travis CI: Building a Ruby Project]]
 
-*** ???
+*** Travisの初期化
+**** 内容
+     - Travisにログインして初期化を行う
+     - 作業の前にブランチを切る
+     - =init= すると =.travis.yml= ができる
 **** コマンド
 #+begin_src bash
-travis init
+git checkout -b travis # -b -> ブランチを作成
+travis login --auto    # GitHubのログイン情報でログイン
+travis init            # 質問には全てEnterを押す
+#+end_src
+
+*** Herokuとの連携
+**** Herokuとの連携
+     - Travis CIからHerokuへの接続を設定する
+     - master以外のブランチで実行すると，そのブランチのみHerokuに送る（ようだ）
+       - [[http://docs.travis-ci.com/user/deployment/heroku/][Travis CI: Heroku Deployment]]
+**** コマンド
+#+begin_src bash
+travis setup heroku
+#+end_src
+
+*** Travis設定ファイルの変更(1)
+**** 設定ファイルの変更
+     - Rubyのバージョン
+**** .travis.yml（抜粋）
+#+begin_src yml
+language: ruby
+rvm:
+- 2.1.3
 #+end_src
 
 
-*** Travis CIのWeb管理画面
+*** Travis用DB設定ファイル
+**** TravisでのテストDB
+     − テストDB用の設定ファイルを追加する
+**** =config/database.yml.travis=
+#+begin_src yaml
+test:
+  adapter: postgresql
+  database: travis_ci_test
+  username: postgres
+#+end_src
+
+*** Travis上のDB設定
+**** 設定ファイルの変更（追加）
+     - PostgreSQLのバージョン
+     - DBの作成
+     - [[http://docs.travis-ci.com/user/using-postgresql/][Travis CI: Using PostgreSQl on Travis CI]]
+
+**** .travis.yml（抜粋）
+#+begin_src yaml
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+#+end_src
+
 *** GitHubとTravis CI連携
+**** 説明
+     - ここまでの設定で，GitHubにpushされたコードは，
+       Travis CIでテストされ，テストが通ったコミットが
+       Herokuに送られるようになった
+     - WebブラウザでTravis CIを開いて確認する
+**** コマンド
+#+begin_src bash
+git add .
+git commit -m 'Configure Travis CI'
+git push
+#+end_src
+
 *** Travis経由でのHerokuへのdeploy
 
 ** ＜演習課題＞
@@ -1005,6 +1070,9 @@ travis init
      - Scaffoldを追加しなさい
      - DBのmigrationを行い，動作確認しなさい
      - うまく動作したらHerokuに配備しなさい
+*** Travis経由でのHerokuへのdeploy
+**** 演習課題
+     - Travis経由でHerokuへdeployできるように
 * TODO 第7章 Web APIを活用したサービス構築
 ** ご利用ガイド
    - [[https://webservice.rakuten.co.jp/guide/][楽天ウェブサービス: ご利用ガイド]]
