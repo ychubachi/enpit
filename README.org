@@ -19,3 +19,6 @@
   - GitHubではなくBacklogでの説明になっているが，gitの機能を勉強する教材として
     よくまとまっている．
 - [[http://sourceforge.jp/magazine/09/03/16/0831212][Gitを使いこなすための20のコマンド | SourceForge.JP Magazine]]
+
+* 過去の資料
+- [[https://github.com/ychubachi/enpit_bizapp_practice][ychubachi/enpit_bizapp_practice]]
