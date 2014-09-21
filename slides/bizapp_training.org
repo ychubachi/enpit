@@ -24,6 +24,16 @@
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
 * 第1章 ガイダンス
+** 連絡事項
+*** 連絡事項
+**** 資料等の入手先
+     - GitHubの下記リポジトリにまとめておきます
+       - [[https://github.com/ychubachi/enpit][ychubachi/enpit]]
+     - 資料は随時updateするので，適宜，最新版をダウンロードしてください
+**** Twitterのハッシュタグ
+     - Twitterのハッシュタグは =#enpit_aiit= を使ってください
+     - まとめサイトなど作ってくれると嬉しいです
+       - 昨年の例 -> [[http://togetter.com/li/558221][enPiT BizApp AIIT ビジネスアプリケーション演習 1日目 - Togetterまとめ]]
 ** 授業の全体像
 *** 学習目標と目的
 **** 目標
