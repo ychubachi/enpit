@@ -2,7 +2,7 @@
 ビジネスアプリケーション演習に関連した情報をまとめたリポジトリです．
 
 * スライド資料
-- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]
+- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]]
 
 * Bookmark
 - enPiT用box作成 :: [[https://github.com/ychubachi/vagrant_enpit][ychubachi/vagrant_enpit]]
