@@ -1,4 +1,4 @@
-% Created 2014-09-23 火 14:11
+% Created 2014-09-23 火 16:46
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1063,7 +1063,9 @@ heroku keys
  \begin{block}{内容}
 \begin{itemize}
 \item Herokuで動作できるSinatraアプリと設定ファイルの例
-\href{https://devcenter.heroku.com/articles/rack#sinatra}{Deploying Rack-based Apps | Heroku Dev Center}
+\begin{itemize}
+\item \href{https://devcenter.heroku.com/articles/rack#sinatra}{Deploying Rack-based Apps | Heroku Dev Center}
+\end{itemize}
 \item 例を見ながら，エディタを用いて，次の3つのファイルを作成する
 \begin{description}
 \item[{\texttt{hello.rb}}] RubyによるWebアプリ本体（作成済み）
@@ -1080,7 +1082,24 @@ emacs Gemfile
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-2-4]{アプリをGitHubにpushする}
+\begin{frame}[fragile,label=sec-5-2-4]{Bundle install}
+ \begin{block}{内容}
+\begin{itemize}
+\item \texttt{Gemfile} の中身に基づき，必要なGem（ライブラリ）をダウンロードする
+\begin{itemize}
+\item \texttt{Gemfile.lock} というファイルができる
+\item このファイルもcommitの対象に含める
+\end{itemize}
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+bundle install
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-5-2-5]{アプリをGitHubにpushする}
  \begin{block}{内容}
 \begin{itemize}
 \item Herokuで動かす前に，commitが必要
@@ -1094,12 +1113,12 @@ emacs Gemfile
 \begin{minted}[]{bash}
 git add .
 git commit -m 'Add configuration files for Heroku'
-git push origin master
+git push -u origin master
 \end{minted}
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-2-5]{Herokuにアプリを作る}
+\begin{frame}[fragile,label=sec-5-2-6]{Herokuにアプリを作る}
  \begin{block}{アプリを作る}
 \begin{itemize}
 \item Herokuが自動生成したURLが表示されるので，メモする
@@ -1116,7 +1135,7 @@ git remote -v
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-2-6]{Herokuにアプリを配備する}
+\begin{frame}[fragile,label=sec-5-2-7]{Herokuにアプリを配備する}
  \begin{block}{配備する方法}
 \begin{itemize}
 \item Herokuのリモートリポジトリにpushする
@@ -1191,7 +1210,22 @@ git push heroku master
 \end{itemize}
 \end{block}
 \end{frame}
-\begin{frame}[fragile,label=sec-6-1-3]{\texttt{rails\_enpit} リポジトリを作成する}
+\begin{frame}[fragile,label=sec-6-1-3]{PostgreSQLにDBを作成}
+ \begin{block}{開発で利用するDB}
+\begin{description}
+\item[{rails\_enpit\_development}] 開発作業中に利用
+\item[{rails\_enpit\_test}] テスト用に利用
+\item[{rails\_enpit\_production}] 本番環境で利用（ローカルには作成しない）
+\end{description}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+createdb rails_enpit_development
+createdb rails_enpit_test
+\end{minted}
+\end{block}
+\end{frame}
+\begin{frame}[fragile,label=sec-6-1-4]{\texttt{rails\_enpit} リポジトリを作成する}
  \begin{block}{内容}
 \begin{itemize}
 \item \texttt{rails} は予め，仮想化環境にインストールしてある
@@ -1211,7 +1245,7 @@ git push -u origin master
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-4]{Gemfileの変更}
+\begin{frame}[fragile,label=sec-6-1-5]{Gemfileの変更}
  \begin{block}{変更する内容}
 \begin{itemize}
 \item GemfileにRails内部で動作するJavaScriptの実行環境を設定する
@@ -1232,7 +1266,7 @@ gem 'therubyracer',  platforms: :ruby
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-5]{Bundle installの実行}
+\begin{frame}[fragile,label=sec-6-1-6]{Bundle installの実行}
  \begin{block}{\texttt{bundle install}}
 \begin{itemize}
 \item Gemfileを読み込み，必要なgemをインストールする
@@ -1249,7 +1283,7 @@ git commit -a -m 'Run bundle install'
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-6-1-6]{Rails serverの起動}
+\begin{frame}[fragile,label=sec-6-1-7]{Rails serverの起動}
  \begin{block}{Rails serverを起動}
 \begin{itemize}
 \item この段階で，アプリケーションを起動できるようになっている
@@ -1409,23 +1443,7 @@ git push heroku master
 \label{sec-7}
 \section{DBとScaffoldの作成}
 \label{sec-7-1}
-\begin{frame}[fragile,label=sec-7-1-1]{PostgreSQLにDBを作成}
- \begin{block}{開発で利用するDB}
-\begin{description}
-\item[{rails\_enpit\_development}] 開発作業中に利用
-\item[{rails\_enpit\_test}] テスト用に利用
-\item[{rails\_enpit\_production}] 本番環境で利用（ローカルには作成しない）
-\end{description}
-\end{block}
-\begin{block}{コマンド}
-\begin{minted}[]{bash}
-createdb rails_enpit_development
-createdb rails_enpit_test
-\end{minted}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile,label=sec-7-1-2]{Scaffold}
+\begin{frame}[fragile,label=sec-7-1-1]{Scaffold}
  \begin{block}{Scaffoldとは}
 \begin{itemize}
 \item \href{https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925}{scaffold - Google 検索}
@@ -1449,7 +1467,7 @@ rails generate scaffold book title:string author:string
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-3]{DBのmigrate}
+\begin{frame}[fragile,label=sec-7-1-2]{DBのmigrate 2}
  \begin{block}{migrateとは}
 \begin{itemize}
 \item Databaseのスキーマ定義の更新
@@ -1463,7 +1481,7 @@ rake db:migrate
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-4]{routeの確認}
+\begin{frame}[fragile,label=sec-7-1-3]{routeの確認}
  \begin{block}{route}
 \begin{itemize}
 \item ルーティングの設定を確認しよう
@@ -1476,7 +1494,7 @@ rake routes
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-5]{動作確認}
+\begin{frame}[fragile,label=sec-7-1-4]{動作確認}
  \begin{block}{動作確認の方法}
 \begin{itemize}
 \item Webブラウザで \url{http://localhost:3000/books} を開く
@@ -1490,7 +1508,7 @@ rails server
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-6]{完成したコードをマージ}
+\begin{frame}[fragile,label=sec-7-1-5]{完成したコードをマージ}
  \begin{block}{ブランチをマージ}
 \begin{itemize}
 \item 動作確認できたので， \texttt{books} branchをマージする
@@ -1508,7 +1526,7 @@ git branch -d books
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-7]{Herokuにディプロイ}
+\begin{frame}[fragile,label=sec-7-1-6]{Herokuにディプロイ}
  \begin{block}{ディプロイ}
 \begin{itemize}
 \item ここまでのアプリをディプロイする
@@ -1524,7 +1542,7 @@ heroku run db:migrate
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-7-1-8]{Scaffoldの作成を取り消す場合（参考）}
+\begin{frame}[fragile,label=sec-7-1-7]{Scaffoldの作成を取り消す場合（参考）}
  \begin{block}{取り消す操作}
 \begin{itemize}
 \item migrationを取り消す
@@ -1543,7 +1561,7 @@ git branch -D books
 \end{block}
 \end{frame}
 
-\begin{frame}[label=sec-7-1-9]{PostgereSQLクライアントのコマンド（参考）}
+\begin{frame}[label=sec-7-1-8]{PostgereSQLクライアントのコマンド（参考）}
 \begin{itemize}
 \item psqlでDBにログイン
 \end{itemize}

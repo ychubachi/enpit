@@ -639,7 +639,7 @@ heroku keys
 *** Herokuで動作できるSinatraアプリ
 **** 内容
      - Herokuで動作できるSinatraアプリと設定ファイルの例
-       [[https://devcenter.heroku.com/articles/rack#sinatra][Deploying Rack-based Apps | Heroku Dev Center]]
+       - [[https://devcenter.heroku.com/articles/rack#sinatra][Deploying Rack-based Apps | Heroku Dev Center]]
      - 例を見ながら，エディタを用いて，次の3つのファイルを作成する
        - =hello.rb= :: RubyによるWebアプリ本体（作成済み）
        - =config.ru= :: Webアプリサーバ（Rack）の設定
@@ -648,6 +648,16 @@ heroku keys
 #+begin_src bash
 emacs config.ru
 emacs Gemfile
+#+end_src
+
+*** Bundle install
+**** 内容
+     - =Gemfile= の中身に基づき，必要なGem（ライブラリ）をダウンロードする
+       - =Gemfile.lock= というファイルができる
+       - このファイルもcommitの対象に含める
+**** コマンド
+#+begin_src bash
+bundle install
 #+end_src
 
 *** アプリをGitHubにpushする
@@ -659,7 +669,7 @@ emacs Gemfile
 #+begin_src bash
 git add .
 git commit -m 'Add configuration files for Heroku'
-git push origin master
+git push -u origin master
 #+end_src
 
 *** Herokuにアプリを作る
@@ -715,6 +725,17 @@ git push heroku master
 **** DBについて
     - DatabeseはPostgreSQLを使用する
       - RoR標準のsqliteは使わない
+*** PostgreSQLにDBを作成
+**** 開発で利用するDB
+     - rails_enpit_development :: 開発作業中に利用
+     - rails_enpit_test :: テスト用に利用
+     - rails_enpit_production :: 本番環境で利用（ローカルには作成しない）
+**** コマンド
+
+#+begin_src bash
+createdb rails_enpit_development
+createdb rails_enpit_test
+#+end_src
 *** =rails_enpit= リポジトリを作成する
 **** 内容
      - =rails= は予め，仮想化環境にインストールしてある
@@ -865,18 +886,6 @@ git push heroku master
 
 * 第7章 DBを使うアプリの開発と継続的統合
 ** DBとScaffoldの作成
-*** PostgreSQLにDBを作成
-**** 開発で利用するDB
-     - rails_enpit_development :: 開発作業中に利用
-     - rails_enpit_test :: テスト用に利用
-     - rails_enpit_production :: 本番環境で利用（ローカルには作成しない）
-**** コマンド
-
-#+begin_src bash
-createdb rails_enpit_development
-createdb rails_enpit_test
-#+end_src
-
 *** Scaffold
 **** Scaffoldとは
      - [[https://www.google.co.jp/search?q=scaffold&client=ubuntu&hs=PiK&channel=fs&hl=ja&source=lnms&tbm=isch&sa=X&ei=smUdVKaZKY7s8AXew4LwDw&ved=0CAgQ_AUoAQ&biw=1195&bih=925][scaffold - Google 検索]]
@@ -892,7 +901,7 @@ git checkout books
 rails generate scaffold book title:string author:string
 #+end_src
 
-*** DBのmigrate
+*** DBのmigrate 2
 **** migrateとは
     - Databaseのスキーマ定義の更新
     - Scaffoldを追加したり，属性を追加したりした際に行う
