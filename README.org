@@ -4,3 +4,7 @@
 * スライド資料
 - [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]]
 - [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.pdf?raw=true][事前準備編]]
+
+* Issue
+- この資料の内容に関する質問・改善提案等はIssueにご登録ください．
+  - [[https://github.com/ychubachi/enpit/issues][Issues · ychubachi/enpit]]
