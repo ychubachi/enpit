@@ -60,7 +60,9 @@ heroku config:set AFID=11b23d92.8f6b6ff4.11b23d93.???????
 git push heroku master
 #+end_src
 
-* 演習
+* Travis CI連携
+  - TBD
+* メモ
 
 #+begin_src bash
 mkdir ~/rakuten_enpit

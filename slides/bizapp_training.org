@@ -1120,3 +1120,11 @@ heroku apps:info
 heroku logs --tail
 #+end_src
 
+*** =rails generate= などが動かない
+    - [[https://devcenter.heroku.com/articles/getting-started-with-rails4#write-your-app][Write your App]]
+
+#+begin_src bash
+spring stop
+#+end_src
+
+

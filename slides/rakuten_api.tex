@@ -1,4 +1,4 @@
-% Created 2014-09-24 水 21:07
+% Created 2014-09-24 水 22:21
 \documentclass[t]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -50,21 +50,17 @@
 \item \href{http://webservice.rakuten.co.jp/document/}{楽天ウェブサービス: API一覧}
 \end{itemize}
 \end{frame}
-
-\begin{frame}[fragile,label=sec-1-2]{アプリの入れ物を作る}
+\begin{frame}[fragile,label=sec-1-2]{サンプルアプリ}
  \begin{itemize}
-\item \texttt{rakuten\_enpit} リポジトリを作成
-\item Herokuに接続
-− アプリURLを取得
+\item \href{https://github.com/ryuichiueda/sinatra_enpit/blob/master/hello.rb}{sinatra$_{\text{enpit}}$/hello.rb at master · ryuichiueda/sinatra$_{\text{enpit}}$}
+\begin{itemize}
+\item \texttt{git clone} する
 \end{itemize}
-
-\begin{minted}[]{bash}
-mkdir ~/rakuten_enpit
-cd ~/rakuten_enpit
-git init
-git create
-heroku create
-\end{minted}
+\item Herokuでアプリを作りアプリURLを取得
+\begin{itemize}
+\item \texttt{heroku create} する
+\end{itemize}
+\end{itemize}
 \end{frame}
 \begin{frame}[label=sec-1-3]{アプリIDの発行}
 \begin{itemize}
@@ -90,5 +86,56 @@ export APPID=102266705971259xxxx
 export AFID=11b23d92.8f6b6ff4.11b23d93.???????
 \end{minted}
 \end{frame}
+\begin{frame}[fragile,label=sec-1-5]{ローカルでの動作確認}
+ \begin{itemize}
+\item ローカルで動作確認する
+\end{itemize}
+
+\begin{minted}[]{bash}
+ruby hello.rb -o 0.0.0.0
+\end{minted}
+\end{frame}
+\section{Herokuで動作させる}
+\label{sec-2}
+\begin{frame}[fragile,label=sec-2-1]{Herokuの環境変数}
+ \begin{itemize}
+\item 次のコマンドで，Heroku内部にも環境変数を作る
+\item 参考
+\begin{itemize}
+\item \href{https://devcenter.heroku.com/articles/config-vars}{Configuration and Config Vars | Heroku Dev Center}
+\end{itemize}
+\end{itemize}
+
+\begin{minted}[]{bash}
+heroku config:set APPID=102266705971259xxxx
+heroku config:set AFID=11b23d92.8f6b6ff4.11b23d93.???????
+\end{minted}
+\end{frame}
+\begin{frame}[fragile,label=sec-2-2]{Herokuでの動作確認}
+ \begin{itemize}
+\item Herokuに直接Pushしてみる
+\item webブラウザで動作確認
+\end{itemize}
+
+\begin{minted}[]{bash}
+git push heroku master
+\end{minted}
+\end{frame}
+\section{Travis CI連携}
+\label{sec-3}
+\begin{itemize}
+\item TBD
+\end{itemize}
+
+\section{メモ}
+\label{sec-4}
+
+\begin{minted}[]{bash}
+mkdir ~/rakuten_enpit
+cd ~/rakuten_enpit
+git init
+git create
+heroku create
+\end{minted}
 % Emacs 24.3.2 (Org mode 8.2.5h)
 \end{document}
