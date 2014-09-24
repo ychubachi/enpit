@@ -1110,3 +1110,13 @@ git push
     - Gitに登録したくないファイルは.gitignoreに登録する
     - 例
       - [[https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore][gitignore/Emacs.gitignore at master · github/gitignore]]
+*** HerokuのアプリのURL確認
+#+begin_src bash
+heroku apps:info
+#+end_src
+
+*** Herokuのログをリアルタイムで見る
+#+begin_src bash
+heroku logs --tail
+#+end_src
+
