@@ -1,0 +1,94 @@
+% Created 2014-09-24 水 21:07
+\documentclass[t]{beamer}
+\usepackage{zxjatype}
+\usepackage[ipa]{zxjafont}
+\setbeamertemplate{navigation symbols}{}
+\hypersetup{colorlinks,linkcolor=,urlcolor=gray}
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Outline}
+  \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+\setbeamertemplate{navigation symbols}{}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\institute[AIIT]{産業技術大学院大学(AIIT)}
+\usetheme{Berkeley}
+\usecolortheme{whale}
+\setcounter{secnumdepth}{2}
+\author{中鉢 欣秀・上田 隆一}
+\date{}
+\title{楽天APIを利用したアプリケーション}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.3.2 (Org mode 8.2.5h)}}
+\begin{document}
+
+\maketitle
+
+\section{楽天API}
+\label{sec-1}
+\begin{frame}[label=sec-1-1]{楽天APIとは？}
+\begin{itemize}
+\item \href{http://webservice.rakuten.co.jp/document/}{楽天ウェブサービス: API一覧}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-2]{アプリの入れ物を作る}
+ \begin{itemize}
+\item \texttt{rakuten\_enpit} リポジトリを作成
+\item Herokuに接続
+− アプリURLを取得
+\end{itemize}
+
+\begin{minted}[]{bash}
+mkdir ~/rakuten_enpit
+cd ~/rakuten_enpit
+git init
+git create
+heroku create
+\end{minted}
+\end{frame}
+\begin{frame}[label=sec-1-3]{アプリIDの発行}
+\begin{itemize}
+\item 新規アプリを登録する
+\begin{itemize}
+\item \href{https://webservice.rakuten.co.jp/app/create}{楽天ウェブサービス: 新規アプリ登録}
+\end{itemize}
+\item アプリ名（任意），アプリのURL，認証コードを入力
+\begin{itemize}
+\item アプリID，アフィリエイトID等を控えておく
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile,label=sec-1-4]{環境変数の設定}
+ \begin{itemize}
+\item アプリID（APPID）とアフィリエイトID（AFID）を環境変数に登録
+\item \texttt{\textasciitilde{}/.bash\_profile} に次の行を追加（自分のID等に書き換えること）
+\item \texttt{exit} して，再度 \texttt{vagrant ssh}
+\end{itemize}
+
+\begin{minted}[]{bash}
+export APPID=102266705971259xxxx
+export AFID=11b23d92.8f6b6ff4.11b23d93.???????
+\end{minted}
+\end{frame}
+% Emacs 24.3.2 (Org mode 8.2.5h)
+\end{document}
