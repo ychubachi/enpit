@@ -1,4 +1,4 @@
-% Created 2014-09-24 水 13:05
+% Created 2014-09-24 水 13:35
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1611,13 +1611,14 @@ rake test
  \begin{block}{内容}
 \begin{itemize}
 \item Travisにログインして初期化を行う
-\item 作業の前にブランチを切る
+\end{itemize}
+\begin{itemize}
 \item \texttt{init} すると \texttt{.travis.yml} ができる
 \end{itemize}
 \end{block}
 \begin{block}{コマンド}
+
 \begin{minted}[]{bash}
-git checkout -b travis # -b -> ブランチを作成
 travis login --auto    # GitHubのログイン情報でログイン
 travis init            # 質問には全てEnterを押す
 \end{minted}

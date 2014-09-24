@@ -995,11 +995,13 @@ rake test
 *** Travisの初期化
 **** 内容
      - Travisにログインして初期化を行う
-     - 作業の前にブランチを切る
+#     - 作業の前にブランチを切る
      - =init= すると =.travis.yml= ができる
 **** コマンド
+
+# git checkout -b travis # -b -> ブランチを作成
+
 #+begin_src bash
-git checkout -b travis # -b -> ブランチを作成
 travis login --auto    # GitHubのログイン情報でログイン
 travis init            # 質問には全てEnterを押す
 #+end_src
