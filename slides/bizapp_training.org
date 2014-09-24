@@ -1105,3 +1105,8 @@ git push
     - 授業で取り上げたツールを使い，自由に試しなさい
     - 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
       - どちらを使うかは，ペアで相談して決めてください
+* 補足
+*** .gitignoreについて
+    - Gitに登録したくないファイルは.gitignoreに登録する
+    - 例
+      - [[https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore][gitignore/Emacs.gitignore at master · github/gitignore]]
