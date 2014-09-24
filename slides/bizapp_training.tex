@@ -1,4 +1,4 @@
-% Created 2014-09-24 水 13:35
+% Created 2014-09-24 水 17:39
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1603,8 +1603,20 @@ rake test
 
 \section{Travis CIとの連携}
 \label{sec-7-3}
-\begin{frame}[label=sec-7-3-1]{Travis CI}
+\begin{frame}[label=sec-7-3-1]{Travis CIのアカウント作成}
+\begin{block}{アカウントの作り方}
+\begin{itemize}
+\item 次のページにアクセスし，画面右上の「Sign in with GitHub」のボタンを押す
+\begin{itemize}
+\item \href{https://travis-ci.org/}{Travis CI - Free Hosted Continuous Integration Platform for the Open Source Community}
+\end{itemize}
+\item GitHubの認証ページが出るので，画面下部にある緑のボタンを押す
+\item Travis CIから確認のメールが来るので，確認する
+\end{itemize}
+\end{block}
+\begin{block}{Ruby アプリ}
 − \href{http://docs.travis-ci.com/user/languages/ruby/}{Travis CI: Building a Ruby Project}
+\end{block}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-7-3-2]{Travisの初期化}
@@ -1763,6 +1775,21 @@ booksコントローラのviewへのリンクを追加しなさい
 \item \href{http://docs.travis-ci.com/user/status-images/}{Travis CI: Status Images}
 \end{itemize}
 \end{block}
+\end{frame}
+\part{Webアプリケーションの共同開発}
+\label{sec-8}
+\begin{frame}[label=sec-8-0-1]{Webアプリケーションの共同開発}
+\begin{itemize}
+\item 2人でペアを組み，1つのWebアプリケーションを開発しなさい
+\begin{itemize}
+\item 何を作るかは，ペアで相談してください
+\end{itemize}
+\item 授業で取り上げたツールを使い，自由に試しなさい
+\item 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
+\begin{itemize}
+\item どちらを使うかは，ペアで相談して決めてください
+\end{itemize}
+\end{itemize}
 \end{frame}
 % Emacs 24.3.1 (Org mode 8.2.6)
 \end{document}

@@ -989,7 +989,13 @@ rake test
 #+end_src
 
 ** Travis CIとの連携
-*** Travis CI
+*** Travis CIのアカウント作成
+**** アカウントの作り方
+    - 次のページにアクセスし，画面右上の「Sign in with GitHub」のボタンを押す
+      - [[https://travis-ci.org/][Travis CI - Free Hosted Continuous Integration Platform for the Open Source Community]]
+    - GitHubの認証ページが出るので，画面下部にある緑のボタンを押す
+    - Travis CIから確認のメールが来るので，確認する
+**** Ruby アプリ
     − [[http://docs.travis-ci.com/user/languages/ruby/][Travis CI: Building a Ruby Project]]
 
 *** Travisの初期化
@@ -1092,3 +1098,10 @@ git push
 **** 演習課題
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
+* Webアプリケーションの共同開発
+*** Webアプリケーションの共同開発
+    - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
+      - 何を作るかは，ペアで相談してください
+    - 授業で取り上げたツールを使い，自由に試しなさい
+    - 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
+      - どちらを使うかは，ペアで相談して決めてください
