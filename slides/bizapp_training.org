@@ -803,7 +803,7 @@ rails generate controller welcome
 *** Viewの作成
 **** Viewとは？
      - HTML等で結果をレンダリングして表示する
-     - =app/views/welcome/inde.html.erb= を作成する
+     - =app/views/welcome/index.html.erb= を作成する
      - erbで作成するのが一般的で，内部でRubyコードを動作させることができる
 **** =index.html.erb=
 #+begin_src html
@@ -901,7 +901,7 @@ git checkout books
 rails generate scaffold book title:string author:string
 #+end_src
 
-*** DBのmigrate 2
+*** DBのMigrate
 **** migrateとは
     - Databaseのスキーマ定義の更新
     - Scaffoldを追加したり，属性を追加したりした際に行う
@@ -948,7 +948,7 @@ git branch -d books
 **** コマンド
 #+begin_src bash
 git push heroku master
-heroku run db:migrate
+heroku run rake db:migrate
 #+end_src
 
 *** Scaffoldの作成を取り消す場合（参考）
