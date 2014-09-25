@@ -1098,7 +1098,7 @@ git push
 **** 演習課題
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
-* Webアプリケーションの共同開発
+* 第8章 Webアプリケーションの共同開発
 *** Webアプリケーションの共同開発
     - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
       - 何を作るかは，ペアで相談してください
@@ -1128,3 +1128,37 @@ spring stop
 #+end_src
 
 
+*** Sinatraでテストが通るようにする
+    - Gemfileに =rake= を追加する
+
+#+begin_src bash
+gem 'rake'
+#+end_src
+
+    - Rakefileを作成する
+
+#+begin_src ruby
+task :default => :test
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.pattern = "./*_test.rb"
+end
+#+end_src
+*** 仮想環境内にファイル（画像など）
+    - Guest OS内に =/vagrant= という共有フォルダがある
+    - このフォルダはHost OSからアクセスできる
+    - 場所はVagrantfileがあるフォルダ
+* 楽天APIを用いた開発
+*** 演習課題
+    - 楽天APIを利用したWebアプリケーションを開発する
+      - グループ編成
+    - グループで次のことを相談
+      - どんなアプリをつくるか
+      - 役割分担
+    - 授業で取り扱った内容のほか自分の知っている知識を活用してください
+      - JavaScript，CSS ...
+*** 演習課題
+    - README.md に使い方，HerokuのURLなどを書く
+    - LICENCEも設定する
