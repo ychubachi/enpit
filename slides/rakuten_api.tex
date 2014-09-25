@@ -1,4 +1,4 @@
-% Created 2014-09-24 水 22:21
+% Created 2014-09-25 木 15:10
 \documentclass[t]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -38,7 +38,7 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.3.2 (Org mode 8.2.5h)}}
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.6)}}
 \begin{document}
 
 \maketitle
@@ -50,9 +50,10 @@
 \item \href{http://webservice.rakuten.co.jp/document/}{楽天ウェブサービス: API一覧}
 \end{itemize}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-1-2]{サンプルアプリ}
  \begin{itemize}
-\item \href{https://github.com/ryuichiueda/sinatra_enpit/blob/master/hello.rb}{sinatra$_{\text{enpit}}$/hello.rb at master · ryuichiueda/sinatra$_{\text{enpit}}$}
+\item \href{https://github.com/ryuichiueda/rakuten_enpit_example}{Rakuten enPiT Example}
 \begin{itemize}
 \item \texttt{git clone} する
 \end{itemize}
@@ -62,6 +63,7 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
+
 \begin{frame}[label=sec-1-3]{アプリIDの発行}
 \begin{itemize}
 \item 新規アプリを登録する
@@ -74,6 +76,7 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-1-4]{環境変数の設定}
  \begin{itemize}
 \item アプリID（APPID）とアフィリエイトID（AFID）を環境変数に登録
@@ -86,6 +89,7 @@ export APPID=102266705971259xxxx
 export AFID=11b23d92.8f6b6ff4.11b23d93.???????
 \end{minted}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-1-5]{ローカルでの動作確認}
  \begin{itemize}
 \item ローカルで動作確認する
@@ -95,6 +99,7 @@ export AFID=11b23d92.8f6b6ff4.11b23d93.???????
 ruby hello.rb -o 0.0.0.0
 \end{minted}
 \end{frame}
+
 \section{Herokuで動作させる}
 \label{sec-2}
 \begin{frame}[fragile,label=sec-2-1]{Herokuの環境変数}
@@ -111,6 +116,7 @@ heroku config:set APPID=102266705971259xxxx
 heroku config:set AFID=11b23d92.8f6b6ff4.11b23d93.???????
 \end{minted}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-2]{Herokuでの動作確認}
  \begin{itemize}
 \item Herokuに直接Pushしてみる
@@ -121,21 +127,17 @@ heroku config:set AFID=11b23d92.8f6b6ff4.11b23d93.???????
 git push heroku master
 \end{minted}
 \end{frame}
+
 \section{Travis CI連携}
 \label{sec-3}
-\begin{itemize}
-\item TBD
+\begin{frame}[fragile,label=sec-3-1]{Travis CIの環境変数}
+ \begin{itemize}
+\item リポジトリで次のコマンドを打つ
 \end{itemize}
-
-\section{メモ}
-\label{sec-4}
-
 \begin{minted}[]{bash}
-mkdir ~/rakuten_enpit
-cd ~/rakuten_enpit
-git init
-git create
-heroku create
+travis env set APPID 102266705971259xxxx
+travis env set AFID 11b23d92.8f6b6ff4.11b23d93.???????
 \end{minted}
-% Emacs 24.3.2 (Org mode 8.2.5h)
+\end{frame}
+% Emacs 24.3.1 (Org mode 8.2.6)
 \end{document}

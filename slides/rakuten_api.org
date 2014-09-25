@@ -13,7 +13,7 @@
    - [[http://webservice.rakuten.co.jp/document/][楽天ウェブサービス: API一覧]]
 
 ** サンプルアプリ
-- [[https://github.com/ryuichiueda/sinatra_enpit/blob/master/hello.rb][sinatra_enpit/hello.rb at master · ryuichiueda/sinatra_enpit]]
+- [[https://github.com/ryuichiueda/rakuten_enpit_example][Rakuten enPiT Example]]
   - =git clone= する
 - Herokuでアプリを作りアプリURLを取得
   - =heroku create= する
@@ -61,13 +61,9 @@ git push heroku master
 #+end_src
 
 * Travis CI連携
-  - TBD
-* メモ
-
+** Travis CIの環境変数
+   - リポジトリで次のコマンドを打つ
 #+begin_src bash
-mkdir ~/rakuten_enpit
-cd ~/rakuten_enpit
-git init
-git create
-heroku create
+travis env set APPID 102266705971259xxxx
+travis env set AFID 11b23d92.8f6b6ff4.11b23d93.???????
 #+end_src
