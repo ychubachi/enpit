@@ -1,4 +1,4 @@
-% Created 2014-09-25 木 15:10
+% Created 2014-09-25 木 16:11
 \documentclass[t]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -57,6 +57,7 @@
 \begin{itemize}
 \item \texttt{git clone} する
 \end{itemize}
+\item \texttt{bundle install} する
 \item Herokuでアプリを作りアプリURLを取得
 \begin{itemize}
 \item \texttt{heroku create} する
@@ -130,14 +131,81 @@ git push heroku master
 
 \section{Travis CI連携}
 \label{sec-3}
-\begin{frame}[fragile,label=sec-3-1]{Travis CIの環境変数}
- \begin{itemize}
-\item リポジトリで次のコマンドを打つ
+\begin{frame}[fragile,label=sec-3-1]{.travis.ymlの再生成}
+ \begin{block}{内容}
+\begin{itemize}
+\item \texttt{fork} して作業用のブランチを作成する
+\item .travis.yml の削除と新規作成
+\item 不要なRubyのバージョンを削除
 \end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git fork
+git branch new_feature
+rm .travis.yml
+travis init
+travis heroku setup
+emacs .travis.yml
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-3-2]{Travis CIの環境変数}
+ \begin{block}{内容}
+\begin{itemize}
+\item リポジトリで次のコマンドを打つ
+\item 自分のAPPID，AFIDに書き換えること
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
 \begin{minted}[]{bash}
 travis env set APPID 102266705971259xxxx
 travis env set AFID 11b23d92.8f6b6ff4.11b23d93.???????
 \end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-3-3]{コミットしてpush}
+ \begin{block}{内容}
+\begin{itemize}
+\item \texttt{add} して \texttt{commit}
+\item 自分のリポジトリにpush
+\end{itemize}
+\end{block}
+\begin{block}{コマンド}
+\begin{minted}[]{bash}
+git add .
+git commit -m 'Update .travis.yml'
+git push -u ychubach master
+\end{minted}
+\end{block}
+\end{frame}
+
+
+
+\section{演習}
+\label{sec-4}
+\begin{frame}[label=sec-4-1]{ローカルでサンプルを動かす}
+\begin{itemize}
+\item 自分のAPPIDを作成する
+\item 仮想化環境とHerokuの環境変数を設定
+\item ローカルで動かしてみよう
+\item Herokuに直接Pushして動かしてみよう
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile,label=sec-4-2]{Travis経由で動かしてみよう}
+ \begin{itemize}
+\item サンプルをTravis経由で動作させてみよう
+\begin{itemize}
+\item Forkして，自分のリポジトリにpushできるようにする
+\item \texttt{.travis.yml} の設定を変更する
+\begin{itemize}
+\item やり方は各自で考えてみよう
+\end{itemize}
+\item Travis CIに環境変数を設定する
+\end{itemize}
+\end{itemize}
 \end{frame}
 % Emacs 24.3.1 (Org mode 8.2.6)
 \end{document}

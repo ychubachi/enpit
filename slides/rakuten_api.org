@@ -15,6 +15,7 @@
 ** サンプルアプリ
 - [[https://github.com/ryuichiueda/rakuten_enpit_example][Rakuten enPiT Example]]
   - =git clone= する
+- =bundle install= する
 - Herokuでアプリを作りアプリURLを取得
   - =heroku create= する
 
@@ -61,9 +62,54 @@ git push heroku master
 #+end_src
 
 * Travis CI連携
+** .travis.ymlの再生成
+*** 内容
+   - =fork= して作業用のブランチを作成する
+   - .travis.yml の削除と新規作成
+   - 不要なRubyのバージョンを削除
+*** コマンド
+#+begin_src bash
+git fork
+git branch new_feature
+rm .travis.yml
+travis init
+travis heroku setup
+emacs .travis.yml
+#+end_src
+
 ** Travis CIの環境変数
+*** 内容
    - リポジトリで次のコマンドを打つ
+   - 自分のAPPID，AFIDに書き換えること
+*** コマンド
 #+begin_src bash
 travis env set APPID 102266705971259xxxx
 travis env set AFID 11b23d92.8f6b6ff4.11b23d93.???????
 #+end_src
+
+** コミットしてpush
+*** 内容
+    - =add= して =commit=
+    - 自分のリポジトリにpush
+*** コマンド
+#+begin_src bash
+git add .
+git commit -m 'Update .travis.yml'
+git push -u ychubach master
+#+end_src
+
+   
+
+* 演習
+** ローカルでサンプルを動かす
+   - 自分のAPPIDを作成する
+   - 仮想化環境とHerokuの環境変数を設定
+   - ローカルで動かしてみよう
+   - Herokuに直接Pushして動かしてみよう
+** Travis経由で動かしてみよう
+   - サンプルをTravis経由で動作させてみよう
+     - Forkして，自分のリポジトリにpushできるようにする
+     - =.travis.yml= の設定を変更する
+       - やり方は各自で考えてみよう
+     - Travis CIに環境変数を設定する
+     
