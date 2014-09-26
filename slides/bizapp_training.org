@@ -116,7 +116,7 @@
      - その他
 **** 仮想化環境の構築用リポジトリ（参考）
      - [[https://github.com/ychubachi/vagrant_enpit][ychubachi/vagrant_enpit]]
-** ＜演習課題（準備作業）＞
+** ＜演習課題1＞ （準備作業）
 *** クラウドのアカウント作成
 **** GitHub
      - [[[https://github.com/join][Join GitHub · GitHub]]]
@@ -308,7 +308,7 @@ git commit
 git pull_request
 #+end_src
 
-** ＜演習課題＞
+** ＜演習課題2＞
 *** Init/Status/Addの練習
 **** 演習課題
      1. 解説した手順に従い，my_enpitリポジトリを作成
@@ -439,7 +439,7 @@ git checkout master
 git pull
 #+end_src
 
-** ＜演習課題＞
+** ＜演習課題3＞
 *** branchの操作（ローカル）
 **** 演習課題
     1. =my_enpit= リポジトリでブランチを作成しなさい（ =new_branch= ）
@@ -533,7 +533,7 @@ git pull_request -m 'Pull Request'
 **** Git brame
      - だれがどの作業をしたかわかる（誰がバグを仕込んだのかも）
        - [[https://help.github.com/articles/using-git-blame-to-trace-changes-in-a-file][Using git blame to trace changes in a file · GitHub Help]]
-** ＜演習課題＞
+** ＜演習課題4-1＞
 *** our_enpitにファイルを追加する
 **** 演習課題
     1. =ychubich/our_enpit= をcloneしてforkする
@@ -548,13 +548,17 @@ git pull_request -m 'Pull Request'
     2. GitHubのPull Request一覧を確認する
     3. おそらくコンフリクトが発生するので，
        GitHubの指示に従い競合を解消する
+** ＜演習課題4-2＞
 *** 隣の人との協同作業
 **** 演習課題
-    1. 新しくリポジトリを作成する（名称は任意）
-    2. 互いに，隣の席の人にリポジトリ名を教え，forkしてもらい
-       Pull Requestを送ってもらう
-    3. マージしてあげる
-    4. 2〜3を繰り返し，協同作業を行ってみよう
+     1. ここまでの演習ができた人と，できていない人とでペアを組む
+	- できていない人ができた人の隣の席に移動する
+     2. 新しくリポジトリを作成する（名称は任意）
+     3. 互いに，隣の席の人にリポジトリ名を教え，forkしてもらい
+        Pull Requestを送ってもらう
+     4. マージしてあげる
+     5. 2〜3を繰り返し，協同作業を行ってみよう
+** ＜演習課題4-3＞
 *** Issue/Wikiの利用
 **** 演習課題
      - GitHubのIssueの機能を使ってみなさい
@@ -693,7 +697,7 @@ git remote -v
 git push heroku master
 #+end_src
 
-** ＜演習課題＞
+** ＜演習課題5-1＞
 *** Sinatraアプリの作成
 **** 演習課題
      - Sinatraアプリを作成して，Herokuで動作させなさい
@@ -701,6 +705,7 @@ git push heroku master
      - コミットのログは詳細に記述し，どんな作業を行ったかが
        他の人にも分かるようにしなさい
      - 完成したコードはGitHubにもpushしなさい
+** ＜演習課題5-2＞ （オプション）
 *** Sinatraアプリの共同開発
 **** 演習課題
      - 隣の席の人と協同でSinatraアプリを開発しなさい
@@ -725,17 +730,18 @@ git push heroku master
 **** DBについて
     - DatabeseはPostgreSQLを使用する
       - RoR標準のsqliteは使わない
+
 *** PostgreSQLにDBを作成
 **** 開発で利用するDB
      - rails_enpit_development :: 開発作業中に利用
      - rails_enpit_test :: テスト用に利用
      - rails_enpit_production :: 本番環境で利用（ローカルには作成しない）
 **** コマンド
-
 #+begin_src bash
 createdb rails_enpit_development
 createdb rails_enpit_test
 #+end_src
+
 *** =rails_enpit= リポジトリを作成する
 **** 内容
      - =rails= は予め，仮想化環境にインストールしてある
@@ -879,10 +885,10 @@ heroku create
 git push heroku master
 #+end_src
 
-** ＜演習課題＞
+** ＜演習課題6＞
 *** RoRアプリの作成
 **** 演習課題
-     - ここまでの説明に従い，Herokuで動作するRoRアプリを完成させなさい
+     - ここまでの説明に従い，Herokuで動作するRoRアプリ（ =rails_enpit= ）を完成させなさい
 
 * 第7章 DBを使うアプリの開発と継続的統合
 ** DBとScaffoldの作成
@@ -1078,10 +1084,29 @@ git push
 **** HerokuへのDeploy
      - テストが通れば，自動でHerokuに配備される
      - 配備できたらWebブラウザでアプリのページを開いて確認する
-** ＜演習課題＞
+*** 補足：Sinatraでテストが通るようにする
+**** Gemfileに =rake= を追加する
+
+#+begin_src bash
+gem 'rake'
+#+end_src
+
+**** Rakefileを作成する
+
+#+begin_src ruby
+task :default => :test
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.pattern = "./*_test.rb"
+end
+#+end_src
+
+** ＜演習課題7＞
 *** Herokuへのdeploy
 **** 演習課題
-    - books コントローラを備えたアプリをHerokuに配備しなさい
+    - =rails_enpit= にbooksスキャっフォルドを追加してHerokuに配備しなさい
 *** リンクの追加
 **** 演習課題
      - welcomeコントローラのviewから，
@@ -1094,18 +1119,136 @@ git push
 *** Travis経由でのHerokuへのdeploy
 **** 演習課題
      - Travis経由でHerokuへdeployできるようにする
-*** Status Image
-**** 演習課題
-     - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
-     - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
 * 第8章 Webアプリケーションの共同開発
+** ＜演習課題8＞
 *** Webアプリケーションの共同開発
     - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
       - 何を作るかは，ペアで相談してください
     - 授業で取り上げたツールを使い，自由に試しなさい
     - 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
       - どちらを使うかは，ペアで相談して決めてください
-* 補足
+* 第9章 楽天APIを利用したアプリケーション
+** 楽天API
+*** 楽天APIとは？
+    - [[http://webservice.rakuten.co.jp/document/][楽天ウェブサービス: API一覧]]
+
+*** サンプルアプリ
+- [[https://github.com/ryuichiueda/rakuten_enpit_example][Rakuten enPiT Example]]
+  - =git clone= する
+- =bundle install= する
+- Herokuでアプリを作りアプリURLを取得
+  - =heroku create= する
+
+*** アプリIDの発行
+    - 新規アプリを登録する
+      - [[https://webservice.rakuten.co.jp/app/create][楽天ウェブサービス: 新規アプリ登録]]
+    - アプリ名（任意），アプリのURL，認証コードを入力
+      - アプリID，アフィリエイトID等を控えておく
+
+*** 環境変数の設定
+   - アプリID（APPID）とアフィリエイトID（AFID）を環境変数に登録
+   - =~/.bash_profile= に次の行を追加（自分のID等に書き換えること）
+   - =exit= して，再度 =vagrant ssh=
+
+#+begin_src bash
+export APPID=102266705971259xxxx
+export AFID=11b23d92.8f6b6ff4.11b23d93.???????
+#+end_src
+
+*** ローカルでの動作確認
+   - ローカルで動作確認する
+
+#+begin_src bash
+ruby hello.rb -o 0.0.0.0
+#+end_src
+
+** Herokuで動作させる
+*** Herokuの環境変数
+**** 環境変数の作成
+   - 次のコマンドで，Heroku内部にも環境変数を作る
+   - 参考
+     - [[https://devcenter.heroku.com/articles/config-vars][Configuration and Config Vars | Heroku Dev Center]]
+**** コマンド
+#+begin_src bash
+heroku config:set APPID=102266705971259xxxx
+heroku config:set AFID=11b23d92.8f6b6ff4.11b23d93.???????
+#+end_src
+
+*** Herokuでの動作確認
+**** 内容
+   - Herokuに直接Pushしてみる
+   - webブラウザで動作確認
+
+**** コマンド
+#+begin_src bash
+git push heroku master
+#+end_src
+
+** Travis CI連携
+*** .travis.ymlの再生成
+**** 内容
+    - =fork= して作業用のブランチを作成する
+    - .travis.yml の削除と新規作成
+    - 不要なRubyのバージョンを削除
+**** コマンド
+#+begin_src bash
+git fork
+git branch new_feature
+rm .travis.yml
+travis init
+travis heroku setup
+emacs .travis.yml
+#+end_src
+
+*** Travis CIの環境変数
+**** 内容
+    - リポジトリで次のコマンドを打つ
+    - 自分のAPPID，AFIDに書き換えること
+**** コマンド
+#+begin_src bash
+travis env set APPID 102266705971259xxxx
+travis env set AFID 11b23d92.8f6b6ff4.11b23d93.???????
+#+end_src
+
+*** コミットしてpush
+**** 内容
+     - =add= して =commit=
+     - 自分のリポジトリにpush
+**** コマンド
+#+begin_src bash
+git add .
+git commit -m 'Update .travis.yml'
+git push -u ychubach master
+#+end_src
+
+** ＜演習課題9-1＞
+*** ローカルでサンプルを動かす
+    - 自分のAPPIDを作成する
+    - 仮想化環境とHerokuの環境変数を設定
+    - ローカルで動かしてみよう
+    - Herokuに直接Pushして動かしてみよう
+** ＜演習課題9-2＞
+*** Travis経由で動かしてみよう（難易度：高）
+    - サンプルをTravis経由で動作させてみよう
+      - Forkして，自分のリポジトリにpushできるようにする
+      - =.travis.yml= の設定を変更する
+       	- やり方は各自で考えてみよう
+      - Travis CIに環境変数を設定する
+
+* 第10章 ミニプロジェクト
+** ＜演習課題10＞
+*** ミニプロジェクト
+    - 楽天APIを利用したWebアプリケーションを開発する
+      - 2つペアを統合し，4人のグループを編成する
+    - グループで次のことを相談
+      - どんなアプリをつくるか
+      - 役割分担
+    - 授業で取り扱った内容のほか自分の知っている知識を活用してください
+      - JavaScript，CSS ...
+    - README.md に使い方，HerokuのURLなどを書く
+    - LICENCEも設定する
+
+* 補足資料
 *** .gitignoreについて
     - Gitに登録したくないファイルは.gitignoreに登録する
     - 例
@@ -1127,38 +1270,12 @@ heroku logs --tail
 spring stop
 #+end_src
 
-
-*** Sinatraでテストが通るようにする
-    - Gemfileに =rake= を追加する
-
-#+begin_src bash
-gem 'rake'
-#+end_src
-
-    - Rakefileを作成する
-
-#+begin_src ruby
-task :default => :test
-
-require 'rake/testtask'
-
-Rake::TestTask.new do |t|
-  t.pattern = "./*_test.rb"
-end
-#+end_src
 *** 仮想環境内にファイル（画像など）
     - Guest OS内に =/vagrant= という共有フォルダがある
     - このフォルダはHost OSからアクセスできる
     - 場所はVagrantfileがあるフォルダ
-* 楽天APIを用いた開発
-*** 演習課題
-    - 楽天APIを利用したWebアプリケーションを開発する
-      - グループ編成
-    - グループで次のことを相談
-      - どんなアプリをつくるか
-      - 役割分担
-    - 授業で取り扱った内容のほか自分の知っている知識を活用してください
-      - JavaScript，CSS ...
-*** 演習課題
-    - README.md に使い方，HerokuのURLなどを書く
-    - LICENCEも設定する
+
+*** Status Image
+**** 演習課題
+     - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
+     - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
