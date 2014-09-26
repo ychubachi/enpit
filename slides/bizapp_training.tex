@@ -1,4 +1,4 @@
-% Created 2014-09-25 木 14:51
+% Created 2014-09-26 金 13:12
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage{zxjatype}
 \usepackage[ipa]{zxjafont}
@@ -1776,18 +1776,18 @@ booksコントローラのviewへのリンクを追加しなさい
 \end{itemize}
 \end{block}
 \end{frame}
-\part{Webアプリケーションの共同開発}
+\part{第8章 Webアプリケーションの共同開発}
 \label{sec-8}
 \begin{frame}[label=sec-8-0-1]{Webアプリケーションの共同開発}
 \begin{itemize}
-\item 2人でペアを組み，1つのWebアプリケーションを開発しなさい
+\item 4人（または3人）でチームを組み，1つのWebアプリケーションを開発しなさい
 \begin{itemize}
-\item 何を作るかは，ペアで相談してください
+\item 何を作るかは，チームで相談してください
 \end{itemize}
 \item 授業で取り上げたツールを使い，自由に試しなさい
 \item 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
 \begin{itemize}
-\item どちらを使うかは，ペアで相談して決めてください
+\item どちらを使うかは，チームで相談して決めてください
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1847,6 +1847,38 @@ Rake::TestTask.new do |t|
   t.pattern = "./*_test.rb"
 end
 \end{minted}
+\end{frame}
+\begin{frame}[fragile,label=sec-9-0-6]{仮想環境内にファイル（画像など）}
+ \begin{itemize}
+\item Guest OS内に \texttt{/vagrant} という共有フォルダがある
+\item このフォルダはHost OSからアクセスできる
+\item 場所はVagrantfileがあるフォルダ
+\end{itemize}
+\end{frame}
+\part{楽天APIを用いた開発}
+\label{sec-10}
+\begin{frame}[label=sec-10-0-1]{演習課題}
+\begin{itemize}
+\item 楽天APIを利用したWebアプリケーションを開発する
+\begin{itemize}
+\item グループ編成
+\end{itemize}
+\item グループで次のことを相談
+\begin{itemize}
+\item どんなアプリをつくるか
+\item 役割分担
+\end{itemize}
+\item 授業で取り扱った内容のほか自分の知っている知識を活用してください
+\begin{itemize}
+\item JavaScript，CSS \ldots{}
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-10-0-2]{演習課題}
+\begin{itemize}
+\item README.md に使い方，HerokuのURLなどを書く
+\item LICENCEも設定する
+\end{itemize}
 \end{frame}
 % Emacs 24.3.1 (Org mode 8.2.6)
 \end{document}
