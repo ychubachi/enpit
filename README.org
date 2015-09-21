@@ -2,7 +2,7 @@
 ビジネスアプリケーション演習に関連した情報をまとめたリポジトリです．
 
 * スライド資料
-- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]]
+- [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw%3Dtrue][コラボレイティブ開発特論]]
 - [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.pdf?raw%3Dtrue][仮想環境の導入]]
 
 * ご質問・ご意見
