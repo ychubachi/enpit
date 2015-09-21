@@ -26,7 +26,7 @@
 
 * 第1章 モダンなソフトウエア開発の道具達
 ** 連絡事項
-*** 連絡事項
+*** 連絡事項(1)
 **** 資料等の入手先
      - GitHubの下記リポジトリにまとめておきます
        - [[https://github.com/ychubachi/enpit][ychubachi/enpit]]
@@ -35,6 +35,12 @@
      - Twitterのハッシュタグは =#enpit_aiit= を使ってください
      - まとめサイトなど作ってくれると嬉しいです
        - 昨年の例 -> [[http://togetter.com/li/558221][enPiT BizApp AIIT ビジネスアプリケーション演習 1日目 - Togetterまとめ]]
+*** 連絡事項(2)
+**** 仮想環境（Vagrant）
+     - 各自のPCに仮想環境をインストールしておいてください
+       - PCを持ってない方には貸出も可能です（数量限定）
+     - インストール方法については下記を参照
+       - [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.org][enpit/preparation.org at master · ychubachi/enpit]]
 ** 授業の全体像
 *** 学習目標と目的
 **** 目標
@@ -90,7 +96,7 @@
 **** 取り扱わないこと
      - 方法論そのものについてはアジャイル開発特論で学ぶ
      - 言語の備えるエコシステムについては必要な範囲で学ぶ
-       # 3Qのフレームワークの授業で取り上げる予定（非enPiT科目）
+     - プログラミングの初歩については教えない
 *** Scrumするための道具
 
 #+CAPTION: The modern tools for Scrum developments.
