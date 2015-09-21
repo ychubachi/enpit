@@ -81,6 +81,18 @@
       - 課題提出と実技試験
 **** 評価の観点
       - 分散PBLで役に立つ知識が習得できたかどうか
+** 「学びの共同体」
+*** 共に学び、共に教える「場」
+    - この教室に集うメンバーは学びの共同体である
+    - 他人に教えることは、優れた学びの方法の一つ
+    - 困った時には助けを求める
+*** 自己紹介
+    - 教員
+      - [[https://github.com/ychubachi/enpit/raw/master/slides/self_introduction.pdf][自己紹介]]
+    - 履修者
+      - 名前（可能であれば所属も）
+      - どんな仕事をしているか（あるいは大学で学んだこと）
+      - この授業を履修した動機
 ** モダンなソフトウエア開発とは
 *** ソフトウエア開発のための方法・言語・道具
 
@@ -338,7 +350,7 @@ git pull_request
        - GitHubとHerokuアカウント
        - 作成したmy_enpitリポジトリのURL
 **** 提出先
-     - [[[https://docs.google.com/forms/d/1SiKQqDLQw2YiJieYVS79ywpHIaNC3uI9cNPb_ddhC1Q/viewform?usp=send_form][enPiT演習アカウント(2014)]]]
+     - [[[https://docs.google.com/forms/d/1FJUpH52RNstvIuIsTkGQxn5XYAWWrY_G_0vE0eRjDV0/viewform?usp%3Dsend_form][コラボレイティブ開発特論(2015) アカウント等]]]
 
 * 第3章 GitHubを用いた開発の流れ
 ** GitHub Flow
