@@ -352,31 +352,13 @@ git pull_request
 **** 提出先
      - [[[https://docs.google.com/forms/d/1FJUpH52RNstvIuIsTkGQxn5XYAWWrY_G_0vE0eRjDV0/viewform?usp%3Dsend_form][コラボレイティブ開発特論(2015) アカウント等]]]
 
-* 第3章 GitHubを用いた開発の流れ
-** GitHub Flow
-*** GitHub Flow (1)
-   1. 思い立ったらブランチ作成
-      - 新しい機能追加や，アイディアを試す
-   2. ブランチにコミットを追加
-      - 変更点をコミットとして作成
-      - コミットのログは，他人が読んでわかるように書く
-   3. Pull Requestを開く
-      - コミットについて，意見交換ができる
-      - 作業途中でPull Requestを出しても構わない
-*** GitHub Flow (2)
-   1. 議論とレビュー
-      - レビューをしたり，質疑応答をしたりする
-   2. マージしてディプロイ
-      - =master= ブランチにマージする（自動でディプロイ）
-      - マージの前にテストしたいときは，ローカルで試す
-参考文献
-   - [[https://guides.github.com/introduction/flow/index.html][Understanding the GitHub Flow · GitHub Guides]]
-
-** ブランチの操作
+* 第3章 Gitのbranchの活用
+** branchの操作
 *** branchの作成
 **** ブランチとは？
      - リポジトリにはmasterブランチがある
-     - 新しい作業を行う場合，必ずbranchを切る
+     - branchは自由に作成できる
+     - branch = commit についた別名
 **** コマンド
 
 #+begin_src bash
@@ -394,6 +376,17 @@ git branch -vv
 git checkout new_branch
 <編集作業>
 git commit -a -m 'Create a new branch'
+#+end_src
+
+*** branchの作成とcheckoutの省力化
+**** 同時に行う方法
+     - 作成してすぐチェックアウトする
+     - 元いたbranchに戻る方法も併せて学ぼう
+**** コマンド
+
+#+begin_src bash
+git checkout -b new_branch
+git checkout -
 #+end_src
 
 *** 他のbranchをmergeする
@@ -479,7 +472,26 @@ git pull
     3. ブラウザで，Pull Requestをマージする
     4. =master= ブランチに移動して， =pull= することで，更新する
 * 第4章 GitHubによる協同作業
-** 他の人の開発状況を見る
+** GitHub Flow
+*** GitHub Flow (1)
+   1. 思い立ったらブランチ作成
+      - 新しい機能追加や，アイディアを試す
+   2. ブランチにコミットを追加
+      - 変更点をコミットとして作成
+      - コミットのログは，他人が読んでわかるように書く
+   3. Pull Requestを開く
+      - コミットについて，意見交換ができる
+      - 作業途中でPull Requestを出しても構わない
+*** GitHub Flow (2)
+   1. 議論とレビュー
+      - レビューをしたり，質疑応答をしたりする
+   2. マージしてディプロイ
+      - レビュー（とテスト）が通ったら、 =master= ブランチにマージする
+      - 「レビューが通ったか」どうかの条件はチームで決める
+参考文献
+   - [[https://guides.github.com/introduction/flow/index.html][Understanding the GitHub Flow · GitHub Guides]]
+
+** OSSの開発に参加する
 *** リモートのリポジトリをClone
 **** Cloneとは
     - GitHubで公開されているリポジトリはだれでも複製（clone）できる
@@ -490,16 +502,6 @@ git pull
 git clone octocat/Spoon-Knife
 #+end_src
 
-*** Pull Requestをチェックアウト
-**** Pull Requestのチェックアウト
-     - 誰かが作成したPull Requestの内容を，ブランチとしてローカルにコピーする
-     - 試しに動作させたり，コードをチェックするときなどに利用
-**** コマンド
-#+begin_src bash
-git checkout https://github.com/octocat/Spoon-Knife/pull/3166
-#+end_src
-
-** 開発に参加する
 *** オリジナルのリポジトリをForkする
 **** Forkとは
      - Cloneしたリポジトリを，
@@ -521,7 +523,7 @@ git remote -vv
 #+begin_src bash
 git branch my_branch
 git checkout my_branch
-＜編集＞
+# 編集
 git commit -a -m 'Update'
 git push -u ychubachi my_branch
 #+end_src
@@ -535,6 +537,33 @@ git push -u ychubachi my_branch
 git pull_request -m 'Pull Request'
 #+end_src
 
+*** コンフリクトの解消
+**** コンフリクトが発生したら
+     - origin に新しいコミットがマージされたら，
+       コンフリクトが発生してマージできなくなることがある
+**** コマンド（未確認）
+#+begin_src bash
+git fetch
+git merge origin/master
+# コンフリクト修正
+git add .
+git commit -m 'Fix conflict'
+git push
+#+end_src
+
+*** Pull Requestをチェックアウト
+**** Pull Requestのチェックアウト
+     - 誰かが作成したPull Requestの内容を，ブランチとしてローカルにコピーする
+     - 試しに動作させたり，コードをチェックするときなどに利用
+**** コマンド
+#+begin_src bash
+git checkout https://github.com/octocat/Spoon-Knife/pull/3166
+#+end_src
+
+*** Fork以外の方法
+    - リポジトリのcontributerにメンバーを登録する
+    - （masterを含め）branchを直接pushできるようになる
+    - mergeの作業も、pull requestを出した本人ができる
 ** GitHubの他の機能
 *** Issue/Wiki
 **** Issue
@@ -552,30 +581,38 @@ git pull_request -m 'Pull Request'
      - だれがどの作業をしたかわかる（誰がバグを仕込んだのかも）
        - [[https://help.github.com/articles/using-git-blame-to-trace-changes-in-a-file][Using git blame to trace changes in a file · GitHub Help]]
 ** ＜演習課題4-1＞
-*** our_enpitにファイルを追加する
+*** (1) ファイルを追加する
 **** 演習課題
-    1. =ychubich/our_enpit= をcloneしてforkする
+    1. =ychubich/our_enpit= をgitコマンドでcloneし，forkする
     2. 新しいブランチを作成し，新規にファイルを追加する
        - 内容は任意（自己紹介など）
        - Markdownで書いてください（拡張子は.md）
     3. コミットを作成し，pull requestを送信する
     4. 教員がマージ作業を行います
-*** 既存のファイルを変更する
+       - コンフリクトが起きた時は各自で修正してください
+       - コンフリクトが解消されない場合はマージしません
+*** (2) 既存のファイルを変更する
 **** 演習課題
-    1. README.mdを改変して，pull requestを送信する
-    2. GitHubのPull Request一覧を確認する
-    3. おそらくコンフリクトが発生するので，
-       GitHubの指示に従い競合を解消する
+    1. 新しいブランチを作成する
+    2. README.mdを改変して，pull requestを送信する
+    3. 教員がマージ作業を行います
+       - コンフリクトが起きた時は各自で修正してください
+       - コンフリクトが解消されない場合はマージしません
+
 ** ＜演習課題4-2＞
-*** 隣の人との協同作業
+*** グループでの協同作業
 **** 演習課題
-     1. ここまでの演習ができた人と，できていない人とでペアを組む
-	- できていない人ができた人の隣の席に移動する
-     2. 新しくリポジトリを作成する（名称は任意）
-     3. 互いに，隣の席の人にリポジトリ名を教え，forkしてもらい
+# ここまでの演習ができた人と，できていない人とでペアを組む
+# - できていない人ができた人の隣の席に移動する
+     1. グループの代表者が新しくリポジトリを作成する（名称は任意）
+     2. 他のメンバーにリポジトリ名を教え，forkしてもらい
         Pull Requestを送ってもらう
-     4. マージしてあげる
-     5. 2〜3を繰り返し，協同作業を行ってみよう
+     3. マージしてあげる
+     4. 2〜3を繰り返し，協同作業を行ってみよう
+
+**** 終わったブループは…
+     - リポジトリのcontributerにメンバーを登録する方法も試す
+     - どちらがやりやすいかメンバーで話し合ってみよう
 ** ＜演習課題4-3＞
 *** Issue/Wikiの利用
 **** 演習課題
@@ -726,8 +763,9 @@ git push heroku master
 ** ＜演習課題5-2＞ （オプション）
 *** Sinatraアプリの共同開発
 **** 演習課題
-     - 隣の席の人と協同でSinatraアプリを開発しなさい
+     - グループメンバーでSinatraアプリを開発しなさい
      - 一方がGitHubのリポジトリを作成し，もう一人がForkする
+       - あるいは他のメンバーを contributer に追加する
      - 最初に，どんな機能をもたせるかを相談しなさい
        - メンバーのスキルに合わせて，できるだけ簡単なもの
        - データベースは使わない
