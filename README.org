@@ -3,7 +3,7 @@
 
 * スライド資料
 - [[https://github.com/ychubachi/enpit/blob/master/slides/bizapp_training.pdf?raw=true][ビジネスアプリケーション演習]]
-- [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.pdf?raw=true][事前準備編]]
+- [[https://github.com/ychubachi/enpit/blob/master/slides/preparation.pdf?raw%3Dtrue][仮想環境の導入]]
 
 * ご質問・ご意見
 - この資料の内容に関する質問・改善提案等はIssueにご登録ください．
