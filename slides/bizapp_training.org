@@ -543,7 +543,7 @@ git pull_request -m 'Pull Request'
        コンフリクトが発生してマージできなくなることがある
 **** コマンド（未確認）
 #+begin_src bash
-git fetch
+git fetch --all
 git merge origin/master
 # コンフリクト修正
 git add .
@@ -561,7 +561,7 @@ git checkout https://github.com/octocat/Spoon-Knife/pull/3166
 #+end_src
 
 *** Fork以外の方法
-    - リポジトリのcontributerにメンバーを登録する
+    - リポジトリの Collaborators にメンバーを登録する
     - （masterを含め）branchを直接pushできるようになる
     - mergeの作業も、pull requestを出した本人ができる
 ** GitHubの他の機能
@@ -611,7 +611,7 @@ git checkout https://github.com/octocat/Spoon-Knife/pull/3166
      4. 2〜3を繰り返し，協同作業を行ってみよう
 
 **** 終わったブループは…
-     - リポジトリのcontributerにメンバーを登録する方法も試す
+     - リポジトリの Collaborators にメンバーを登録する方法も試す
      - どちらがやりやすいかメンバーで話し合ってみよう
 ** ＜演習課題4-3＞
 *** Issue/Wikiの利用
