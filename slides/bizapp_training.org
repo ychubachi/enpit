@@ -583,7 +583,7 @@ git checkout https://github.com/octocat/Spoon-Knife/pull/3166
 ** ＜演習課題4-1＞
 *** (1) ファイルを追加する
 **** 演習課題
-    1. =ychubich/our_enpit= をgitコマンドでcloneし，forkする
+    1. =ychubachi/our_enpit= をgitコマンドでcloneし，forkする
     2. 新しいブランチを作成し，新規にファイルを追加する
        - 内容は任意（自己紹介など）
        - Markdownで書いてください（拡張子は.md）
