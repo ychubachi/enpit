@@ -539,11 +539,10 @@ git pull_request -m 'Pull Request'
 
 *** コンフリクトの解消
 **** コンフリクトが発生したら
-     - origin に新しいコミットがマージされたら，
-       コンフリクトが発生してマージできなくなることがある
+     - 作業中のブランチで次の作業を行う
 **** コマンド（未確認）
 #+begin_src bash
-git fetch --all
+git fetch origin
 git merge origin/master
 # コンフリクト修正
 git add .
