@@ -763,7 +763,6 @@ git push heroku master
      - 完成したコードはGitHubにもpushしなさい
 ** ＜演習課題5-2＞ （オプション）
 *** Sinatraアプリの共同開発
-**** 演習課題
      - グループメンバーでSinatraアプリを開発しなさい
      - 代表者がGitHubのリポジトリを作成し他のメンバーを Collaborators に追加する
        - 他のメンバーは代表者のリポジトリをcloneする
@@ -772,9 +771,11 @@ git push heroku master
      - GitHub Flowをチームで回す
        - ブランチを作成し，Pull Requestを送る
        - 他のメンバー（一人以上）からレビューを受けたら各自でマージ
-     - （計画5分＋スプリント10分）×3 セット
-*** 提出先
-    - http://goo.gl/forms/p1SXNT2grM
+*** Sinatraアプリの共同開発（続き）
+     - GitHubのURLとHerokuのURLを提出
+       - http://goo.gl/forms/p1SXNT2grM
+     - （計画5分＋スプリント10分）×3（or 4） セット
+     - 最後、振り返りを5分行い、発表する
 
 * 第6章 Ruby on Railsアプリの開発
 ** Ruby on Railsアプリの生成と実行
@@ -823,7 +824,6 @@ git push -u origin master
 **** 変更する内容
      - GemfileにRails内部で動作するJavaScriptの実行環境を設定する
      - 当該箇所のコメントを外す
-     - 変更をcommitしておく
 **** 変更前
 #+begin_src ruby
 # gem 'therubyracer',  platforms: :ruby
@@ -854,7 +854,7 @@ git commit -a -m 'Run bundle install'
      - 確認したら，端末でCtrl-Cを押してサーバを停止する
 **** コマンド
 #+begin_src bash
-rails server
+bin/rails server -b 0.0.0.0
 #+end_src
 
 ** Controller/Viewの作成
