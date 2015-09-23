@@ -670,6 +670,8 @@ ruby hello.rb -o 0.0.0.0
 **** 動作確認の方法
      - Host OSのWebブラウザで，http://localhost:4567 にアクセスする．
 
+*** Sinatraについて
+    - [[http://www.sinatrarb.com/intro.html][Sinatra: README]]
 ** Herokuでアプリケーションを動かす
 *** コマンドラインでHerokuにログインする
 **** 内容
