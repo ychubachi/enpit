@@ -963,9 +963,8 @@ git push heroku master
        - うまく行かなかったらbranchごと削除すれば良い
 **** コマンド
 #+begin_src bash
-git branch books
-git checkout books
-rails generate scaffold book title:string author:string
+git checkout -b books
+bin/rails generate scaffold book title:string author:string
 #+end_src
 
 *** DBのMigrate
@@ -974,7 +973,7 @@ rails generate scaffold book title:string author:string
     - Scaffoldを追加したり，属性を追加したりした際に行う
 **** コマンド
 #+begin_src bash
-rake db:migrate
+bin/rake db:migrate
 #+end_src
 
 *** routeの確認
@@ -982,7 +981,7 @@ rake db:migrate
      - ルーティングの設定を確認しよう
 **** コマンド
 #+begin_src bash
-rake routes
+bin/rake routes
 #+end_src
 
 *** 動作確認
@@ -991,7 +990,7 @@ rake routes
      - CRUD処理が完成していることを確かめる
 **** コマンド
 #+begin_src bash
-rails server
+bin/rails server
 #+end_src
 
 *** 完成したコードをマージ
