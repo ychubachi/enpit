@@ -920,7 +920,7 @@ git commit -m 'Create welcome controller and view'
 **** =Gemfile= に追加する内容
 #+begin_src ruby
 gem 'rails_12factor', group: :production
-ruby '2.1.2'
+ruby '2.2.2'
 #+end_src
 
 *** Gitにコミット
