@@ -1079,6 +1079,8 @@ travis login --auto    # GitHubのログイン情報で自動ログイン
 travis init            # 質問には全てEnterを押す
 #+end_src
 
+# gem update --system 2.4.6
+
 *** Herokuとの連携
 **** Herokuとの連携
      - Travis CIからHerokuへの接続を設定する
