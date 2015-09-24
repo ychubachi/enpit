@@ -1024,7 +1024,7 @@ heroku run rake db:migrate
     - branchを削除
 **** コマンド
 #+begin_src bash
-rake db:rollback
+bin/rake db:rollback
 git add .
 git commit -m 'Rollback'
 git checkout master
@@ -1051,7 +1051,7 @@ git branch -D books
      - テスト用のDB（ =rails_enpit_test= ）が更新される
 **** コマンド
 #+begin_src bash
-rake test
+bin/rake test
 #+end_src
 
 ** Travis CIとの連携
@@ -1125,6 +1125,7 @@ addons:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
+  - rake db:migrate RAILS_ENV=test # いらない？
 #+end_src
 
 *** GitHubとTravis CI連携
