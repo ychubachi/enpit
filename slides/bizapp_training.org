@@ -1162,11 +1162,11 @@ git push
     - [[http://webservice.rakuten.co.jp/document/][楽天ウェブサービス: API一覧]]
 
 *** サンプルアプリ
-- [[https://github.com/ryuichiueda/rakuten_enpit_example][Rakuten enPiT Example]]
-  - =git clone= する
-- =bundle install= する
-- Herokuでアプリを作りアプリURLを取得
-  - =heroku create= する
+    - [[https://github.com/ychubachi/rakuten_enpit_example][ychubachi/rakuten_enpit_example]]
+      - =git clone= する
+      - =bundle install= する
+    - Herokuでアプリを作りアプリURLを取得
+      - =heroku create= する
 
 *** アプリIDの発行
     - 新規アプリを登録する
@@ -1271,12 +1271,13 @@ git push -u ychubach master
 **** ミニプロジェクト
     - 楽天APIを利用したWebアプリケーションを開発する
     - グループで次のことを相談
-      - プロダクトバックログを作る
+      - プロダクトバックログをGitHub の Issue で作る
       - 見積もりなど Scrum 的にやってみよう
     - 授業で取り扱った内容のほか自分の知っている知識を活用してください
       - JavaScript，CSS ...
-    - README.md に使い方，HerokuのURLなどを書く
-    - LICENCEも設定する
+    - その他
+      - README.md に使い方，HerokuのURLなどを書く
+      - LICENCE は必ず設定する
 
 * 補足資料
 *** .gitignoreについて
@@ -1306,7 +1307,6 @@ spring stop
     - 場所はVagrantfileがあるフォルダ
 
 *** Status Image
-**** 演習課題
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
 *** Webアプリケーションの共同開発（ペア）
