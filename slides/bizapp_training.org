@@ -1148,50 +1148,18 @@ git push
 **** HerokuへのDeploy
      - テストが通れば，自動でHerokuに配備される
      - 配備できたらWebブラウザでアプリのページを開いて確認する
-*** 補足：Sinatraでテストが通るようにする
-**** Gemfileに =rake= を追加する
-
-#+begin_src bash
-gem 'rake'
-#+end_src
-
-**** Rakefileを作成する
-
-#+begin_src ruby
-task :default => :test
-
-require 'rake/testtask'
-
-Rake::TestTask.new do |t|
-  t.pattern = "./*_test.rb"
-end
-#+end_src
-
 ** ＜演習課題7＞
-*** Herokuへのdeploy
+*** =rails_enpit= の拡張
 **** 演習課題
-    - =rails_enpit= にbooksスキャっフォルドを追加してHerokuに配備しなさい
-*** リンクの追加
-**** 演習課題
-     - welcomeコントローラのviewから，
-       booksコントローラのviewへのリンクを追加しなさい
-*** Scaffoldの追加
-**** 演習課題
-     - Scaffoldを追加しなさい
-     - DBのmigrationを行い，動作確認しなさい
-     - うまく動作したらHerokuに配備しなさい
-*** Travis経由でのHerokuへのdeploy
-**** 演習課題
-     - Travis経由でHerokuへdeployできるようにする
-* 第8章 Webアプリケーションの共同開発
-** ＜演習課題8＞
-*** Webアプリケーションの共同開発（ペア）
-    - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
-      - 何を作るかは，ペアで相談してください
-    - 授業で取り上げたツールを使い，自由に試しなさい
-    - 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
-      - どちらを使うかは，ペアで相談して決めてください
-* 第9章 楽天APIを利用したアプリケーション
+    - Viewを変更
+      - welcomeコントローラのviewから，
+        booksコントローラのviewへのリンクを追加する etc
+    - Scaffoldの追加
+      - 任意のScaffoldを追加してみなさい
+      - DBのmigrationを行い，動作確認しなさい
+    - Herokuへの配備
+      - Travis経由でHerokuへdeployできるようにする
+* 第8章 楽天APIを利用したアプリケーション
 ** 楽天API
 *** 楽天APIとは？
     - [[http://webservice.rakuten.co.jp/document/][楽天ウェブサービス: API一覧]]
@@ -1285,28 +1253,29 @@ git commit -m 'Update .travis.yml'
 git push -u ychubach master
 #+end_src
 
-** ＜演習課題9-1＞
-*** ローカルでサンプルを動かす
+** 演習課題
+*** 演習課題8-1
+**** ローカルでサンプルを動かす
     - 自分のAPPIDを作成する
     - 仮想化環境とHerokuの環境変数を設定
     - ローカルで動かしてみよう
     - Herokuに直接Pushして動かしてみよう
-** ＜演習課題9-2＞
-*** Travis経由で動かしてみよう（難易度：高）
+*** 演習課題8-2
+**** Travis経由で動かす
     - サンプルをTravis経由で動作させてみよう
       - Forkして，自分のリポジトリにpushできるようにする
       - =.travis.yml= の設定を変更する
        	- やり方は各自で考えてみよう
       - Travis CIに環境変数を設定する
 
-* 第10章 ミニプロジェクト
-** ＜演習課題10＞
-*** ミニプロジェクト
+* 第9章 ミニプロジェクト
+** 演習課題
+*** 演習課題9
+**** ミニプロジェクト
     - 楽天APIを利用したWebアプリケーションを開発する
-      - 2つペアを統合し，4人のグループを編成する
     - グループで次のことを相談
-      - どんなアプリをつくるか
-      - 役割分担
+      - プロダクトバックログを作る
+      - 見積もりなど Scrum 的にやってみよう
     - 授業で取り扱った内容のほか自分の知っている知識を活用してください
       - JavaScript，CSS ...
     - README.md に使い方，HerokuのURLなどを書く
@@ -1343,3 +1312,28 @@ spring stop
 **** 演習課題
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
+*** Webアプリケーションの共同開発（ペア）
+    - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
+      - 何を作るかは，ペアで相談してください
+    - 授業で取り上げたツールを使い，自由に試しなさい
+    - 利用するフレームワークは，SinatraでもRailsでもどちらでもかまいません
+      - どちらを使うかは，ペアで相談して決めてください
+*** 補足：Sinatraでテストが通るようにする
+**** Gemfileに =rake= を追加する
+
+#+begin_src bash
+gem 'rake'
+#+end_src
+
+**** Rakefileを作成する
+
+#+begin_src ruby
+task :default => :test
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.pattern = "./*_test.rb"
+end
+#+end_src
+
