@@ -865,7 +865,7 @@ bin/rails server -b 0.0.0.0
      - =rails generate controller= コマンドで作成する
 **** コマンド
 #+begin_src bash
-rails generate controller welcome
+bin/rails generate controller welcome
 #+end_src
 *** Viewの作成
 **** Viewとは？
@@ -896,7 +896,7 @@ root 'welcome#index'
     - Webブラウザで =http://localhost:3000/= を開いて確認する
 **** コマンド
 #+begin_src bash
-rails server
+bin/rails server -b 0.0.0.0
 #+end_src
 
 *** ここまでをコミットしておく
