@@ -1082,7 +1082,6 @@ travis init            # 質問には全てEnterを押す
 *** Herokuとの連携
 **** Herokuとの連携
      - Travis CIからHerokuへの接続を設定する
-     - master以外のブランチで実行すると，そのブランチのみHerokuに送る（ようだ）
        - [[http://docs.travis-ci.com/user/deployment/heroku/][Travis CI: Heroku Deployment]]
 **** コマンド
 #+begin_src bash
@@ -1091,8 +1090,9 @@ travis setup heroku
 
 *** Travisで動かすRubyのバージョン設定
 **** 設定ファイルの変更
-     - Rubyのバージョン
-**** .travis.yml（抜粋）
+     - まず、Rubyのバージョンを指定する
+     - 変更の際はYAMLのインデントに注意する
+**** .travis.yml を書き換える
 #+begin_src yaml
 language: ruby
 rvm:
@@ -1101,7 +1101,8 @@ rvm:
 
 *** Travis用DB設定ファイル
 **** TravisでのテストDB
-     − テストDB用の設定ファイルを追加する
+     - テストDB用の設定ファイルを追加する
+
 **** =config/database.yml.travis=
 #+begin_src yaml
 test:
