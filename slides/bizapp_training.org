@@ -1067,15 +1067,15 @@ rake test
 
 *** Travisの初期化
 **** 内容
+     - Travis の CI ツール
+       - [[https://github.com/travis-ci/travis.rb][travis-ci/travis.rb]]
      - Travisにログインして初期化を行う
-#     - 作業の前にブランチを切る
      - =init= すると =.travis.yml= ができる
 **** コマンド
 
-# git checkout -b travis # -b -> ブランチを作成
-
 #+begin_src bash
-travis login --auto    # GitHubのログイン情報でログイン
+gem install travis     # Travis CLIのアップデート
+travis login --auto    # GitHubのログイン情報で自動ログイン
 travis init            # 質問には全てEnterを押す
 #+end_src
 
@@ -1096,7 +1096,7 @@ travis setup heroku
 #+begin_src yaml
 language: ruby
 rvm:
-- 2.1.2
+- 2.2.2
 #+end_src
 
 *** Travis用DB設定ファイル
