@@ -1318,6 +1318,10 @@ spring stop
 **** Status Image
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
+**** Deploy後、自動で heroku の db:migrate
+     - 次のURLの「Running-commands」の箇所を参照
+       - [[http://docs.travis-ci.com/user/deployment/heroku/][Heroku Deployment - Travis CI]]
+
 ** その他
 *** 演習課題
 **** Webアプリケーションの共同開発（ペア）
