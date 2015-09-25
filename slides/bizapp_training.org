@@ -1224,7 +1224,7 @@ git push heroku master
 git fork
 git branch new_feature
 rm .travis.yml
-travis init
+travis init -r <your_name>/rakuten_enpit_example
 travis setup heroku
 emacs .travis.yml
 #+end_src
@@ -1283,36 +1283,44 @@ git push -u ychubach master
     - グループの代表者はアプリのURL等を次のフォームから提出してください
       - http://goo.gl/forms/xdeirTA169
 * 補足資料
-*** .gitignoreについて
+** FAQ
+*** FAQ （git関連）
+**** .gitignoreについて
     - Gitに登録したくないファイルは.gitignoreに登録する
     - 例
       - [[https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore][gitignore/Emacs.gitignore at master · github/gitignore]]
-*** HerokuのアプリのURL確認
+*** FAQ （Heroku関連）
+**** HerokuのアプリのURL確認
 #+begin_src bash
 heroku apps:info
 #+end_src
 
-*** Herokuのログをリアルタイムで見る
+**** Herokuのログをリアルタイムで見る
 #+begin_src bash
 heroku logs --tail
 #+end_src
 
-*** =rails generate= などが動かない
+*** FAQ （Rails関連）
+**** =rails generate= などが動かない
     - [[https://devcenter.heroku.com/articles/getting-started-with-rails4#write-your-app][Write your App]]
 
 #+begin_src bash
 spring stop
 #+end_src
 
-*** 仮想環境内にファイル（画像など）
+*** FAQ （Vagrant関連）
+**** 仮想環境内にファイル（画像など）
     - Guest OS内に =/vagrant= という共有フォルダがある
     - このフォルダはHost OSからアクセスできる
     - 場所はVagrantfileがあるフォルダ
 
-*** Status Image
+*** FAQ （Travis CI関連）
+**** Status Image
      - README.mdを編集し，Travisのテスト状況を表示するStatus Imageを追加する
      - [[http://docs.travis-ci.com/user/status-images/][Travis CI: Status Images]]
-*** Webアプリケーションの共同開発（ペア）
+** その他
+*** 演習課題
+**** Webアプリケーションの共同開発（ペア）
     - 2人でペアを組み，1つのWebアプリケーションを開発しなさい
       - 何を作るかは，ペアで相談してください
     - 授業で取り上げたツールを使い，自由に試しなさい
