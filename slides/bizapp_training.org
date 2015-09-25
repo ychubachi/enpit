@@ -1225,7 +1225,7 @@ git fork
 git branch new_feature
 rm .travis.yml
 travis init
-travis heroku setup
+travis setup heroku
 emacs .travis.yml
 #+end_src
 
@@ -1278,7 +1278,9 @@ git push -u ychubach master
     - その他
       - README.md に使い方，HerokuのURLなどを書く
       - LICENCE は必ず設定する
-
+*** 課題の提出先
+    - グループの代表者はアプリのURL等を次のフォームから提出してください
+      - http://goo.gl/forms/xdeirTA169
 * 補足資料
 *** .gitignoreについて
     - Gitに登録したくないファイルは.gitignoreに登録する
