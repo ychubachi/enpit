@@ -105,7 +105,7 @@
 ** Git，VirtualBoxとVagrantのインストール
 *** 手順
    1. Git/VirtualBox/Vagrantをインストール
-      - choco install git virtualbox vagrant
+      - choco install -y git virtualbox vagrant
    2. インストールの確認
 *** スクリーンキャスト
     - http://youtu.be/MQHDRIUP3hI
